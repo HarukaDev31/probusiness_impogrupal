@@ -39,14 +39,12 @@
             <img class="mb-2" src="<?php echo base_url("assets/images/logo_horizontal_probusiness_claro_2.png?ver=1.0.0"); ?>" alt="" height="45">
           </a>
           
-          <a class="menu-ul-a send-order text-decoration-none" onclick="modalpedido()" style="">
-            <span style="" class="count-car-global">
-              <p class="text-black gradiente-btn gradiente-btn-menu" style="">
-                <i class="fa-solid fa-bag-shopping fa-2x"></i>
-                <span style="" class="h5"><?php echo 1; ?></span>
-              </p>
+          <button type="button" class="btn btn-primary position-relative">
+            <i class="fa-solid fa-bag-shopping fa-2x"></i>
+            <span id="span-cart-global_cantidad" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
             </span>
-          </a>
+          </button>
         </div>
       </nav>
     </header>
@@ -97,6 +95,8 @@
             Fecha de Cierre: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Fin); ?>
           </p>
 
+          <input type="hidden" id="hidden-global-signo_moneda" class="form-control" value="<?php echo $arrImportacionGrupalProducto[0]->No_Signo; ?>">
+
           <!-- diseño de item -->
           <?php foreach ($arrImportacionGrupalProducto as $row) { ?>
           <div class="card mt-5">
@@ -118,6 +118,7 @@
                         <th scope="col">Unidad</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">C/U</th>
+                        <th scope="col"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -125,11 +126,21 @@
                         <td><?php echo $row->No_Unidad_Medida; ?></td>
                         <td><?php echo $row->cantidad_item; ?></td>
                         <td><?php echo $row->No_Signo . ' ' . $row->precio_item; ?></td>
+                        <td>
+                          <div id="div-agregar_item-<?php echo $row->ID_Producto; ?>" class="d-grid">
+                            <button id="btn-agregar_item-<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" class="btn btn-primary me-md-2 btn-lg btn-agregar_item" type="button">Agregar</button>
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td><?php echo $row->No_Unidad_Medida_2; ?></td>
                         <td><?php echo $row->cantidad_item_2; ?></td>
                         <td><?php echo $row->No_Signo . ' ' . $row->precio_item_2; ?></td>
+                        <td>
+                          <div id="div-agregar_item-<?php echo $row->ID_Producto; ?>" class="d-grid">
+                            <button id="btn-agregar_item-<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" class="btn btn-primary me-md-2 btn-lg btn-agregar_item" type="button">Agregar</button>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -189,15 +200,15 @@
       </footer>
     </div>
  
-    <div class="fixed-bottom mt-auto py-3 bg-white footer-cart-shadow">
+    <div id="div-footer-cart" class="fixed-bottom mt-auto py-3 bg-white footer-cart-shadow">
       <div class="container">
         <div class="row">
           <div class="col-5 col-sm-6">
-            <div id="div-cart_items">4 productos</div>
-            <div id="div-cart_total" class="fw-bold fs-5">S/ 200.00</div>
+            <div id="div-cart_items"></div>
+            <div id="div-cart_total" class="fw-bold fs-5"></div>
           </div>
           <div class="col-7 col-sm-6">
-            <div id="div-cart_total" class="d-grid">
+            <div class="d-grid">
               <button class="btn btn-primary me-md-2 btn-lg" type="button">Ver mi pedido</button>
             </div>
           </div>
@@ -208,5 +219,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/b7119ee4cd.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">var base_url = '<?php echo base_url(); ?>';</script>
+
+    <!--interno-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="<?php echo base_url("assets/js/inicio.js?ver=7.0.0"); ?>"></script>
   </body>
 </html>

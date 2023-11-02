@@ -386,3 +386,11 @@ function quitarCaracteresEspecialesListadoReportes($cadena) {
 	$texto = str_replace($no_permitidas, $permitidas, $cadena);
 	return $texto;
 }
+
+function countBooks($array) {
+    $qty = 0;
+    foreach ($array as $key => $data) {
+        $qty += $data['cantidad_item'];
+    }
+    return $qty;
+}
