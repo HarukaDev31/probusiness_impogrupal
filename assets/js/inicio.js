@@ -4,6 +4,21 @@ $(document).ready(function () {
   
   signo_moneda = $('#hidden-global-signo_moneda').val();
 
+  $('.input-number').on('input', function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+
+  $('.input-decimal').on('input', function () {
+    numero = parseFloat(this.value);
+    if (!isNaN(numero)) {
+      this.value = this.value.replace(/[^0-9\.]/g, '');
+      if (numero < 0)
+          this.value = '';
+    } else {
+      this.value = this.value.replace(/[^0-9\.]/g, '');
+    }
+  });
+
   $(document).on('click', '.btn-agregar_item', function() {
     const type_action = 'add';
     const id_item = $( this ).data('id_item');
@@ -68,16 +83,36 @@ $(document).ready(function () {
   });
   
   $(document).on('click', '#btn-completar_pedido', function() {
-    var arrParams = {
-      'cantidad_total' : $( '#hidden-cart_shop-cantidad_total' ).val(),
-      'importe_total' : $( '#hidden-cart_shop-importe_total' ).val(),
-      'Nu_Documento_Identidad' : $( '[name="Nu_Documento_Identidad"]' ).val(),
-      'No_Entidad' : $( '[name="No_Entidad"]' ).val(),
-      'Nu_Celular_Entidad' : $( '[name="Nu_Celular_Entidad"]' ).val(),
-      'Txt_Email_Entidad' : $( '[name="Txt_Email_Entidad"]' ).val(),
-      'Txt_Direccion' : $( '[name="Txt_Direccion"]' ).val(),
-    };
-    addPedido(arrParams);
+    if ($("#payment-documento_identidad").val().trim().length < 6) {
+      $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
+      $('#payment-documento_identidad').closest('.form-group').removeClass('has-success').addClass('has-error');
+    } else if ($("#payment-nombre_cliente").val().trim().length < 6) {
+      $('#payment-nombre_cliente').closest('.form-group').find('.help-block').html('Mínimo 6 caracteres');
+      $('#payment-nombre_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
+    } else if ($("#payment-celular_cliente").val().trim().length < 9) {
+      $('#payment-celular_cliente').closest('.form-group').find('.help-block').html('9 dígitos');
+      $('#payment-celular_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
+    } else if ($("#payment-email").val().trim().length < 1) {
+      $('#payment-email').closest('.form-group').find('.help-block').html('Ingresar Email');
+      $('#payment-email').closest('.form-group').removeClass('has-success').addClass('has-error');
+    } else if (!checkEmail($('#payment-email').val())) {
+      $('#payment-email').closest('.form-group').find('.help-block').html('Email inválido');
+      $('#payment-email').closest('.form-group').addClass('has-success').removeClass('has-error');
+    } else if ($("#payment-direccion").val().trim().length < 10) {
+      $('#payment-direccion').closest('.form-group').find('.help-block').html('Mínimo 10 caracteres');
+      $('#payment-direccion').closest('.form-group').removeClass('has-success').addClass('has-error');
+    } else {
+      var arrParams = {
+        'cantidad_total' : $( '#hidden-cart_shop-cantidad_total' ).val(),
+        'importe_total' : $( '#hidden-cart_shop-importe_total' ).val(),
+        'Nu_Documento_Identidad' : $( '[name="Nu_Documento_Identidad"]' ).val(),
+        'No_Entidad' : $( '[name="No_Entidad"]' ).val(),
+        'Nu_Celular_Entidad' : $( '[name="Nu_Celular_Entidad"]' ).val(),
+        'Txt_Email_Entidad' : $( '[name="Txt_Email_Entidad"]' ).val(),
+        'Txt_Direccion' : $( '[name="Txt_Direccion"]' ).val(),
+      };
+      addPedido(arrParams);
+    }
   })
 });
 
@@ -180,9 +215,9 @@ function modalCartShop(){
         $('.modal-cart_shop-footer').addClass('d-none');
 
         sHmtlModalCartShopSinItem += '<div class="container py-5 px-5 text-center">';
-        sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';
-        sHmtlModalCartShopSinItem += '<span class="mb-3">Tu carrito de compras está vacío</span><br>';
-        sHmtlModalCartShopSinItem += '<a type="button" href="<?php echo base_url(); ?>" rel="noopener noreferrer" class="mt-3 btn btn-secondary">Comenzar a comprar</a>';
+          sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';
+          sHmtlModalCartShopSinItem += '<span class="mb-3">Tu carrito de compras está vacío</span><br>';
+          sHmtlModalCartShopSinItem += '<a type="button" href="' + base_url + '" rel="noopener noreferrer" class="mt-3 btn btn-secondary">Comenzar a comprar</a>';
         sHmtlModalCartShopSinItem += '</div>';
       
         $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
@@ -234,4 +269,19 @@ function addPedido(arrParams){
       $( '#btn-completar_pedido' ).attr('disabled', false);
     }
   });
+}
+
+function checkEmail(email){
+    var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    if (caract.test(email) == false){
+        $( '#txt-email' ).closest('.form-group').find('.help-block').html('Email inválido');
+        $( '#txt-email' ).closest('.form-group').addClass('has-success').removeClass('has-error');
+        $( '#txt-email' ).closest('.form-group').find('.help-block').removeClass('interno-span-primary');
+        return false;
+    }else{
+        $( '#txt-email' ).closest('.form-group').find('.help-block').html('Email válido');
+        $( '#txt-email' ).closest('.form-group').removeClass('has-success').addClass('has-error');
+        $( '#txt-email' ).closest('.form-group').find('.help-block').addClass('interno-span-primary');
+        return true;
+    }
 }
