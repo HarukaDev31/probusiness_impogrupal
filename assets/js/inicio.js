@@ -83,6 +83,9 @@ $(document).ready(function () {
   });
   
   $(document).on('click', '#btn-completar_pedido', function() {
+    $('.help-block').empty();
+    $('.form-group').removeClass('has-error');
+    
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
       $('#payment-documento_identidad').closest('.form-group').removeClass('has-success').addClass('has-error');
