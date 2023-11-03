@@ -22,7 +22,7 @@
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://www.youtube.com/@MiguelVillegasImportaciones" alt="ProBusiness" title="ProBusiness" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> Youtube</a></li>
         </ul>
       </div>
-      <div class="col-6 col-md">
+      <div class="col-12 col-md">
         <h5>Contacto</h5>
         <ul class="list-unstyled text-small">
           <li class="mb-1"><a class="link-secondary text-decoration-none" href="#"><i class="fa-solid fa-phone"></i> (+51) 953 314 683</a></li>
