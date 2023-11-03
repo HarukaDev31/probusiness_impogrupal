@@ -394,3 +394,11 @@ function countBooks($array) {
     }
     return $qty;
 }
+
+function amountBooks($array) {
+    $total = 0;
+    foreach ($array as $key => $data) {
+        $total += $data['total_item'];
+    }
+    return $total;
+}

@@ -7,6 +7,9 @@ class InicioModel extends CI_Model{
     public function getImportacionGrupalProducto($arrParams){
         //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
         $query = "SELECT
+IGC.ID_Empresa,
+IGC.ID_Organizacion,
+IGC.ID_Importacion_Grupal,
 IGC.No_Importacion_Grupal,
 IGC.Fe_Inicio,
 IGC.Fe_Fin,
