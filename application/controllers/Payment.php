@@ -26,9 +26,12 @@ class Payment extends CI_Controller {
 		$arrPost['header'] = $this->input->post('arrParams');
 		$arrPost['detail'] = $_SESSION['cart'];
 		
+		$_SESSION['header']['cliente'] = $arrPost['header'];
+		
 		$arrResponse = $this->PaymentModel->addPedido($arrPost);
 		if ($arrResponse['status']=='success'){
 			//unset($_SESSION['cart']);
+			$_SESSION['header']['documento'] = $arrResponse['result'];
 			echo json_encode($arrResponse);
 		} else {
 			echo json_encode($arrResponse);
@@ -37,13 +40,17 @@ class Payment extends CI_Controller {
 
 	public function thank(){
 		//falta que redirija al inicio si no tiene carrito de compras
-		$arrPedido = $_SESSION['cart'];
-		unset($_SESSION['cart']);
+		$arrCabecera = $_SESSION['header'];
+		$arrDetalle = $_SESSION['cart'];
+
+		unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
+		unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
 		
 		$this->load->view('header');
 		$this->load->view('menu');
 		$this->load->view('thank', array(
-			'arrPedido' => $arrPedido
+			'arrCabecera' => $arrCabecera,
+			'arrDetalle' => $arrDetalle
 		));
 		$this->load->view('footer');
 	}

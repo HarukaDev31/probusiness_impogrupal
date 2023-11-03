@@ -14,12 +14,17 @@ class PaymentModel extends CI_Model{
         $sNombreEntidad = trim($arrHeader['No_Entidad']);
         $sNumeroDocumentoIdentidad = trim($arrHeader['Nu_Documento_Identidad']);
         $iTipoDocumentoIdentidad = '1';//1=OTROS
-        if ( strlen($sNumeroDocumentoIdentidad) == 8 )
+        $sTipoDocumentoIdentidad = 'OTROS';
+        if ( strlen($sNumeroDocumentoIdentidad) == 8 ) {
             $iTipoDocumentoIdentidad = '2';//2=DNI
-        else if ( strlen($sNumeroDocumentoIdentidad) == 11 )
+            $sTipoDocumentoIdentidad = 'DNI';
+        } else if ( strlen($sNumeroDocumentoIdentidad) == 11 ) {
             $iTipoDocumentoIdentidad = '4';//4=RUC
-        else if ( strlen($sNumeroDocumentoIdentidad) == 12 )
+            $sTipoDocumentoIdentidad = 'RUC';
+        } else if ( strlen($sNumeroDocumentoIdentidad) == 12 ) {
             $iTipoDocumentoIdentidad = '3';//3=CARNET EXTRANJERIA
+            $sTipoDocumentoIdentidad = 'CARNET EXTRANJERIA';
+        }
         
         $query = "SELECT ID_Entidad FROM entidad WHERE ID_Empresa = 1 AND Nu_Tipo_Entidad = 0 AND ID_Tipo_Documento_Identidad = " . $iTipoDocumentoIdentidad . " AND Nu_Documento_Identidad = '" . $sNumeroDocumentoIdentidad . "' AND No_Entidad = '" . limpiarCaracteresEspeciales($sNombreEntidad) . "' LIMIT 1";
         $objVerificarCliente = $this->db->query($query)->row();
@@ -50,6 +55,9 @@ class PaymentModel extends CI_Model{
         }
         //caso contrario ubicar id
 
+        $dEmision = dateNow('fecha');
+        $dRegistroHora = dateNow('fecha_hora');
+
 		$arrSaleOrder = array(
 			'ID_Empresa' => 1,
 			'ID_Organizacion' => 1,
@@ -62,6 +70,7 @@ class PaymentModel extends CI_Model{
             'Qt_Total' => $arrHeader['cantidad_total'],
 			'Txt_Direccion_Envio' => $arrHeader['Txt_Direccion'],
             'Nu_Estado' => 1,//1=Pendiente, 2=Confirmado y 3=Finalizado
+            'Fe_Registro' => $dRegistroHora
 		);
 		
 		$this->db->insert('importacion_grupal_pedido_cabecera', $arrSaleOrder);
@@ -94,7 +103,14 @@ class PaymentModel extends CI_Model{
 			$this->db->trans_commit();
 			return array(
 				'status' => 'success',
-				'message' => 'Pedido creado'
+				'message' => 'Pedido creado',
+                'result' => array(
+                    'id_pedido' => $iIdHeader,
+                    'tipo_documento_identidad' => $sTipoDocumentoIdentidad,
+                    'fecha_registro' => $dRegistroHora,
+                    'importe_total' => $arrHeader['importe_total'],
+                    'cantidad_total' => $arrHeader['cantidad_total']
+                )
 			);
 		}
     }

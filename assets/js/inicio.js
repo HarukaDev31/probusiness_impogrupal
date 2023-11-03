@@ -89,8 +89,8 @@ $(document).ready(function () {
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
       $('#payment-documento_identidad').closest('.form-group').removeClass('has-success').addClass('has-error');
-    } else if ($("#payment-nombre_cliente").val().trim().length < 6) {
-      $('#payment-nombre_cliente').closest('.form-group').find('.help-block').html('Mínimo 6 caracteres');
+    } else if ($("#payment-nombre_cliente").val().trim().length < 3) {
+      $('#payment-nombre_cliente').closest('.form-group').find('.help-block').html('Mínimo 3 caracteres');
       $('#payment-nombre_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
     } else if ($("#payment-celular_cliente").val().trim().length < 9) {
       $('#payment-celular_cliente').closest('.form-group').find('.help-block').html('9 dígitos');
@@ -262,13 +262,14 @@ function addPedido(arrParams){
       console.log(response);
 
       if( response.status == 'success' ){
-        alert(response.message);
-        
-        setTimeout(function () {
-          window.location = base_url + "Payment/thank";
-        }, 1200);
-      } else {
+        //alert(response.message);
+        //setTimeout(function () {
+        //window.location = base_url + "Payment/thank";
+        //}, 1200);
 
+        window.location = base_url + "Payment/thank";
+      } else {
+        alert(response.message);
       }
 
       $( '#btn-completar_pedido' ).text('');

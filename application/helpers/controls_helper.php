@@ -402,3 +402,9 @@ function amountBooks($array) {
     }
     return $total;
 }
+
+function ToDateHourBD($date){
+    $d = explode('-', $date);
+    $h = explode(" ", $d[2]);
+    return $h[0] . '/' . $d[1] . '/' . $d[0] . ' ' . $h[1];
+}

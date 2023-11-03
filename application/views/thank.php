@@ -11,7 +11,7 @@
           <?php
           $fTotalCantidadPedido = 0;
           $fTotalImportePedido = 0;
-          foreach($arrPedido as $row){
+          foreach($arrDetalle as $row){
             $fTotalCantidadPedido = $row['cantidad_item'];
             $fTotalImportePedido = $row['total_item'];
           ?>
@@ -56,3 +56,45 @@
     </div>
   </div>
 </main>
+<?php
+
+//array_debug($arrCabecera);
+//array_debug($arrDetalle);
+
+$phone = "51" . $arrCabecera['cliente']['Nu_Celular_Entidad'];
+
+//Preparar array para envío de data de pedido para la aplicación
+$message = "!Hola *ProBusiness*!";
+$message .= "\nAcabo de realizar el siguiente pedido.";
+
+$message .= "\n\n👤 *Información de contacto:*";
+$message .= "\n*Cliente:* " . $arrCabecera['cliente']['No_Entidad'];
+$message .= "\n*" . $arrCabecera['documento']['tipo_documento_identidad'] . "*: " . $arrCabecera['cliente']['Nu_Documento_Identidad'];
+
+$message .= "\n*Nro. Pedido:* " . $arrCabecera['documento']['id_pedido'];
+$message .= "\n*Fecha:* " . ToDateHourBD($arrCabecera['documento']['fecha_registro']);
+
+//Detalle de pedido
+$message .= "\n\n*Detalle de Pedido*\n";
+$message .= "===============\n";
+foreach($arrDetalle as $row)
+  $message .= "✅ " . number_format($row['cantidad_item'], 2, '.', ',') . " x *" . $row['nombre_item'] . "* - S/ " . number_format($row['precio_item'], 2, '.', ',') . "\n";
+
+$message .= "\n📍 *Dirección:* " . $arrCabecera['cliente']['Txt_Direccion'];
+  
+//Totales
+$message .= "\n*Importe Total:* S/ " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
+$message .= "\n*Cantidad Total:* S/ " . number_format($arrCabecera['documento']['cantidad_total'], 2, '.', ',');
+
+$message = urlencode($message);
+
+$sURLSendMessageWhatsapp = "https://wa.me/" . $phone . "?text=" . $message;
+
+//$sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=51915914064&text=hola";
+//echo $sURLSendMessageWhatsapp;
+?>
+<script>
+  setTimeout(function () {
+    window.location = '<?php echo $sURLSendMessageWhatsapp; ?>';
+  }, 2100);
+</script>
