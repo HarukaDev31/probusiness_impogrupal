@@ -218,7 +218,11 @@ function addPedido(arrParams){
       console.log(response);
 
       if( response.status == 'success' ){
+        alert(response.message);
         
+        setTimeout(function () {
+          window.location = base_url + "Payment/thank";
+        }, 2100);
       } else {
 
       }

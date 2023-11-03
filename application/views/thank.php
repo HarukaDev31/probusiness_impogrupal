@@ -1,13 +1,12 @@
 <main><br><br>
   <div class="container mt-5">
-    <h2 class="text-center mb-4"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
-    <h2 class="text-center mb-4">Pedido creado</h2>
+    <h2 class="text-center mb-4 text-success"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
+    <h2 class="text-center mb-4 fw-bold">Pedido creado</h2>
     
     <div class="col-12 col-sm-12 col-md-12">
-      <h2 class="text-center mb-4">Resumen</h2>
+      <h2 class="text-left mb-4">Resumen</h2>
         <div class="card" style="border: none;">
         <div class="card-body shadow p-3 bg-body rounded pt-0">
-          <?php //array_debug($_SESSION['cart']); ?>
           <?php //aqui borrar session carrito ?>
           <?php
           $fTotalCantidadPedido = 0;
@@ -53,6 +52,8 @@
             </div>
           </div>
         </div>
+        
+        <?php unset($_SESSION['cart']); ?>
       </div>
     </div>
   </div>
