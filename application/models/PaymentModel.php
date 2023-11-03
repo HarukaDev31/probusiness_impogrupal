@@ -66,13 +66,15 @@ class PaymentModel extends CI_Model{
 		
 		$this->db->insert('importacion_grupal_pedido_cabecera', $arrSaleOrder);
 		$iIdHeader = $this->db->insert_id();
-
+        
 		foreach($arrDetail as $row) {
 			$arrSaleOrderDetail[] = array(
 				'ID_Empresa' => 1,
 				'ID_Organizacion' => 1,
 				'ID_Pedido_Cabecera' => $iIdHeader,
-				'ID_Producto' => $row['id_item'],
+				'ID_Producto' => $row['id_item_bd'],
+				'ID_Unidad_Medida' => $row['id_unidad_medida'],
+				'ID_Unidad_Medida_Precio' => $row['id_unidad_medida_2'],
 				'Qt_Producto' => $row['cantidad_item'],
 				'Ss_Precio' => $row['precio_item'],
 				'Ss_SubTotal' => $row['total_item'],

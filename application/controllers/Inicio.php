@@ -32,6 +32,9 @@ class Inicio extends CI_Controller {
 		$count = 0;
 		if( !empty($arrParams['id_item']) && !empty($arrParams['cantidad_item']) ) {
 			$id = $arrParams['id_item'];
+			$id_item_bd = $arrParams['id_item_bd'];
+			$id_unidad_medida = $arrParams['id_unidad_medida'];
+			$id_unidad_medida_2 = $arrParams['id_unidad_medida_2'];
 			$nombre_item = $arrParams['nombre_item'];
 			$url_imagen_item = $arrParams['url_imagen_item'];
 			$cantidad_item = $arrParams['cantidad_item'];
@@ -42,6 +45,9 @@ class Inicio extends CI_Controller {
 				foreach ($_SESSION['cart'] as $key => $product) {
 					if($product['id_item'] == $id) {
 						$_SESSION['cart'][$key]['cantidad_item'] += $cantidad_item;
+						$_SESSION['cart'][$key]['id_item_bd'] = $id_item_bd;
+						$_SESSION['cart'][$key]['id_unidad_medida'] = $id_unidad_medida;
+						$_SESSION['cart'][$key]['id_unidad_medida_2'] = $id_unidad_medida_2;
 						$_SESSION['cart'][$key]['precio_item'] = $precio_item;
 						$_SESSION['cart'][$key]['total_item'] = $total_item;
 						$_SESSION['cart'][$key]['nombre_item'] = $nombre_item;
@@ -53,6 +59,9 @@ class Inicio extends CI_Controller {
 				if(!$existProduct) {
 					array_push($_SESSION['cart'], [
 						'id_item' => $id,
+						'id_item_bd' => $id_item_bd,
+						'id_unidad_medida' => $id_unidad_medida,
+						'id_unidad_medida_2' => $id_unidad_medida_2,
 						'cantidad_item' => $cantidad_item,
 						'precio_item' => $precio_item,
 						'total_item' => $total_item,
@@ -63,6 +72,9 @@ class Inicio extends CI_Controller {
 			} else {
 				$_SESSION['cart'][] = [
 					'id_item' => $id,
+					'id_item_bd' => $id_item_bd,
+					'id_unidad_medida' => $id_unidad_medida,
+					'id_unidad_medida_2' => $id_unidad_medida_2,
 					'cantidad_item' => $cantidad_item,
 					'precio_item' => $precio_item,
 					'total_item' => $total_item,

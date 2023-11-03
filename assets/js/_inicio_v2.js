@@ -7,7 +7,6 @@ $(document).ready(function () {
   $(document).on('click', '.btn-agregar_item', function() {
     const type_action = 'add';
     const id_item = $( this ).data('id_item');
-    const id_item_bd = $( this ).data('id_item_bd');
     const id_unidad_medida = $( this ).data('id_unidad_medida');
     const id_unidad_medida_2 = $( this ).data('id_unidad_medida_2');
     const nombre_item = $( this ).data('nombre_item');
@@ -18,7 +17,6 @@ $(document).ready(function () {
     
     var arrParams = {
       type_action : type_action,
-      id_item_bd : id_item_bd,
       id_item : id_item,
       id_unidad_medida : id_unidad_medida,
       id_unidad_medida_2 : id_unidad_medida_2,
@@ -34,7 +32,6 @@ $(document).ready(function () {
   $(document).on('click', '.btn-quitar_item', function() {
     const type_action = 'remove';
     const id_item = $(this).attr('data-id_item');
-    const id_item_bd = $( this ).data('id_item_bd');
     const id_unidad_medida = $( this ).data('id_unidad_medida');
     const id_unidad_medida_2 = $( this ).data('id_unidad_medida_2');
     const nombre_item = $( this ).data('nombre_item');
@@ -45,7 +42,6 @@ $(document).ready(function () {
 
     var arrParams = {
       type_action : type_action,
-      id_item_bd : id_item_bd,
       id_item : id_item,
       id_unidad_medida : id_unidad_medida,
       id_unidad_medida_2 : id_unidad_medida_2,
@@ -171,6 +167,26 @@ function modalCartShop(){
                 sHmtlModalCartShopSinItem += '</div>';
                 sHmtlModalCartShopSinItem += '</div>';
               sHmtlModalCartShopSinItem += '</div>';
+
+              /*
+              sHmtlModalCartShopSinItem += '<div class="row">';
+                sHmtlModalCartShopSinItem += '<div class="col-6">';
+                  sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-eliminar_item">';
+                    sHmtlModalCartShopSinItem += '<button class="btn btn-default text-danger btn-quitar_item" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '">';
+                    sHmtlModalCartShopSinItem += '<i aria-hidden="true" class="fas fa-trash-alt text-danger"></i> Eliminar';
+                    sHmtlModalCartShopSinItem += '</button>';
+                  sHmtlModalCartShopSinItem += '</div>';
+                sHmtlModalCartShopSinItem += '</div>';
+                
+                sHmtlModalCartShopSinItem += '<div class="col-6">';
+                  sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-cantidad_item text-right">';
+                    sHmtlModalCartShopSinItem += '<button class="btn btn-primary btn-sm" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '"><i class="fa-solid fa-minus"></i></button>';
+                    sHmtlModalCartShopSinItem += '&nbsp;<p class="fs-5 text px-1 mt-1 mb-1">' + row.cantidad_item +  '</p>&nbsp;';
+                    sHmtlModalCartShopSinItem += '<button class="btn btn-primary btn-sm" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '"><i class="fa-solid fa-plus"></i></button>';
+                  sHmtlModalCartShopSinItem += '</div>';
+                sHmtlModalCartShopSinItem += '</div>';
+              sHmtlModalCartShopSinItem += '</div>';
+              */
             sHmtlModalCartShopSinItem += '</div>';
           sHmtlModalCartShopSinItem += '</div>';
         }
