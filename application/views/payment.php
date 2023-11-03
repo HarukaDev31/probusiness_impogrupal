@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 col-sm-8 col-md-8">
         <div class="col-12 col-sm-12 col-md-12">
-          <h2 class="text-left mb-3">Información de contacto</h2>
+          <h2 class="text-left mb-3 fw-bold">Información de contacto</h2>
           <form>
             <div class="card" style="border: none;">
               <div class="card-body shadow p-3 bg-body rounded">
@@ -11,7 +11,7 @@
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
                     <label>DNI / RUC / OTROS <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
-                      <input type="text" id="payment-documento_identidad" inputmode="numeric" name="Nu_Documento_Identidad" class="form-control required" placeholder="Ingresar" maxlength="15" autocomplete="off">
+                      <input type="text" id="payment-documento_identidad" inputmode="numeric" name="Nu_Documento_Identidad" class="form-control required input-number" placeholder="Ingresar" maxlength="15" autocomplete="off">
                       <span class="help-block text-danger" id="error"></span>
                     </div>
                   </div>
@@ -47,7 +47,7 @@
         
         <div class="col-12 col-sm-12 col-md-12">
           <!--direccion-->
-          <h2 class="text-left mb-3">Dirección</h2>
+          <h2 class="text-left mb-3 fw-bold">Dirección</h2>
           <form>
             <div class="card" style="border: none;">
               <div class="card-body shadow p-3 mb-5 bg-body rounded">
@@ -68,7 +68,7 @@
       
       <div class="col-12 col-sm-4 col-md-4">
         <div class="col-12 col-sm-12 col-md-12">
-          <h2 class="text-center mb-3">Resumen</h2>
+          <h2 class="text-center mb-3 fw-bold">Resumen</h2>
             <div class="card" style="border: none;">
             <div class="card-body shadow p-3 bg-body rounded pt-0">
               <?php //array_debug($_SESSION['cart']); ?>

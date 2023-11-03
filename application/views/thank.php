@@ -4,7 +4,7 @@
     <h2 class="text-center mb-4 fw-bold">Pedido creado</h2>
     
     <div class="col-12 col-sm-12 col-md-12">
-      <h2 class="text-left mb-4">Resumen</h2>
+      <h2 class="text-left mb-4 fw-bold">Resumen</h2>
         <div class="card" style="border: none;">
         <div class="card-body shadow p-3 bg-body rounded pt-0">
           <?php //aqui borrar session carrito ?>

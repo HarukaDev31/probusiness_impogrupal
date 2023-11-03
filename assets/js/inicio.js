@@ -156,7 +156,7 @@ function requestRemoveCart(arrParams) {
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
 
       $('#div-footer-cart').show();
-      
+
       modalCartShop();
     } else {
       alert(response.message);
@@ -289,16 +289,16 @@ function addPedido(arrParams){
 }
 
 function checkEmail(email){
-    var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
-    if (caract.test(email) == false){
-        $( '#txt-email' ).closest('.form-group').find('.help-block').html('Email inválido');
-        $( '#txt-email' ).closest('.form-group').addClass('has-success').removeClass('has-error');
-        $( '#txt-email' ).closest('.form-group').find('.help-block').removeClass('interno-span-primary');
-        return false;
-    }else{
-        $( '#txt-email' ).closest('.form-group').find('.help-block').html('Email válido');
-        $( '#txt-email' ).closest('.form-group').removeClass('has-success').addClass('has-error');
-        $( '#txt-email' ).closest('.form-group').find('.help-block').addClass('interno-span-primary');
-        return true;
-    }
+  var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+  if (caract.test(email) == false){
+    $( '#txt-email' ).closest('.form-group').find('.help-block').html('Email inválido');
+    $( '#txt-email' ).closest('.form-group').addClass('has-success').removeClass('has-error');
+    $( '#txt-email' ).closest('.form-group').find('.help-block').removeClass('interno-span-primary');
+    return false;
+  }else{
+    $( '#txt-email' ).closest('.form-group').find('.help-block').html('Email válido');
+    $( '#txt-email' ).closest('.form-group').removeClass('has-success').addClass('has-error');
+    $( '#txt-email' ).closest('.form-group').find('.help-block').addClass('interno-span-primary');
+    return true;
+  }
 }
