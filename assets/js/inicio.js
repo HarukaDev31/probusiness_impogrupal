@@ -85,7 +85,7 @@ $(document).ready(function () {
   $(document).on('click', '#btn-completar_pedido', function() {
     $('.help-block').empty();
     $('.form-group').removeClass('has-error');
-    
+
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
       $('#payment-documento_identidad').closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -156,6 +156,8 @@ function requestRemoveCart(arrParams) {
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
 
       $('#div-footer-cart').show();
+      
+      modalCartShop();
     } else {
       alert(response.message);
     }
@@ -172,48 +174,60 @@ function modalCartShop(){
     success: function (response) {
       console.log(response);
       if(response.status=='success'){
-        $('.modal-cart_shop-footer').removeClass('d-none');
-        $('#modal-cart-items').html('');
-        for(i in response.result){
-          var row = response.result[i];
-          console.log(row);
+        if(parseInt(response.count) > 0) {
+          $('.modal-cart_shop-footer').removeClass('d-none');
+          $('#modal-cart-items').html('');
+          for(i in response.result){
+            var row = response.result[i];
+            console.log(row);
 
-          sHmtlModalCartShopSinItem += '<div class="row div-line pb-2" id="modal-cart_shop-id_item' + row.id_item + '">';
-            sHmtlModalCartShopSinItem += '<div class="col-12">';
-              sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div_item" id="">';
-                sHmtlModalCartShopSinItem += '<a href="#" class="modal-cart_shop-img_item">';
-                  sHmtlModalCartShopSinItem += '<img src="' + row.url_imagen_item + '">';
-                sHmtlModalCartShopSinItem += '</a>';
-                sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-body_item ps-3">';
-                  sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item text-secondary">' + row.nombre_item + '</h3>';
-                  sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-precio_item">';
-                    sHmtlModalCartShopSinItem += '<span class="fw-bold">';
-                    sHmtlModalCartShopSinItem += signo_moneda + ' <span data-total_item="" data-id_item="">' + row.total_item + '</span>';
-                    sHmtlModalCartShopSinItem += '</span>';
+            sHmtlModalCartShopSinItem += '<div class="row div-line pb-2" id="modal-cart_shop-id_item' + row.id_item + '">';
+              sHmtlModalCartShopSinItem += '<div class="col-12">';
+                sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div_item" id="">';
+                  sHmtlModalCartShopSinItem += '<a href="#" class="modal-cart_shop-img_item">';
+                    sHmtlModalCartShopSinItem += '<img src="' + row.url_imagen_item + '">';
+                  sHmtlModalCartShopSinItem += '</a>';
+                  sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-body_item ps-3">';
+                    sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item text-secondary">' + row.nombre_item + '</h3>';
+                    sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-precio_item">';
+                      sHmtlModalCartShopSinItem += '<span class="fw-bold">';
+                      sHmtlModalCartShopSinItem += signo_moneda + ' <span data-total_item="" data-id_item="">' + row.total_item + '</span>';
+                      sHmtlModalCartShopSinItem += '</span>';
+                    sHmtlModalCartShopSinItem += '</div>';
+                    
+                    sHmtlModalCartShopSinItem += '<div class="row">';
+                      sHmtlModalCartShopSinItem += '<div class="col-6">';
+                        sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-cantidad_item" style="float: left;">';
+                          sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1">Cant: ' + row.cantidad_item +  '</p>';
+                        sHmtlModalCartShopSinItem += '</div>';
+                      sHmtlModalCartShopSinItem += '</div>';
+
+                      sHmtlModalCartShopSinItem += '<div class="col-6">';
+                        sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-eliminar_item">';
+                          sHmtlModalCartShopSinItem += '<button class="btn btn-default text-danger btn-quitar_item" data-id_unidad_medida_2="' + row.id_unidad_medida_2 + '" data-id_unidad_medida="' + row.id_unidad_medida + '" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '">';
+                          sHmtlModalCartShopSinItem += '<i aria-hidden="true" class="fas fa-trash-alt text-danger"></i> Eliminar';
+                          sHmtlModalCartShopSinItem += '</button>';
+                        sHmtlModalCartShopSinItem += '</div>';
+                      sHmtlModalCartShopSinItem += '</div>';
                   sHmtlModalCartShopSinItem += '</div>';
-                  
-                  sHmtlModalCartShopSinItem += '<div class="row">';
-                    sHmtlModalCartShopSinItem += '<div class="col-6">';
-                      sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-cantidad_item" style="float: left;">';
-                        sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1">Cant: ' + row.cantidad_item +  '</p>';
-                      sHmtlModalCartShopSinItem += '</div>';
-                    sHmtlModalCartShopSinItem += '</div>';
-
-                    sHmtlModalCartShopSinItem += '<div class="col-6">';
-                      sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-eliminar_item">';
-                        sHmtlModalCartShopSinItem += '<button class="btn btn-default text-danger btn-quitar_item" data-id_unidad_medida_2="' + row.id_unidad_medida_2 + '" data-id_unidad_medida="' + row.id_unidad_medida + '" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '">';
-                        sHmtlModalCartShopSinItem += '<i aria-hidden="true" class="fas fa-trash-alt text-danger"></i> Eliminar';
-                        sHmtlModalCartShopSinItem += '</button>';
-                      sHmtlModalCartShopSinItem += '</div>';
-                    sHmtlModalCartShopSinItem += '</div>';
-                sHmtlModalCartShopSinItem += '</div>';
+                  sHmtlModalCartShopSinItem += '</div>';
                 sHmtlModalCartShopSinItem += '</div>';
               sHmtlModalCartShopSinItem += '</div>';
             sHmtlModalCartShopSinItem += '</div>';
-          sHmtlModalCartShopSinItem += '</div>';
-        }
+          }
 
-        $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
+          $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
+        } else {
+          $('.modal-cart_shop-footer').addClass('d-none');
+  
+          sHmtlModalCartShopSinItem += '<div class="container py-5 px-5 text-center">';
+            sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';
+            sHmtlModalCartShopSinItem += '<span class="mb-3">Tu carrito de compras está vacío</span><br>';
+            sHmtlModalCartShopSinItem += '<a type="button" href="' + base_url + '" rel="noopener noreferrer" class="mt-3 btn btn-secondary">Comenzar a comprar</a>';
+          sHmtlModalCartShopSinItem += '</div>';
+        
+          $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
+        }
       } else {
         $('.modal-cart_shop-footer').addClass('d-none');
 
