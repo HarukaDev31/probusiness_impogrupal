@@ -76,14 +76,14 @@
               $fTotalCantidadPedido = 0;
               $fTotalImportePedido = 0;
               foreach($_SESSION['cart'] as $row){
-                $fTotalCantidadPedido = $row['cantidad_item'];
-                $fTotalImportePedido = $row['total_item'];
+                $fTotalCantidadPedido += $row['cantidad_item'];
+                $fTotalImportePedido += $row['total_item'];
               ?>
               <div class="row div-line">
                 <div class="col-12">
                   <div class="modal-cart_shop-div_item" id="delete_item_562260">
                     <a href="#" class="modal-cart_shop-img_item">
-                      <img src="<?php echo $row['url_imagen_item']; ?>">
+                      <img class="shadow-sm bg-body rounded" src="<?php echo $row['url_imagen_item']; ?>">
                     </a>
                     <div class="modal-cart_shop-body_item">
                       <h6 class="ps-2"><?php echo $row['nombre_item']; ?></h6>
@@ -112,6 +112,20 @@
                     <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
                     <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                     S/ <span><?php echo $fTotalImportePedido; ?></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 d-grid">
+                <div class="modal-cart_shop-div-precio_item pb-3">
+                  <span class="fw-bold text-danger fs-5">
+                    Total a pagar
+                  </span>
+
+                  <span class="fw-bold float-right text-danger fs-5">
+                    <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
+                    <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
+                    S/ <span><?php echo round(($fTotalImportePedido / 2), 2); ?></span>
                   </span>
                 </div>
               </div>

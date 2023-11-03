@@ -230,3 +230,9 @@ z-index: 2;
 .float-right{
     float: right;
 }
+
+.img-medio_pago {
+    height: 60px;
+    max-width: 100%;
+    margin: auto;
+}
