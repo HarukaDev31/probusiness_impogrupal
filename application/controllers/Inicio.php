@@ -120,6 +120,7 @@ class Inicio extends CI_Controller {
 		if(isset($_SESSION['cart'])) {
 			$result['status'] = 'success';
 			$result['result'] = $_SESSION['cart'];
+			$result['count'] = countBooks($_SESSION['cart']);
 		} else {
 			$result['status'] = 'error';
 			$result['message'] = 'No hay datos';
