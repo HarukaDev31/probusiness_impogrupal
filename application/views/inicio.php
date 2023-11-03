@@ -51,7 +51,7 @@
       <div class="card mt-5">
         <div class="row g-0">
           <div class="col-sm-4 position-relative">
-            <img src="<?php echo base_url("assets/images/elefante.png?ver=1.0.0"); ?>" class="card-img fit-cover w-100 cart-size-img" alt="<?php echo $row->No_Producto; ?>">
+            <img src="<?php echo $row->No_Producto . '?ver=' . $row->Nu_Version_Imagen; ?>" class="card-img fit-cover w-100 cart-size-img" alt="<?php echo $row->No_Producto; ?>">
           </div>
 
           <div class="col-sm-8">
