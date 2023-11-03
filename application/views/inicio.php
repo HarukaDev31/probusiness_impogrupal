@@ -77,7 +77,7 @@
                     <td><?php echo $row->No_Signo . ' ' . $row->precio_item; ?></td>
                     <td>
                       <div id="div-agregar_item-<?php echo $row->ID_Producto; ?>" class="d-grid">
-                        <button id="btn-agregar_item-<?php echo $row->ID_Producto; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo base_url("assets/images/elefante.png?ver=1.0.0"); ?>" class="btn btn-primary btn-lg btn-agregar_item" type="button">Agregar</button>
+                        <button id="btn-agregar_item-<?php echo $row->ID_Producto; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-lg btn-agregar_item" type="button">Agregar</button>
                       </div>
                     </td>
                   </tr>
@@ -87,7 +87,7 @@
                     <td><?php echo $row->No_Signo . ' ' . $row->precio_item_2; ?></td>
                     <td>
                       <div id="div-agregar_item-<?php echo $row->ID_Producto; ?>" class="d-grid">
-                        <button id="btn-agregar_item-<?php echo $row->ID_Producto; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo base_url("assets/images/elefante.png?ver=1.0.0"); ?>" class="btn btn-primary btn-lg btn-agregar_item" type="button">Agregar</button>
+                        <button id="btn-agregar_item-<?php echo $row->ID_Producto; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-lg btn-agregar_item" type="button">Agregar</button>
                       </div>
                     </td>
                   </tr>
