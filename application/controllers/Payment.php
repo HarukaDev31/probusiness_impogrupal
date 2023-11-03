@@ -37,10 +37,14 @@ class Payment extends CI_Controller {
 
 	public function thank(){
 		//falta que redirija al inicio si no tiene carrito de compras
-
+		$arrPedido = $_SESSION['cart'];
+		unset($_SESSION['cart']);
+		
 		$this->load->view('header');
 		$this->load->view('menu');
-		$this->load->view('thank');
+		$this->load->view('thank', array(
+			'arrPedido' => $arrPedido
+		));
 		$this->load->view('footer');
 	}
 }

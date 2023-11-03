@@ -11,7 +11,7 @@
           <?php
           $fTotalCantidadPedido = 0;
           $fTotalImportePedido = 0;
-          foreach($_SESSION['cart'] as $row){
+          foreach($arrPedido as $row){
             $fTotalCantidadPedido = $row['cantidad_item'];
             $fTotalImportePedido = $row['total_item'];
           ?>
@@ -52,8 +52,6 @@
             </div>
           </div>
         </div>
-        
-        <?php unset($_SESSION['cart']); ?>
       </div>
     </div>
   </div>

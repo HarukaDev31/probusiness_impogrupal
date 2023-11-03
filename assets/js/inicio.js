@@ -222,7 +222,7 @@ function addPedido(arrParams){
         
         setTimeout(function () {
           window.location = base_url + "Payment/thank";
-        }, 2100);
+        }, 1200);
       } else {
 
       }
