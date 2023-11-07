@@ -12,13 +12,13 @@ class Inicio extends CI_Controller {
 	}
 
 	public function index(){
-		//unset($_SESSION['cart']);//por mientras hasta que realice el quitar
-		//unset($_SESSION['header']);//por mientras hasta que realice el quitar
+		unset($_SESSION['cart']);//por mientras hasta que realice el quitar
+		unset($_SESSION['header']);//por mientras hasta que realice el quitar
 
 		$arrParams = array();
 		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu', array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto));
 		$this->load->view('inicio',
 			array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto)
 		);
@@ -83,7 +83,12 @@ class Inicio extends CI_Controller {
 					'url_imagen_item' => $url_imagen_item
 				];
 			}
+
+			$responseItemCartShopActual = searchForIdItem($_SESSION['cart'], $id);
+
 			$result['status'] = 'success';
+			$result['id_item'] = $responseItemCartShopActual['id_item'];//id por item
+			$result['count_item'] = $responseItemCartShopActual['cantidad_item'];//cantidad por item
 			$result['count'] = countBooks($_SESSION['cart']);
 			$result['total_item'] = amountBooks($_SESSION['cart']);
 		} else {
@@ -107,7 +112,11 @@ class Inicio extends CI_Controller {
 				}
 			}
 			
+			$responseItemCartShopActual = searchForIdItem($_SESSION['cart'], $id);
+
 			$result['status'] = 'success';
+			$result['id_item'] = $responseItemCartShopActual['id_item'];//id por item
+			$result['count_item'] = $responseItemCartShopActual['cantidad_item'];//cantidad por item
 			$result['count'] = countBooks($_SESSION['cart']);
 			$result['total_item'] = amountBooks($_SESSION['cart']);
 		} else {

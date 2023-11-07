@@ -15,8 +15,10 @@ class Payment extends CI_Controller {
 	public function index(){
 		//falta que redirija al inicio si no tiene carrito de compras
 
+		$arrParams = array();
+		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu', array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto));
 		$this->load->view('payment');
 		$this->load->view('footer');
 	}

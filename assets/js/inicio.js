@@ -82,13 +82,15 @@ $(document).ready(function () {
     modalCartShop();
   });
   
-  $(document).on('click', '#btn-completar_pedido', function() {
+  $(document).on('click', '.btn-completar_pedido', function() {
     $('.help-block').empty();
     $('.form-group').removeClass('has-error');
 
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
       $('#payment-documento_identidad').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#payment-documento_identidad'));
     } else if ($("#payment-nombre_cliente").val().trim().length < 3) {
       $('#payment-nombre_cliente').closest('.form-group').find('.help-block').html('Mínimo 3 caracteres');
       $('#payment-nombre_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -106,6 +108,11 @@ $(document).ready(function () {
       $('#payment-direccion').closest('.form-group').removeClass('has-success').addClass('has-error');
     } else {
       var arrParams = {
+        'id_importacion_grupal' : $( '#hidden-global-id_importacion_grupal' ).val(),
+        'id_empresa' : $( '#hidden-global-id_empresa' ).val(),
+        'id_organizacion' : $( '#hidden-global-id_organizacion' ).val(),
+        'id_pais' : $( '#hidden-global-id_pais' ).val(),
+        'id_moneda' : $( '#hidden-global-id_moneda' ).val(),
         'cantidad_total' : $( '#hidden-cart_shop-cantidad_total' ).val(),
         'importe_total' : $( '#hidden-cart_shop-importe_total' ).val(),
         'Nu_Documento_Identidad' : $( '[name="Nu_Documento_Identidad"]' ).val(),
@@ -120,10 +127,10 @@ $(document).ready(function () {
 });
 
 function requestAddCart(arrParams) {
-  console.log(arrParams);
-
+  //console.log(arrParams);
   $.post(base_url + 'Inicio/agregarItem', {arrParams}, function(response) {
     console.log(response);
+
     if( response.status == 'success' ){
       const sCaracterPalabra = (response.count > 1 ? 's' : '');
       
@@ -132,6 +139,8 @@ function requestAddCart(arrParams) {
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
 
       $('#div-footer-cart').show();
+
+      $('#btn-agregar_item-' + arrParams.id_item).html('Agregar <span class="badge bg-danger">' + response.count_item + '</span>');
     } else {
       alert(response.message);
     }
@@ -139,13 +148,13 @@ function requestAddCart(arrParams) {
 }
 
 function requestRemoveCart(arrParams) {
-  console.log(arrParams);
-
+  //console.log(arrParams);
   const id_item_temporal = arrParams.id_item;
 
   $.post(base_url + 'Inicio/quitarItem', {arrParams}, function(response) {
     console.log('item temporal : ' + id_item_temporal);
     console.log(response);
+
     if( response.status == 'success' ){
       $('#modal-cart_shop-id_item' + id_item_temporal).remove();
 
@@ -157,6 +166,7 @@ function requestRemoveCart(arrParams) {
 
       $('#div-footer-cart').show();
 
+      $('#btn-agregar_item-' + arrParams.id_item).html('Agregar <span class="badge bg-danger">' + response.count_item + '</span>');
       modalCartShop();
     } else {
       alert(response.message);
@@ -222,8 +232,8 @@ function modalCartShop(){
   
           sHmtlModalCartShopSinItem += '<div class="container py-5 px-5 text-center">';
             sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';
-            sHmtlModalCartShopSinItem += '<span class="mb-3">Tu carrito de compras está vacío</span><br>';
-            sHmtlModalCartShopSinItem += '<a type="button" href="' + base_url + '" rel="noopener noreferrer" class="mt-3 btn btn-secondary">Comenzar a comprar</a>';
+            sHmtlModalCartShopSinItem += '<h6><span class="fw-semibold">Tu carrito de compras está vacío</span></h6>';
+            sHmtlModalCartShopSinItem += '<a type="button" href="' + base_url + '" rel="noopener noreferrer" class="mt-3 btn btn-primary">Seguir a comprando</a>';
           sHmtlModalCartShopSinItem += '</div>';
         
           $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
@@ -233,8 +243,8 @@ function modalCartShop(){
 
         sHmtlModalCartShopSinItem += '<div class="container py-5 px-5 text-center">';
           sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';
-          sHmtlModalCartShopSinItem += '<span class="mb-3">Tu carrito de compras está vacío</span><br>';
-          sHmtlModalCartShopSinItem += '<a type="button" href="' + base_url + '" rel="noopener noreferrer" class="mt-3 btn btn-secondary">Comenzar a comprar</a>';
+          sHmtlModalCartShopSinItem += '<h6><span class="fw-semibold">Tu carrito de compras está vacío</span></h6>';
+          sHmtlModalCartShopSinItem += '<a type="button" href="' + base_url + '" rel="noopener noreferrer" class="mt-3 btn btn-primary">Seguir a comprando</a>';
         sHmtlModalCartShopSinItem += '</div>';
       
         $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
@@ -246,9 +256,9 @@ function modalCartShop(){
 }
 
 function addPedido(arrParams){
-  $( '#btn-completar_pedido' ).text('');
-  $( '#btn-completar_pedido' ).attr('disabled', true);
-  $( '#btn-completar_pedido' ).append( 'Guardando <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>' );
+  $( '.btn-completar_pedido' ).text('');
+  $( '.btn-completar_pedido' ).attr('disabled', true);
+  $( '.btn-completar_pedido' ).append( 'Guardando <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>' );
 
   console.log(arrParams);
   $.ajax({
@@ -272,9 +282,9 @@ function addPedido(arrParams){
         alert(response.message);
       }
 
-      $( '#btn-completar_pedido' ).text('');
-      $( '#btn-completar_pedido' ).append( 'Completar pedido' );
-      $( '#btn-completar_pedido' ).attr('disabled', false);
+      $( '.btn-completar_pedido' ).text('');
+      $( '.btn-completar_pedido' ).append( 'Finalizar pedido' );
+      $( '.btn-completar_pedido' ).attr('disabled', false);
     },
     error: function (jqXHR, textStatus, errorThrown) {
       alert('Problemas al registrar. Intentar más tarde.')
@@ -282,9 +292,9 @@ function addPedido(arrParams){
       //Message for developer
       console.log(jqXHR.responseText);
       
-      $( '#btn-completar_pedido' ).text('');
-      $( '#btn-completar_pedido' ).append( 'Completar pedido' );
-      $( '#btn-completar_pedido' ).attr('disabled', false);
+      $( '.btn-completar_pedido' ).text('');
+      $( '.btn-completar_pedido' ).append( 'Finalizar pedido' );
+      $( '.btn-completar_pedido' ).attr('disabled', false);
     }
   });
 }
@@ -302,4 +312,10 @@ function checkEmail(email){
     $( '#txt-email' ).closest('.form-group').find('.help-block').addClass('interno-span-primary');
     return true;
   }
+}
+
+function scrollToError( $sMetodo, $IdElemento ){
+  $sMetodo.animate({
+    scrollTop: $IdElemento.offset().top - 100
+  }, 'slow');
 }

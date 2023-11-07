@@ -9,6 +9,8 @@ class InicioModel extends CI_Model{
         $query = "SELECT
 IGC.ID_Empresa,
 IGC.ID_Organizacion,
+IGC.ID_Moneda,
+'1' AS ID_Pais,
 IGC.ID_Importacion_Grupal,
 IGC.No_Importacion_Grupal,
 IGC.Fe_Inicio,
@@ -35,7 +37,9 @@ JOIN importacion_grupal_detalle AS IGD ON(IGD.ID_Importacion_Grupal = IGC.ID_Imp
 JOIN producto AS ITEM ON(ITEM.ID_Producto = IGD.ID_Producto)
 JOIN unidad_medida AS UM ON(UM.ID_Unidad_Medida = ITEM.ID_Unidad_Medida)
 JOIN unidad_medida AS UM2 ON(UM2.ID_Unidad_Medida = ITEM.ID_Unidad_Medida_Precio)
-JOIN moneda AS MONE ON(MONE.ID_Moneda = IGC.ID_Moneda);";
+JOIN moneda AS MONE ON(MONE.ID_Moneda = IGC.ID_Moneda)
+WHERE
+IGC.Nu_Estado = 1";
 
         if ( !$this->db->simple_query($query) ){
             $error = $this->db->error();

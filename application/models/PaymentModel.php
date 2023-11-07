@@ -32,8 +32,8 @@ class PaymentModel extends CI_Model{
             $ID_Entidad = $objVerificarCliente->ID_Entidad;
         } else {
             $arrCliente = array(
-                'ID_Empresa' => 1,
-                'ID_Organizacion' => 1,
+                'ID_Empresa' => $arrHeader['id_empresa'],
+                'ID_Organizacion' => $arrHeader['id_organizacion'],
                 'Nu_Tipo_Entidad' => 0,//0=Cliente
                 'ID_Tipo_Documento_Identidad' => $iTipoDocumentoIdentidad,
                 'Nu_Documento_Identidad' => $sNumeroDocumentoIdentidad,
@@ -59,13 +59,13 @@ class PaymentModel extends CI_Model{
         $dRegistroHora = dateNow('fecha_hora');
 
 		$arrSaleOrder = array(
-			'ID_Empresa' => 1,
-			'ID_Organizacion' => 1,
-			'ID_Importacion_Grupal' => 1,
+            'ID_Empresa' => $arrHeader['id_empresa'],
+            'ID_Organizacion' => $arrHeader['id_organizacion'],
+			'ID_Importacion_Grupal' => $arrHeader['id_importacion_grupal'],
 			'Fe_Emision' => dateNow('fecha'),
             'ID_Entidad' => $ID_Entidad,
-			'ID_Pais' => 1,
-            'ID_Moneda' => 1,
+			'ID_Pais' => $arrHeader['id_pais'],//1=PERU
+            'ID_Moneda' => $arrHeader['id_moneda'],
             'Ss_Total' => $arrHeader['importe_total'],
             'Qt_Total' => $arrHeader['cantidad_total'],
 			'Txt_Direccion_Envio' => $arrHeader['Txt_Direccion'],
@@ -78,8 +78,8 @@ class PaymentModel extends CI_Model{
         
 		foreach($arrDetail as $row) {
 			$arrSaleOrderDetail[] = array(
-				'ID_Empresa' => 1,
-				'ID_Organizacion' => 1,
+                'ID_Empresa' => $arrHeader['id_empresa'],
+                'ID_Organizacion' => $arrHeader['id_organizacion'],
 				'ID_Pedido_Cabecera' => $iIdHeader,
 				'ID_Producto' => $row['id_item_bd'],
 				'ID_Unidad_Medida' => $row['id_unidad_medida'],

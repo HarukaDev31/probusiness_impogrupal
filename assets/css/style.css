@@ -142,10 +142,12 @@ z-index: 2;
     box-shadow: 0px 10px 5px rgba(0,0,0,.15), 0px -10px 5px rgba(0,0,0,.15);
 }
 
+/*
 .modal-cart_shop-body {
     max-height: 82vh;
     overflow-y: scroll;
 }
+*/
 
 /* sm */
 @media (min-width: 576px) {

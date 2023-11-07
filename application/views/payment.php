@@ -50,7 +50,7 @@
           <h2 class="text-left mb-3 fw-bold">Dirección</h2>
           <form>
             <div class="card" style="border: none;">
-              <div class="card-body shadow p-3 mb-5 bg-body rounded">
+              <div class="card-body shadow p-3 bg-body rounded">
                 <div class="row">
                   <div class="col-12 col-sm-12 col-md-12 mb-3">
                     <label>Dirección <span class="label-advertencia text-danger"> *</span></label>
@@ -101,36 +101,74 @@
                 </div>
               </div>
               <?php } ?>
-              
-              <div class="col-12 d-grid mt-3">
-                <div class="modal-cart_shop-div-precio_item pb-3">
-                  <span class="fw-bold">
-                    Total
-                  </span>
+              <div class="d-block d-sm-none">
+                <br><br><br><br><br><br><br>
+              </div>
 
-                  <span class="fw-bold float-right">
-                    <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
-                    <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
-                    S/ <span><?php echo $fTotalImportePedido; ?></span>
-                  </span>
+              <div class="d-none d-sm-block">
+                <div class="col-12 d-grid mt-3">
+                  <div class="modal-cart_shop-div-precio_item pb-3">
+                    <span class="fw-bold">
+                      Total
+                    </span>
+
+                    <span class="fw-bold float-right">
+                      <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
+                      <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
+                      S/ <span><?php echo $fTotalImportePedido; ?></span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="col-12 d-grid">
+                  <div class="modal-cart_shop-div-precio_item pb-3">
+                    <span class="fw-bold text-danger fs-5">
+                      Total a pagar
+                    </span>
+
+                    <span class="fw-bold float-right text-danger fs-5">
+                      <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
+                      <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
+                      S/ <span><?php echo round(($fTotalImportePedido / 2), 2); ?></span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 d-grid">
+                  <button type="button" class="btn btn-primary btn-lg btn-completar_pedido">Finalizar pedido</button>
                 </div>
               </div>
 
-              <div class="col-12 d-grid">
-                <div class="modal-cart_shop-div-precio_item pb-3">
-                  <span class="fw-bold text-danger fs-5">
-                    Total a pagar
-                  </span>
+              <div class="d-block d-sm-none totales-payment fixed-bottom bg-white p-3 shadow pt-0">
+                <div class="col-12 d-grid mt-3">
+                  <div class="modal-cart_shop-div-precio_item pb-3">
+                    <span class="fw-bold">
+                      Total
+                    </span>
 
-                  <span class="fw-bold float-right text-danger fs-5">
-                    <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
-                    <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
-                    S/ <span><?php echo round(($fTotalImportePedido / 2), 2); ?></span>
-                  </span>
+                    <span class="fw-bold float-right">
+                      <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
+                      <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
+                      S/ <span><?php echo $fTotalImportePedido; ?></span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div class="col-12 d-grid">
-                <button type="button" id="btn-completar_pedido" class="btn btn-primary btn-lg">Completar pedido</button>
+
+                <div class="col-12 d-grid">
+                  <div class="modal-cart_shop-div-precio_item pb-3">
+                    <span class="fw-bold text-danger fs-5">
+                      Total a pagar
+                    </span>
+
+                    <span class="fw-bold float-right text-danger fs-5">
+                      <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
+                      <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
+                      S/ <span><?php echo round(($fTotalImportePedido / 2), 2); ?></span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-12 d-grid">
+                  <button type="button" class="btn btn-primary btn-lg btn-completar_pedido">Finalizar pedido</button>
+                </div>
               </div>
             </div>
           </div>

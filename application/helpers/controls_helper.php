@@ -403,6 +403,21 @@ function amountBooks($array) {
     return $total;
 }
 
+function searchForIdItem($array, $id_item) {
+	$data = array('key' => '', 'id_item' => '', 'cantidad_item' => '');
+	if(!empty($array)) {
+		foreach ($array as $key => $val) {
+			if ($val['id_item'] == $id_item) {
+				$data['key'] = $key;
+				$data['id_item'] = $id_item;
+				$data['cantidad_item'] = $val['cantidad_item'];
+				return $data;
+			}
+		}
+	}
+	return null;
+}
+
 function ToDateHourBD($date){
     $d = explode('-', $date);
     $h = explode(" ", $d[2]);
