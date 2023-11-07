@@ -45,8 +45,8 @@ class Payment extends CI_Controller {
 		$arrCabecera = $_SESSION['header'];
 		$arrDetalle = $_SESSION['cart'];
 
-		//unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
-		//unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
+		unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
+		unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
 		
 		$this->load->view('header');
 		$this->load->view('menu');
