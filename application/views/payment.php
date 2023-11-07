@@ -35,7 +35,7 @@
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
                     <label>Email <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
-                      <input type="text" id="payment-email" inputmode="text" name="Txt_Email_Entidad" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="on">
+                      <input type="text" id="payment-email" inputmode="text" name="Txt_Email_Entidad" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="on" autocapitalize="none">
                       <span class="help-block text-danger" id="error"></span>
                     </div>
                   </div>
