@@ -107,14 +107,14 @@
               $numero_celular="953314683";
               $phone = $codigo_pais . $numero_celular;
               
-              $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n";
-              $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n\n";
-              $message_wp .= "Unidad: *" . $row->No_Unidad_Medida . "* 📦\n";
-              $message_wp .= "Cantidad: *" . round($row->cantidad_item, 2) . "*\n";
+              $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
+              $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n";
+              $message_wp .= "*" . $row->No_Unidad_Medida . "* 📦\n";
+              $message_wp .= "Contiene *" . round($row->cantidad_item, 2) . "* unidades\n";
               $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item, 2, '.', ',') . "*\n\n";
               
-              $message_wp .= "Unidad: *" . $row->No_Unidad_Medida_2 . "* 📦\n";
-              $message_wp .= "Cantidad: *" . round($row->cantidad_item_2, 2) . "*\n";
+              $message_wp .= "*" . $row->No_Unidad_Medida_2 . "* 📦\n";
+              $message_wp .= "Contiene *" . round($row->cantidad_item_2, 2) . "* unidades\n";
               $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item_2, 2, '.', ',') . "*\n\n";
               $message_wp = urlencode($message_wp);
               $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;
