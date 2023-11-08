@@ -39,11 +39,11 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
 ?>
 
   <div class="container mt-5">
-    <h2 class="text-center mb-4 text-success"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
+    <h2 class="text-center mb-4 pt-3 text-success"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
     <h2 class="text-center mb-4 fw-bold">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?> creado</h2>
     <h3 class="text-center mb-4">Total a pagar S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
     
-    <a class="btn btn-success btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+    <a class="btn btn-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
 
     <div class="row">
       <div class="col-12 col-sm-6 col-md-6">
@@ -53,9 +53,9 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
             <div class="row">
               <div class="col-12">
                 <div class="modal-cart_shop-div_item">
-                  <a href="#" class="modal-cart_shop-img_item">
+                  <div class="modal-cart_shop-img_item">
                     <img class="shadow-sm bg-body rounded" src="<?php echo base_url('assets/images/logo_bcp.png?ver=1.0.0'); ?>">
-                  </a>
+                  </div>
                   <div class="modal-cart_shop-body_item ps-3">
                     <h6 class="ps-2">Cuenta Corriente</h6>
                     <div class="modal-cart_shop-div-precio_item ps-2">
@@ -92,7 +92,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
           </div>
         </div>
           
-        <div class="card mt-3" style="border: none;">
+        <div class="card mt-3 mb-3" style="border: none;">
           <div class="card-body shadow p-3 bg-body rounded pb-0 pt-0">
             <div class="row">
               <div class="col-12">
@@ -120,7 +120,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
       <div class="col-12 col-sm-6 col-md-6 mt-3 mt-sm-0">
         <h2 class="text-left mb-4 fw-bold">Resumen</h2>
           <div class="card" style="border: none;">
-          <div class="card-body shadow p-3 bg-body rounded pt-0">
+          <div class="card-body shadow p-3 bg-body rounded pt-0 mb-3">
             <?php //aqui borrar session carrito ?>
             <?php
             $fTotalCantidadPedido = 0;
@@ -154,11 +154,11 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
             
             <div class="col-12 d-grid mt-3">
               <div class="modal-cart_shop-div-precio_item pb-3">
-                <span class="fw-bold">
+                <span class="fw-bold fs-5">
                   Total
                 </span>
 
-                <span class="fw-bold float-right">
+                <span class="fw-bold float-right fs-5">
                   <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
                   <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                   S/ <span><?php echo number_format($arrCabecera['documento']['importe_total'], 2, '.', ','); ?></span>
@@ -172,8 +172,10 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
   </div>
 </main>
 <script>
+  /*
   setTimeout(function () {
     window.open("<?php echo $sURLSendMessageWhatsapp; ?>", "_blank");
     //window.location = '<?php echo $sURLSendMessageWhatsapp; ?>';
   }, 2100);
+  */
 </script>

@@ -83,8 +83,18 @@ $(document).ready(function () {
   });
   
   $(document).on('click', '.btn-completar_pedido', function() {
+    /*
+    var radioValue = $("input[name='arrMedioPago']:checked").val();
+    console.log(radioValue);
+
+    console.log($('input[name="arrMedioPago"]:checked').data('id'));
+    */
+    
     $('.help-block').empty();
     $('.form-group').removeClass('has-error');
+
+    const sMedioPago = $("input[name='arrMedioPago']:checked").val();
+    const iIdMedioPago = $("input[name='arrMedioPago']:checked").data('id');
 
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
@@ -94,18 +104,30 @@ $(document).ready(function () {
     } else if ($("#payment-nombre_cliente").val().trim().length < 3) {
       $('#payment-nombre_cliente').closest('.form-group').find('.help-block').html('Mínimo 3 caracteres');
       $('#payment-nombre_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#payment-nombre_cliente'));
     } else if ($("#payment-celular_cliente").val().trim().length < 9) {
       $('#payment-celular_cliente').closest('.form-group').find('.help-block').html('9 dígitos');
       $('#payment-celular_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#payment-celular_cliente'));
     } else if ($("#payment-email").val().trim().length < 1) {
       $('#payment-email').closest('.form-group').find('.help-block').html('Ingresar Email');
       $('#payment-email').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#payment-documento_identidad'));
     } else if (!checkEmail($('#payment-email').val())) {
       $('#payment-email').closest('.form-group').find('.help-block').html('Email inválido');
       $('#payment-email').closest('.form-group').addClass('has-success').removeClass('has-error');
+
+      scrollToError($("html, body"), $('#payment-email'));
     } else if ($("#payment-direccion").val().trim().length < 10) {
       $('#payment-direccion').closest('.form-group').find('.help-block').html('Mínimo 10 caracteres');
       $('#payment-direccion').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#payment-direccion'));
+    } else if (sMedioPago===undefined || sMedioPago==0 || sMedioPago=='') {
+      alert('Elegir medio de pago');
     } else {
       var arrParams = {
         'id_importacion_grupal' : $( '#hidden-global-id_importacion_grupal' ).val(),
@@ -120,6 +142,7 @@ $(document).ready(function () {
         'Nu_Celular_Entidad' : $( '[name="Nu_Celular_Entidad"]' ).val(),
         'Txt_Email_Entidad' : $( '[name="Txt_Email_Entidad"]' ).val(),
         'Txt_Direccion' : $( '[name="Txt_Direccion"]' ).val(),
+        'id_medio_pago' : iIdMedioPago,
       };
       addPedido(arrParams);
     }
@@ -139,8 +162,14 @@ function requestAddCart(arrParams) {
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
 
       $('#div-footer-cart').show();
+  
+      const count_item = (response.count_item != null ? response.count_item : 0);
 
-      $('#btn-agregar_item-' + arrParams.id_item).html('Agregar <span class="badge bg-danger">' + response.count_item + '</span>');
+      if(count_item>0){
+        $('#btn-agregar_item-' + arrParams.id_item).html('Agregar <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' + count_item + '</span>');
+      } else {
+        $('#btn-agregar_item-' + arrParams.id_item).html('Agregar');
+      }
     } else {
       alert(response.message);
     }
@@ -166,7 +195,14 @@ function requestRemoveCart(arrParams) {
 
       $('#div-footer-cart').show();
 
-      $('#btn-agregar_item-' + arrParams.id_item).html('Agregar <span class="badge bg-danger">' + response.count_item + '</span>');
+      const count_item = (response.count_item != null ? response.count_item : 0);
+
+      if(count_item>0){
+        $('#btn-agregar_item-' + arrParams.id_item).html('Agregar <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' + count_item + '</span>');
+      } else {
+        $('#btn-agregar_item-' + arrParams.id_item).html('Agregar');
+      }
+
       modalCartShop();
     } else {
       alert(response.message);
@@ -198,7 +234,7 @@ function modalCartShop(){
                     sHmtlModalCartShopSinItem += '<img src="' + row.url_imagen_item + '" class="shadow-sm bg-body rounded">';
                   sHmtlModalCartShopSinItem += '</a>';
                   sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-body_item ps-3">';
-                    sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item text-secondary">' + row.nombre_item + '</h3>';
+                    sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item text-dark">' + row.nombre_item + '</h3>';
                     sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-precio_item">';
                       sHmtlModalCartShopSinItem += '<span class="fw-bold">';
                       sHmtlModalCartShopSinItem += 'S/ <span data-total_item="" data-id_item="">' + row.total_item + '</span>';
@@ -227,8 +263,24 @@ function modalCartShop(){
           }
 
           $('#modal-cart-items').html(sHmtlModalCartShopSinItem);
+          
+          sHmtlModalCartShopSinItem='';
+          sHmtlModalCartShopSinItem += '<div class="container">';
+            sHmtlModalCartShopSinItem += '<div class="row">';
+              sHmtlModalCartShopSinItem += '<div class="col">';
+                sHmtlModalCartShopSinItem += '<span id="modal-total_cantidad-cart_shop">Cantidad: <label id="label-total_cantidad">' + response.count + '</label></span>';
+              sHmtlModalCartShopSinItem += '</div>';
+              sHmtlModalCartShopSinItem += '<div class="col" style="text-align: right;">';
+                sHmtlModalCartShopSinItem += '<span id="modal-total_importe-cart_shop" class="fw-bold">Total: <label id="label-total_importe">' + $('#hidden-global-signo_moneda').val() + ' ' + response.total_item + '</label></span>';
+              sHmtlModalCartShopSinItem += '</div>';
+            sHmtlModalCartShopSinItem += '</div>';
+          sHmtlModalCartShopSinItem += '</div>';
+
+          $('#modal-footer_total').html(sHmtlModalCartShopSinItem);
         } else {
           $('.modal-cart_shop-footer').addClass('d-none');
+
+          $('#modal-footer_total').html('');
   
           sHmtlModalCartShopSinItem += '<div class="container py-5 px-5 text-center">';
             sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';
@@ -240,6 +292,8 @@ function modalCartShop(){
         }
       } else {
         $('.modal-cart_shop-footer').addClass('d-none');
+
+        $('#modal-footer_total').html('');
 
         sHmtlModalCartShopSinItem += '<div class="container py-5 px-5 text-center">';
           sHmtlModalCartShopSinItem += '<i class="mb-3 fa-solid fa-cart-shopping fa-3x"></i><br>';

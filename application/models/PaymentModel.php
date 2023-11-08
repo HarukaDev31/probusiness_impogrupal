@@ -4,6 +4,34 @@ class PaymentModel extends CI_Model{
 		parent::__construct();
     }
   
+    public function getMedioPago($arrParams){
+        //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
+        $query = "SELECT * FROM medio_pago WHERE ID_Empresa = " . $arrParams['ID_Empresa'] . " AND Nu_Tipo_Forma_Pago_Lae_Shop IN(1,2,3,4) AND Nu_Activar_Medio_Pago_Lae_Shop=1";
+
+        if ( !$this->db->simple_query($query) ){
+            $error = $this->db->error();
+            return array(
+                'status' => 'danger',
+                'message' => 'Problemas al obtener datos',
+                'code_sql' => $error['code'],
+                'message_sql' => $error['message']
+            );
+        }
+        $arrResponseSQL = $this->db->query($query);
+        if ( $arrResponseSQL->num_rows() > 0 ){
+            return array(
+                'status' => 'success',
+                'message' => 'Si hay registros',
+                'result' => $arrResponseSQL->result()
+            );
+        }
+        
+        return array(
+            'status' => 'warning',
+            'message' => 'No hay registros'
+        );
+    }
+  
     public function addPedido($arrPost){
 		$this->db->trans_begin();
         
@@ -69,6 +97,7 @@ class PaymentModel extends CI_Model{
             'Ss_Total' => $arrHeader['importe_total'],
             'Qt_Total' => $arrHeader['cantidad_total'],
 			'Txt_Direccion_Envio' => $arrHeader['Txt_Direccion'],
+			'ID_Medio_Pago' => $arrHeader['id_medio_pago'],
             'Nu_Estado' => 1,//1=Pendiente, 2=Confirmado y 3=Finalizado
             'Fe_Registro' => $dRegistroHora
 		);

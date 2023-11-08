@@ -27,6 +27,9 @@
         <div class="modal-body modal-cart_shop-body" id="modal-cart-items">
         </div>
         <div class="modal-footer modal-cart_shop-footer fixed-bottom bg-white border border-0">
+          <div id="modal-footer_total" class="d-grid" style="width: 100%;">
+          </div>
+
           <div class="d-grid" style="width: 100%;">
             <a type="button" href="<?php echo base_url('payment'); ?>" rel="noopener noreferrer" class="btn btn-primary btn-lg">Completar pedido</a>
           </div>

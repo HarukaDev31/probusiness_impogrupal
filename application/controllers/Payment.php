@@ -17,9 +17,20 @@ class Payment extends CI_Controller {
 
 		$arrParams = array();
 		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
+		
+		//get medio de pago
+		$arrMedioPago = array();
+		if($arrImportacionGrupalProducto['status'] == 'success') {
+			$arrImportacionGrupalProducto_ = $arrImportacionGrupalProducto['result'];
+			$arrParamsMedioPago = array(
+				'ID_Empresa' => $arrImportacionGrupalProducto_[0]->ID_Empresa
+			);
+			$arrMedioPago = $this->PaymentModel->getMedioPago($arrParamsMedioPago);
+		}
+
 		$this->load->view('header');
 		$this->load->view('menu', array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto));
-		$this->load->view('payment');
+		$this->load->view('payment', array('arrMedioPago' => $arrMedioPago));
 		$this->load->view('footer');
 	}
 
@@ -45,8 +56,8 @@ class Payment extends CI_Controller {
 		$arrCabecera = $_SESSION['header'];
 		$arrDetalle = $_SESSION['cart'];
 
-		unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
-		unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
+		//unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
+		//unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
 		
 		$this->load->view('header');
 		$this->load->view('menu');

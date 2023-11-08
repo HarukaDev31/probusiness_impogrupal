@@ -25,10 +25,10 @@ ITEM.ID_Unidad_Medida,
 ITEM.ID_Unidad_Medida_Precio AS ID_Unidad_Medida_2,
 UM.No_Unidad_Medida,
 ITEM.Qt_Unidad_Medida AS cantidad_item,
-ITEM.Ss_Precio_Ecommerce_Online_Regular AS precio_item,
+ITEM.Ss_Precio_Importacion AS precio_item,
 UM2.No_Unidad_Medida AS No_Unidad_Medida_2,
 ITEM.Qt_Unidad_Medida_2 AS cantidad_item_2,
-ITEM.Ss_Precio_Ecommerce_Online AS precio_item_2,
+ITEM.Ss_Precio_Importacion_2 AS precio_item_2,
 ITEM.Nu_Activar_Item_Lae_Shop AS estado_item,
 ITEM.Txt_Producto
 FROM

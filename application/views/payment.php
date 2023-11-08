@@ -64,14 +64,61 @@
             </div>
           </form>
         </div>
+        
+        <div class="col-12 col-sm-12 col-md-12">
+          <!--direccion-->
+          <h2 class="text-left mb-3 fw-bold">Medios de Pago</h2>
+          
+          <?php
+          if($arrMedioPago['status']=='success') {
+            foreach($arrMedioPago['result'] as $row){
+              //array_debug($row);
+            ?>
+            
+            <div class="card mb-3" style="border: none;">
+              <div class="card-body shadow p-3 bg-body rounded pb-0 pt-0">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-check" style="cursor: pointer;">
+                      <input style="cursor: pointer;" class="form-check-input mt-4" type="radio" name="arrMedioPago" id="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
+                      <label style="cursor: pointer;" class="ms-3 col-12" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
+                        <div class="modal-cart_shop-div_item">
+                          <span>
+                            <img class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen; ?>">
+                          </span>
+                        </div>
+
+                        <div class="mb-2">
+                          <h6 class="ps-2"><?php echo $row->No_Medio_Pago_Tienda_Virtual; ?></h6>
+                          <div class="modal-cart_shop-div-precio_item ps-2">
+                            <span class="fw-bold">
+                              <span>200-3001727689</span>
+                            </span>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <?php
+            }
+          } else {
+
+          }
+          ?>
+        </div>
+        
+        <?php //array_debug($arrMedioPago); ?>
       </div>
       
       <div class="col-12 col-sm-4 col-md-4">
-        <div class="col-12 col-sm-12 col-md-12">
+        <div class="col-12 col-sm-12 col-md-12 sticky-top">
           <h2 class="text-center mb-3 fw-bold">Resumen</h2>
             <div class="card" style="border: none;">
             <div class="card-body shadow p-3 bg-body rounded pt-0">
-              <?php //array_debug($_SESSION['cart']); ?>
               <?php
               $fTotalCantidadPedido = 0;
               $fTotalImportePedido = 0;
