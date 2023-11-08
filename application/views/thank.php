@@ -172,10 +172,8 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
   </div>
 </main>
 <script>
-  /*
   setTimeout(function () {
     window.open("<?php echo $sURLSendMessageWhatsapp; ?>", "_blank");
     //window.location = '<?php echo $sURLSendMessageWhatsapp; ?>';
   }, 2100);
-  */
 </script>
