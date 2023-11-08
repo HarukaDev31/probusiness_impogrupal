@@ -1,11 +1,15 @@
 <main>
 <br><br>
+<!--
+<br><br>
+-->
 <?php
 
 //array_debug($arrResponsePedido);
 //array_debug($arrCabecera);
 //array_debug($arrDetalle);
 //array_debug($arrMedioPago);
+//echo base_url();
 
 $phone = "51" . $arrCabecera['cliente']['Nu_Celular_Entidad'];
 
@@ -44,10 +48,20 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
 
   <div class="container mt-5">
     <h2 class="text-center mb-4 pt-3 text-success"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
-    <h2 class="text-center mb-4 fw-bold">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?> creado</h2>
-    <h3 class="text-center mb-4">Total a pagar S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
-    
-    <a class="btn btn-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+    <h2 class="text-center mb-4">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?> creado</h2>
+    <a class="btn btn-outline-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+
+    <h3 class="text-center mb-4 fw-bold">Total a pagar S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
+
+    <form class="form row g-3" role="form" id="attachform" enctype="multipart/form-data">
+      <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
+      <div class="col-12 col-sm-12" style="cursor: pointer">
+        <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" style="cursor: pointer">
+      </div>
+      <div class="col-12 col-sm-12">
+        <button type="submit" id="btn-file_voucher" class="btn btn-primary btn-lg btn-block shadow" style="width:100%">Enviar</button>
+      </div>
+    </form>
 
     <div class="row">
       <?php

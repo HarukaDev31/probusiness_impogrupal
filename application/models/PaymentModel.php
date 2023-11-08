@@ -281,4 +281,10 @@ CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
             'message' => 'No hay registros'
         );
     }
+
+    public function addVoucherPedido($data, $where){
+        if ( $this->db->update('importacion_grupal_pedido_cabecera', $data, $where) > 0 )
+            return array('status' => 'success', 'message' => 'Se guardo correctamente');
+		return array('status' => 'warning', 'message' => 'Problemas al guardar');
+    }
 }

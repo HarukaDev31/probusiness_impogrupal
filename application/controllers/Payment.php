@@ -193,4 +193,57 @@ class Payment extends CI_Controller {
             ));
 		}
 	}
+
+	public function enviarArchivo(){
+		//array_debug($_FILES);
+		//array_debug($this->input->post());
+	
+		$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'heif', 'webp');
+		if(!empty($this->input->post('id_pedido')) && isset($_FILES['voucher'])){
+			$img = $_FILES['voucher']['name'];
+			$tmp = $_FILES['voucher']['tmp_name'];
+			$type = $_FILES['voucher']['type'];
+			// get uploaded file's extension
+			$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+			// check's valid format
+			if(in_array($ext, $valid_extensions)){
+				$path = "assets/images/voucher_deposito/";
+				
+				$config['upload_path'] = $path;
+				$config['allowed_types'] = 'png|jpg|jpeg|webp|PNG|JPG|JPEG|WEBP';
+				$config['max_size'] = 1024;//1024 KB = 1 MB
+				$config['encrypt_name'] = TRUE;
+				$config['max_filename'] = '255';
+
+				$this->load->library('upload', $config);
+
+				if (!$this->upload->do_upload('voucher')){
+					echo json_encode(array(
+						'status' => 'warning',
+						'message' => 'No se guardo ' . strip_tags($this->upload->display_errors()) 
+					));
+				} else {
+					$arrUploadFile = $this->upload->data();
+					//array_debug($arrUploadFile);
+
+					//ruta de archivo cloud
+					$Txt_Url_Imagen_Deposito = base_url($path . $arrUploadFile['file_name']);
+
+					//echo $Txt_Url_Imagen_Deposito;
+					$data = array(
+						'Txt_Url_Imagen_Deposito' => $Txt_Url_Imagen_Deposito
+					);
+					$where = array(
+						'ID_Pedido_Cabecera' => $this->input->post('id_pedido')
+					);
+					echo json_encode($this->PaymentModel->addVoucherPedido($data, $where));
+				}
+			} else {
+				echo json_encode(array(
+					'status' => 'warning',
+					'message' => 'Extensión inválida ' . $type
+				));
+			}
+		}
+	}	
 }
