@@ -198,16 +198,17 @@ $(document).ready(function () {
         'id_organizacion' : $( '#hidden-global-id_organizacion' ).val(),
         'id_pais' : $( '#hidden-global-id_pais' ).val(),
         'id_moneda' : $( '#hidden-global-id_moneda' ).val(),
+        'signo_moneda' : $( '#hidden-global-signo_moneda' ).val(),
         'cantidad_total' : $( '#hidden-cart_shop-cantidad_total' ).val(),
         'importe_total' : $( '#hidden-cart_shop-importe_total' ).val(),
-        'Nu_Documento_Identidad' : $( '[name="Nu_Documento_Identidad"]' ).val(),
-        'No_Entidad' : $( '[name="No_Entidad"]' ).val(),
-        'Nu_Celular_Entidad' : $( '[name="Nu_Celular_Entidad"]' ).val(),
-        'Txt_Email_Entidad' : $( '[name="Txt_Email_Entidad"]' ).val(),
+        'Nu_Documento_Identidad' : $('#payment-documento_identidad').val(),
+        'No_Entidad' : $('#payment-nombre_cliente').val(),
+        'Nu_Celular_Entidad' : $('#payment-celular_cliente').val(),
+        'Txt_Email_Entidad' : $('#payment-email').val(),
         'id_departamento' : $( '#cbo-departamento' ).val(),
         'id_provincia' : $( '#cbo-provincia' ).val(),
         'id_distrito' : $( '#cbo-distrito' ).val(),
-        'Txt_Direccion' : $( '[name="Txt_Direccion"]' ).val(),
+        'Txt_Direccion' : $('#payment-direccion').val(),
         'id_medio_pago' : iIdMedioPago,
       };
       addPedido(arrParams);
@@ -416,7 +417,7 @@ function addPedido(arrParams){
   $( '.btn-completar_pedido' ).attr('disabled', true);
   $( '.btn-completar_pedido' ).append( 'Guardando <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>' );
 
-  console.log(arrParams);
+  //console.log(arrParams);
   $.ajax({
     url: base_url + 'Payment/addPedido',
     type: "POST",
@@ -425,7 +426,7 @@ function addPedido(arrParams){
       arrParams
     },
     success: function (response) {
-      console.log(response);
+      //console.log(response);
 
       if( response.status == 'success' ){
         //alert(response.message);
@@ -433,7 +434,7 @@ function addPedido(arrParams){
         //window.location = base_url + "Payment/thank";
         //}, 1200);
 
-        window.location = base_url + "Payment/thank";
+        window.location = base_url + "Payment/thank/" + response.result.id_pedido;
       } else {
         alert(response.message);
       }

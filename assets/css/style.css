@@ -253,3 +253,29 @@ z-index: 2;
 .float-right{
     float: right;
 }
+
+/* file voucher */
+.custom-file-voucher #voucher {
+    margin-left: -2px !important;
+}
+
+.custom-file-voucher#voucher::-webkit-file-upload-button {
+    display: none;
+}
+
+.custom-file-voucher #voucher::file-selector-button {
+    display: none;
+}
+
+.custom-file-voucher:hover label {
+    background-color: #dde0e3;
+    cursor: pointer;
+}
+
+#voucher::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#voucher::before {
+    content: 'your wording';
+}

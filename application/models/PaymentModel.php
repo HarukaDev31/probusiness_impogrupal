@@ -151,6 +151,7 @@ class PaymentModel extends CI_Model{
                 'Nu_Documento_Identidad' => $sNumeroDocumentoIdentidad,
                 'No_Entidad' => $sNombreEntidad,
                 'Nu_Estado' => 1,
+                'Txt_Direccion_Entidad' => $arrHeader['Txt_Direccion'],
                 'Nu_Celular_Entidad' => $arrHeader['Nu_Celular_Entidad'],
                 'Txt_Email_Entidad'	=> $arrHeader['Txt_Email_Entidad']
             );
@@ -183,7 +184,6 @@ class PaymentModel extends CI_Model{
 			'ID_Departamento' => $arrHeader['id_departamento'],
 			'ID_Provincia' => $arrHeader['id_provincia'],
 			'ID_Distrito' => $arrHeader['id_distrito'],
-			'Txt_Direccion_Envio' => $arrHeader['Txt_Direccion'],
 			'ID_Medio_Pago' => $arrHeader['id_medio_pago'],
             'Nu_Estado' => 1,//1=Pendiente, 2=Confirmado y 3=Finalizado
             'Fe_Registro' => $dRegistroHora
@@ -225,7 +225,8 @@ class PaymentModel extends CI_Model{
                     'tipo_documento_identidad' => $sTipoDocumentoIdentidad,
                     'fecha_registro' => $dRegistroHora,
                     'importe_total' => $arrHeader['importe_total'],
-                    'cantidad_total' => $arrHeader['cantidad_total']
+                    'cantidad_total' => $arrHeader['cantidad_total'],
+                    'signo_moneda' => $arrHeader['signo_moneda'],
                 )
 			);
 		}
@@ -237,24 +238,26 @@ class PaymentModel extends CI_Model{
 CAB.ID_Empresa,
 CAB.ID_Pedido_Cabecera AS id_pedido,
 CAB.Fe_Registro AS fecha_registro,
-CAB.Txt_Direccion_Envio AS Txt_Direccion,
 CAB.Qt_Total AS cantidad_total,
 CAB.Ss_Total AS importe_total,
 CLI.No_Entidad,
 CLI.Nu_Celular_Entidad,
-TDI.No_Tipo_Documento_Identidad AS tipo_documento_identidad,
+TDI.No_Tipo_Documento_Identidad_Breve AS tipo_documento_identidad,
 CLI.Nu_Documento_Identidad,
+CLI.Txt_Direccion_Entidad AS Txt_Direccion,
 DET.Qt_Producto AS cantidad_item,
 ITEM.No_Producto AS nombre_item,
 ITEM.No_Imagen_Item AS url_imagen_item,
 DET.Ss_Precio AS precio_item,
-DET.Ss_Total AS total_item
+DET.Ss_Total AS total_item,
+MONE.No_Signo AS signo_moneda
 FROM
 importacion_grupal_pedido_cabecera AS CAB
 JOIN importacion_grupal_pedido_detalle AS DET ON(CAB.ID_Pedido_Cabecera = DET.ID_Pedido_Cabecera)
 JOIN producto AS ITEM ON(ITEM.ID_Producto = DET.ID_Producto)
 JOIN entidad AS CLI ON(CAB.ID_Entidad = CLI.ID_Entidad)
 JOIN tipo_documento_identidad AS TDI ON(TDI.ID_Tipo_Documento_Identidad = CLI.ID_Tipo_Documento_Identidad)
+JOIN moneda AS MONE ON(MONE.ID_Moneda = CAB.ID_Moneda)
 WHERE
 CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
 

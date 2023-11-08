@@ -101,9 +101,13 @@
               <p class="card-text">
                 <?php echo $row->Txt_Producto; ?>
               </p>
-              <span><strong>Vendidos</strong></span>
-              <div class="progress" style="height: 35px;">
-                <div class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar" style="width: 80%;" aria-valuenow="200" aria-valuemin="0" aria-valuemax="100"><span class="text-black"><strong>200/240</strong></span></div>
+
+              <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real --->
+              <div class="d-none">
+                <span><strong>Vendidos</strong></span>
+                <div class="progress" style="height: 35px;">
+                  <div class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar" style="width: 80%;" aria-valuenow="200" aria-valuemin="0" aria-valuemax="100"><span class="text-black"><strong>200/240</strong></span></div>
+                </div>
               </div>
             </div>
           </div>

@@ -29,21 +29,35 @@ $message .= "\n\n*Detalle de Pedido*\n";
 $message .= "===============\n";
 foreach($arrDetalle as $row) {
   $row = (array)$row;
-  $message .= "✅ " . number_format($row['cantidad_item'], 2, '.', ',') . " x *" . $row['nombre_item'] . "* - S/ " . number_format($row['precio_item'], 2, '.', ',') . "\n";
+  $message .= "✅ " . round($row['cantidad_item'], 2) . " x *" . $row['nombre_item'] . "* - S/ " . number_format($row['total_item'], 2, '.', ',') . "\n";
 }
 
-$message .= "\n📍 *Dirección:* " . $arrCabecera['cliente']['Txt_Direccion'];
-  
 //Totales
-$message .= "\n*Importe Total:* S/ " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
-$message .= "\n*Cantidad Total:* S/ " . number_format($arrCabecera['documento']['cantidad_total'], 2, '.', ',');
+$message .= "\n*Total a Pagar (50%): " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
+$message .= "\nTotal: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
+
+//enviar cuentas bancarias
+//array_debug($arrMedioPago);
+//Cuentas bancarias
+if($arrMedioPago['status']=='success') {
+  $message .= "\n\n*Cuentas Bancarias*\n";
+  $message .= "===============\n";
+  foreach($arrMedioPago['result'] as $row) {
+    $sTipoCuenta = '';
+    if ($row->Nu_Tipo_Cuenta==1){
+      $sTipoCuenta = ' *Cuenta Corriente*';
+    }
+    $message .= "*Banco:* " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta;
+    //$message .= "\n*Moneda:* " . $row->No_Moneda;
+    $message .= "\n*Titular:* " . $row->No_Titular_Cuenta;
+    $message .= "\n*Número de cuenta:* " . $row->No_Cuenta_Bancaria;
+    $message .= "\n\n";
+  }
+}
 
 $message = urlencode($message);
 
 $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message;
-
-//$sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=51915914064&text=hola";
-//echo $sURLSendMessageWhatsapp;
 ?>
 
   <div class="container mt-5">
@@ -51,12 +65,15 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
     <h2 class="text-center mb-4">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?> creado</h2>
     <a class="btn btn-outline-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
 
-    <h3 class="text-center mb-4 fw-bold">Total a pagar S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
+    <h3 class="text-center mb-4 fw-bold">Total a pagar (50%) S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
 
     <form class="form row g-3" role="form" id="attachform" enctype="multipart/form-data">
       <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
       <div class="col-12 col-sm-12" style="cursor: pointer">
-        <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" style="cursor: pointer">
+        <div class="input-group custom-file-voucher">
+          <label class="input-group-text" for="voucher">Subir archivo</label>
+          <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
+        </div>
       </div>
       <div class="col-12 col-sm-12">
         <button type="submit" id="btn-file_voucher" class="btn btn-primary btn-lg btn-block shadow" style="width:100%">Enviar</button>
@@ -119,11 +136,11 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
                     <h6 class="ps-2"><?php echo $row['nombre_item']; ?></h6>
                     <div class="modal-cart_shop-div-precio_item ps-2">
                       <span class="fw-bold">
-                        Cant: <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['cantidad_item']; ?></span>
+                        Cant: <span data-total_producto="80" id="total-por-producto_562260"><?php echo round($row['cantidad_item'], 2); ?></span>
                       </span>
 
                       <span class="fw-bold float-right">
-                        S/ <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['total_item']; ?></span>
+                        S/ <span data-total_producto="80" id="total-por-producto_562260"><?php echo number_format($row['total_item'], 2, '.', ','); ?></span>
                       </span>
                     </div>
                   </div>
@@ -139,8 +156,6 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
                 </span>
 
                 <span class="fw-bold float-right fs-5">
-                  <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
-                  <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                   S/ <span><?php echo number_format($arrCabecera['documento']['importe_total'], 2, '.', ','); ?></span>
                 </span>
               </div>
