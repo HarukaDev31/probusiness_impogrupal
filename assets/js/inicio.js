@@ -82,6 +82,49 @@ $(document).ready(function () {
     modalCartShop();
   });
   
+  $(document).on('change', '#cbo-departamento', function () {
+    var id = $(this).val(), response = '';
+    $('#cbo-provincia').html('<option value="0" selected="selected">- Cargando -</option>');
+    if (id > 0) {
+      $.post(base_url + 'Payment/searchForIdProvincia', { ID_Departamento: id }, function (response) {
+        //console.log(response);
+        if(response.status=='success'){
+          $('#cbo-provincia').html('<option value="0" selected="selected">- Seleccionar -</option>');
+          response = response.result;
+          for (var i = 0; i < response.length; i++){
+            $('#cbo-provincia').append('<option value="' + response[i].ID_Provincia + '">' + response[i].No_Provincia + '</option>');
+          }
+        } else {
+          $('#cbo-provincia').html('<option value="0" selected="selected">- Sin provincia -</option>');
+
+          alert(response.message);
+        }
+      }, 'JSON');
+    }
+  });
+
+  //Direccion modal usuario primera vez
+  $(document).on('change', '#cbo-provincia', function () {
+    var id = $(this).val(), response = '';
+    $('#cbo-distrito').html('<option value="0" selected="selected">- Cargando -</option>');
+    if (id > 0) {
+      $.post(base_url + 'Payment/searchForIdDistrito', { ID_Provincia: id }, function (response) {
+        //console.log(response);
+        if(response.status=='success'){
+          $('#cbo-distrito').html('<option value="0" selected="selected">- Seleccionar -</option>');
+          response = response.result;
+          for (var i = 0; i < response.length; i++){
+            $('#cbo-distrito').append('<option value="' + response[i].ID_Distrito + '">' + response[i].No_Distrito + '</option>');
+          }
+        } else {
+          $('#cbo-distrito').html('<option value="0" selected="selected">- Sin distrito -</option>');
+
+          alert(response.message);
+        }
+      }, 'JSON');
+    }
+  });
+
   $(document).on('click', '.btn-completar_pedido', function() {
     /*
     var radioValue = $("input[name='arrMedioPago']:checked").val();
@@ -121,6 +164,21 @@ $(document).ready(function () {
       $('#payment-email').closest('.form-group').addClass('has-success').removeClass('has-error');
 
       scrollToError($("html, body"), $('#payment-email'));
+    } else if ($("#cbo-departamento").val() == 0) {
+      $('#cbo-departamento').closest('.form-group').find('.help-block').html('Elegir departamento');
+      $('#cbo-departamento').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#cbo-departamento'));
+    } else if ($("#cbo-provincia").val() == 0) {
+      $('#cbo-provincia').closest('.form-group').find('.help-block').html('Elegir provincia');
+      $('#cbo-provincia').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#cbo-provincia'));
+    } else if ($("#cbo-distrito").val() == 0) {
+      $('#cbo-distrito').closest('.form-group').find('.help-block').html('Elegir distrito');
+      $('#cbo-distrito').closest('.form-group').removeClass('has-success').addClass('has-error');
+
+      scrollToError($("html, body"), $('#cbo-distrito'));
     } else if ($("#payment-direccion").val().trim().length < 10) {
       $('#payment-direccion').closest('.form-group').find('.help-block').html('Mínimo 10 caracteres');
       $('#payment-direccion').closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -141,6 +199,9 @@ $(document).ready(function () {
         'No_Entidad' : $( '[name="No_Entidad"]' ).val(),
         'Nu_Celular_Entidad' : $( '[name="Nu_Celular_Entidad"]' ).val(),
         'Txt_Email_Entidad' : $( '[name="Txt_Email_Entidad"]' ).val(),
+        'id_departamento' : $( '#cbo-departamento' ).val(),
+        'id_provincia' : $( '#cbo-provincia' ).val(),
+        'id_distrito' : $( '#cbo-distrito' ).val(),
         'Txt_Direccion' : $( '[name="Txt_Direccion"]' ).val(),
         'id_medio_pago' : iIdMedioPago,
       };

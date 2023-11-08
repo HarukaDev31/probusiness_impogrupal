@@ -44,7 +44,13 @@
             </div>
           </form>
         </div>
-        
+
+        <?php
+        //array_debug($arrDepartamento);
+        //array_debug($arrProvincia);
+        //array_debug($arrDistrito);
+        ?>
+
         <div class="col-12 col-sm-12 col-md-12">
           <!--direccion-->
           <h2 class="text-left mb-3 fw-bold">Dirección</h2>
@@ -52,6 +58,39 @@
             <div class="card" style="border: none;">
               <div class="card-body shadow p-3 bg-body rounded">
                 <div class="row">
+                  <div class="col-12 col-sm-4 col-md-4 mb-3">
+                    <label>Departamento <span class="label-advertencia text-danger"> *</span></label>
+                    <div class="form-group">
+                      <select name="cbo-departamento" id="cbo-departamento" class="form-select">
+                        <option value="0" selected="selected">- Seleccionar -</option>
+                        <?php foreach ($arrDepartamento['result'] as $row) { ?>
+                          <option value="<?php echo $row->ID_Departamento; ?>"><?php echo $row->No_Departamento; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                    <span class="help-block text-danger" id="error"></span>
+                  </div>
+                  
+                  <div class="col-12 col-sm-4 col-md-4 mb-3">
+                    <label>Provincia <span class="label-advertencia text-danger"> *</span></label>
+                    <div class="form-group">
+                      <select name="cbo-provincia" id="cbo-provincia" class="form-select">
+                        <option value="0" selected="selected">- Seleccionar -</option>
+                      </select>
+                    </div>
+                    <span class="help-block text-danger" id="error"></span>
+                  </div>
+
+                  <div class="col-12 col-sm-4 col-md-4 mb-3">
+                    <label>Distrito <span class="label-advertencia text-danger"> *</span></label>
+                    <div class="form-group">
+                      <select name="cbo-distrito" id="cbo-distrito" class="form-select">
+                        <option value="0" selected="selected">- Seleccionar -</option>
+                      </select>
+                    </div>
+                    <span class="help-block text-danger" id="error"></span>
+                  </div>
+
                   <div class="col-12 col-sm-12 col-md-12 mb-3">
                     <label>Dirección <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
@@ -111,7 +150,6 @@
           ?>
         </div>
         
-        <?php //array_debug($arrMedioPago); ?>
       </div>
       
       <div class="col-12 col-sm-4 col-md-4">

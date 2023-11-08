@@ -4,6 +4,90 @@ class PaymentModel extends CI_Model{
 		parent::__construct();
     }
   
+    public function getDepartamento(){
+        //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
+        $query = "SELECT * FROM departamento WHERE Nu_Estado=1 ORDER BY No_Departamento";
+
+        if ( !$this->db->simple_query($query) ){
+            $error = $this->db->error();
+            return array(
+                'status' => 'danger',
+                'message' => 'Problemas al obtener datos',
+                'code_sql' => $error['code'],
+                'message_sql' => $error['message']
+            );
+        }
+        $arrResponseSQL = $this->db->query($query);
+        if ( $arrResponseSQL->num_rows() > 0 ){
+            return array(
+                'status' => 'success',
+                'message' => 'Si hay registros',
+                'result' => $arrResponseSQL->result()
+            );
+        }
+        
+        return array(
+            'status' => 'warning',
+            'message' => 'No hay registros'
+        );
+    }
+  
+    public function getProvincia(){
+        //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
+        $query = "SELECT * FROM provincia WHERE Nu_Estado=1 ORDER BY No_Provincia";
+
+        if ( !$this->db->simple_query($query) ){
+            $error = $this->db->error();
+            return array(
+                'status' => 'danger',
+                'message' => 'Problemas al obtener datos',
+                'code_sql' => $error['code'],
+                'message_sql' => $error['message']
+            );
+        }
+        $arrResponseSQL = $this->db->query($query);
+        if ( $arrResponseSQL->num_rows() > 0 ){
+            return array(
+                'status' => 'success',
+                'message' => 'Si hay registros',
+                'result' => $arrResponseSQL->result()
+            );
+        }
+        
+        return array(
+            'status' => 'warning',
+            'message' => 'No hay registros'
+        );
+    }
+  
+    public function getDistrito($arrParams){
+        //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
+        $query = "SELECT * FROM distrito_tienda_virtual WHERE ID_Empresa=" . $arrParams['ID_Empresa'] . " AND Nu_Habilitar_Ecommerce=1 ORDER BY No_Distrito";
+
+        if ( !$this->db->simple_query($query) ){
+            $error = $this->db->error();
+            return array(
+                'status' => 'danger',
+                'message' => 'Problemas al obtener datos',
+                'code_sql' => $error['code'],
+                'message_sql' => $error['message']
+            );
+        }
+        $arrResponseSQL = $this->db->query($query);
+        if ( $arrResponseSQL->num_rows() > 0 ){
+            return array(
+                'status' => 'success',
+                'message' => 'Si hay registros',
+                'result' => $arrResponseSQL->result()
+            );
+        }
+        
+        return array(
+            'status' => 'warning',
+            'message' => 'No hay registros'
+        );
+    }
+
     public function getMedioPago($arrParams){
         //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
         $query = "SELECT * FROM medio_pago WHERE ID_Empresa = " . $arrParams['ID_Empresa'] . " AND Nu_Tipo_Forma_Pago_Lae_Shop IN(1,2,3,4) AND Nu_Activar_Medio_Pago_Lae_Shop=1";
@@ -96,6 +180,9 @@ class PaymentModel extends CI_Model{
             'ID_Moneda' => $arrHeader['id_moneda'],
             'Ss_Total' => $arrHeader['importe_total'],
             'Qt_Total' => $arrHeader['cantidad_total'],
+			'ID_Departamento' => $arrHeader['id_departamento'],
+			'ID_Provincia' => $arrHeader['id_provincia'],
+			'ID_Distrito' => $arrHeader['id_distrito'],
 			'Txt_Direccion_Envio' => $arrHeader['Txt_Direccion'],
 			'ID_Medio_Pago' => $arrHeader['id_medio_pago'],
             'Nu_Estado' => 1,//1=Pendiente, 2=Confirmado y 3=Finalizado

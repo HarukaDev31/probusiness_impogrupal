@@ -14,6 +14,8 @@ class Inicio extends CI_Controller {
 	public function index(){
 		unset($_SESSION['cart']);//por mientras hasta que realice el quitar
 		unset($_SESSION['header']);//por mientras hasta que realice el quitar
+		unset($_SESSION['provincia']);//por mientras hasta que realice el quitar
+		unset($_SESSION['distrito']);//por mientras hasta que realice el quitar
 
 		$arrParams = array();
 		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
