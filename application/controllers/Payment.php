@@ -208,7 +208,11 @@ class Payment extends CI_Controller {
 			// check's valid format
 			if(in_array($ext, $valid_extensions)){
 				$path = "assets/images/voucher_deposito/";
-				
+					
+				if(!is_dir($path)){
+					mkdir($path,0755,TRUE);
+				}
+
 				$config['upload_path'] = $path;
 				$config['allowed_types'] = 'png|jpg|jpeg|webp|PNG|JPG|JPEG|WEBP';
 				$config['max_size'] = 1024;//1024 KB = 1 MB
