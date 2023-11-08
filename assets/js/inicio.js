@@ -19,7 +19,8 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on('click', '.btn-agregar_item', function() {
+  $(document).on('click', '.btn-agregar_item', function (e) {
+    e.preventDefault();
     const type_action = 'add';
     const id_item = $( this ).data('id_item');
     const id_item_bd = $( this ).data('id_item_bd');
@@ -30,7 +31,10 @@ $(document).ready(function () {
     const cantidad_item = parseFloat($( this ).data('cantidad_item'));
     const precio_item = parseFloat($( this ).data('precio_item'));
     const total_item = (cantidad_item * precio_item);
-    
+
+    $('#btn-agregar_item-' + id_item).prop('disabled', true);
+    $('#btn-agregar_item-' + id_item).html('<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>');
+
     var arrParams = {
       type_action : type_action,
       id_item_bd : id_item_bd,
@@ -46,7 +50,8 @@ $(document).ready(function () {
     requestAddCart(arrParams);
   });
   
-  $(document).on('click', '.btn-quitar_item', function() {
+  $(document).on('click', '.btn-quitar_item', function (e) {
+    e.preventDefault();
     const type_action = 'remove';
     const id_item = $(this).attr('data-id_item');
     const id_item_bd = $( this ).data('id_item_bd');
@@ -57,6 +62,9 @@ $(document).ready(function () {
     const cantidad_item = parseFloat($( this ).data('cantidad_item'));
     const precio_item = parseFloat($( this ).data('precio_item'));
     const total_item = (cantidad_item * precio_item);
+
+    $('#btn-quitar_item-' + id_item).prop('disabled', true);
+    $('#btn-quitar_item-' + id_item).html('<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>');
 
     var arrParams = {
       type_action : type_action,
@@ -74,11 +82,13 @@ $(document).ready(function () {
     
   });
 
-  $(document).on('click', '#btn-ver-cart_shop', function() {
+  $(document).on('click', '#btn-ver-cart_shop', function (e) {
+    e.preventDefault();
     modalCartShop();
   });
   
-  $(document).on('click', '#icon-ver-cart_shop', function() {
+  $(document).on('click', '#icon-ver-cart_shop', function (e) {
+    e.preventDefault();
     modalCartShop();
   });
   
@@ -125,13 +135,8 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on('click', '.btn-completar_pedido', function() {
-    /*
-    var radioValue = $("input[name='arrMedioPago']:checked").val();
-    console.log(radioValue);
-
-    console.log($('input[name="arrMedioPago"]:checked').data('id'));
-    */
+  $(document).on('click', '.btn-completar_pedido', function (e) {
+    e.preventDefault();
     
     $('.help-block').empty();
     $('.form-group').removeClass('has-error');
@@ -215,6 +220,7 @@ function requestAddCart(arrParams) {
   $.post(base_url + 'Inicio/agregarItem', {arrParams}, function(response) {
     console.log(response);
 
+    $('#btn-agregar_item-' + arrParams.id_item).prop('disabled', false);
     if( response.status == 'success' ){
       const sCaracterPalabra = (response.count > 1 ? 's' : '');
       
@@ -242,9 +248,10 @@ function requestRemoveCart(arrParams) {
   const id_item_temporal = arrParams.id_item;
 
   $.post(base_url + 'Inicio/quitarItem', {arrParams}, function(response) {
-    console.log('item temporal : ' + id_item_temporal);
+    //console.log('item temporal : ' + id_item_temporal);
     console.log(response);
 
+    $('#btn-quitar_item-' + arrParams.id_item).prop('disabled', false);
     if( response.status == 'success' ){
       $('#modal-cart_shop-id_item' + id_item_temporal).remove();
 
@@ -264,6 +271,9 @@ function requestRemoveCart(arrParams) {
         $('#btn-agregar_item-' + arrParams.id_item).html('Agregar');
       }
 
+      if(response.count==0){//ocultar footer porque ya no hay registros  
+        $('#div-footer-cart').hide();
+      }
       modalCartShop();
     } else {
       alert(response.message);
@@ -311,7 +321,7 @@ function modalCartShop(){
 
                       sHmtlModalCartShopSinItem += '<div class="col-6">';
                         sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-eliminar_item">';
-                          sHmtlModalCartShopSinItem += '<button class="btn btn-default text-danger btn-quitar_item" data-id_unidad_medida_2="' + row.id_unidad_medida_2 + '" data-id_unidad_medida="' + row.id_unidad_medida + '" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '">';
+                          sHmtlModalCartShopSinItem += '<button class="btn btn-default text-danger btn-quitar_item" id="btn-quitar_item-' + row.id_item + '" data-id_unidad_medida_2="' + row.id_unidad_medida_2 + '" data-id_unidad_medida="' + row.id_unidad_medida + '" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '">';
                           sHmtlModalCartShopSinItem += '<i aria-hidden="true" class="fas fa-trash-alt text-danger"></i> Eliminar';
                           sHmtlModalCartShopSinItem += '</button>';
                         sHmtlModalCartShopSinItem += '</div>';
@@ -329,7 +339,7 @@ function modalCartShop(){
           sHmtlModalCartShopSinItem += '<div class="container">';
             sHmtlModalCartShopSinItem += '<div class="row">';
               sHmtlModalCartShopSinItem += '<div class="col">';
-                sHmtlModalCartShopSinItem += '<span id="modal-total_cantidad-cart_shop">Cantidad: <label id="label-total_cantidad">' + response.count + '</label></span>';
+                sHmtlModalCartShopSinItem += '<span id="modal-total_cantidad-cart_shop" class="fw-bold">Cantidad: <label id="label-total_cantidad">' + response.count + '</label></span>';
               sHmtlModalCartShopSinItem += '</div>';
               sHmtlModalCartShopSinItem += '<div class="col" style="text-align: right;">';
                 sHmtlModalCartShopSinItem += '<span id="modal-total_importe-cart_shop" class="fw-bold">Total: <label id="label-total_importe">' + $('#hidden-global-signo_moneda').val() + ' ' + response.total_item + '</label></span>';

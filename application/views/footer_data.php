@@ -1,5 +1,5 @@
-<div class="container py-3">
-  <footer class="pt-4 my-md-5 pt-md-5 pb-4 border-top">
+<div class="container py-3 pb-5">
+  <footer class="pt-4 my-md-5 pt-md-5 pb-5 border-top">
     <div class="row">
       <div class="col-12 col-md">
         <img class="mb-2" src="<?php echo base_url("assets/images/isotipo_probusiness.png?ver=1.0.0"); ?>" alt="" height="45">

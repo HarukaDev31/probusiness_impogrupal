@@ -13,7 +13,9 @@ class Payment extends CI_Controller {
 	}
 
 	public function index(){
-		//falta que redirija al inicio si no tiene carrito de compras
+		if(!isset($_SESSION['cart'])){
+			redirect('Inicio');
+		}
 
 		$arrParams = array();
 		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
@@ -48,7 +50,11 @@ class Payment extends CI_Controller {
 		}
 
 		$this->load->view('header');
-		$this->load->view('menu', array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto));
+		$this->load->view('menu', array(
+				'bCartShop' => false,
+				'arrImportacionGrupalProducto' => $arrImportacionGrupalProducto
+			)
+		);
 		$this->load->view('payment', array(
 				'arrMedioPago' => $arrMedioPago,
 				'arrDepartamento' => $arrDepartamento
@@ -58,7 +64,10 @@ class Payment extends CI_Controller {
 	}
 
 	public function addPedido(){
-		//falta que redirija al inicio si no tiene carrito de compras
+		if(!isset($_SESSION['cart'])){
+			redirect('Inicio');
+		}
+
 		$arrPost['header'] = $this->input->post('arrParams');
 		$arrPost['detail'] = $_SESSION['cart'];
 		
@@ -74,21 +83,61 @@ class Payment extends CI_Controller {
 		}
 	}
 
-	public function thank(){
-		//falta que redirija al inicio si no tiene carrito de compras
-		$arrCabecera = $_SESSION['header'];
-		$arrDetalle = $_SESSION['cart'];
+	public function thank($iIdPedido=0){
+		if($iIdPedido==0 && !isset($_SESSION['header']) && !isset($_SESSION['cart'])){
+			redirect('Inicio');
+		}
 
-		//unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
-		//unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
+		//falta que redirija al inicio si no tiene carrito de compras
+		if( isset($_SESSION['header']) && isset($_SESSION['cart']) ){
+			$arrCabecera = $_SESSION['header'];
+			$arrDetalle = $_SESSION['cart'];
+
+			$ID_Empresa = $arrCabecera['cliente']['id_empresa'];
+		}
+
+		unset($_SESSION['header']);//quitado temporalmente para crear pedido por whatssapp
+		unset($_SESSION['cart']);//quitado temporalmente para crear pedido por whatssapp
 		unset($_SESSION['provincia']);
 		unset($_SESSION['distrito']);
 		
+		//get pedido si vence la sesión
+		$arrParams = array( 'id_pedido' => $iIdPedido );
+		$arrResponsePedido = $this->PaymentModel->getPedido($arrParams);
+		if($arrResponsePedido['status']=='success'){
+			$arrPedidoCabecera = $arrResponsePedido['result'][0];
+			
+			$ID_Empresa = $arrPedidoCabecera->ID_Empresa;
+
+			$arrCabecera['cliente']['Nu_Celular_Entidad'] = $arrPedidoCabecera->Nu_Celular_Entidad;
+			$arrCabecera['cliente']['No_Entidad'] = $arrPedidoCabecera->No_Entidad;
+			$arrCabecera['documento']['tipo_documento_identidad'] = $arrPedidoCabecera->tipo_documento_identidad;
+			$arrCabecera['cliente']['Nu_Documento_Identidad'] = $arrPedidoCabecera->Nu_Documento_Identidad;
+			$arrCabecera['cliente']['Txt_Direccion'] = $arrPedidoCabecera->Txt_Direccion;
+
+			$arrCabecera['documento']['id_pedido'] = $arrPedidoCabecera->id_pedido;
+			$arrCabecera['documento']['fecha_registro'] = $arrPedidoCabecera->fecha_registro;
+			$arrCabecera['documento']['importe_total'] = $arrPedidoCabecera->importe_total;
+			$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
+
+			$arrDetalle = (array)$arrResponsePedido['result'];
+		}
+
+		//get medio de pago
+		$arrParamsMedioPago = array(
+			'ID_Empresa' => $ID_Empresa
+		);
+		$arrMedioPago = $this->PaymentModel->getMedioPago($arrParamsMedioPago);
+
 		$this->load->view('header');
-		$this->load->view('menu');
+		$this->load->view('menu', array(
+				'bCartShop' => false,
+			)
+		);
 		$this->load->view('thank', array(
 			'arrCabecera' => $arrCabecera,
-			'arrDetalle' => $arrDetalle
+			'arrDetalle' => $arrDetalle,
+			'arrMedioPago' => $arrMedioPago
 		));
 		$this->load->view('footer');
 	}

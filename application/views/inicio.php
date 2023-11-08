@@ -46,10 +46,13 @@
 
       <!-- diseño de item -->
       <?php foreach ($arrImportacionGrupalProducto as $row) { ?>
-      <div class="card mt-5">
+      <div class="card border-0 rounded shadow mt-5">
         <div class="row g-0">
           <div class="col-sm-4 position-relative">
-            <img src="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="card-img fit-cover w-100 cart-size-img" alt="<?php echo $row->No_Producto; ?>">
+            <div class="h-100">
+              <!--<img src="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
+              <img src="https://intranet.probusiness.pe/assets/images/productos/20603287721/elefantepn.png?ver=1" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">
+            </div>
           </div>
 
           <div class="col-sm-8">
@@ -59,38 +62,41 @@
                   <?php echo $row->No_Producto; ?>
                 </a>
               </h2>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Unidad</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">C/U</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><?php echo $row->No_Unidad_Medida; ?></td>
-                    <td><?php echo $row->cantidad_item; ?></td>
-                    <td><?php echo $row->No_Signo . ' ' . $row->precio_item; ?></td>
-                    <td>
-                      <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid">
-                        <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-agregar_item position-relative" type="button">Agregar</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><?php echo $row->No_Unidad_Medida_2; ?></td>
-                    <td><?php echo $row->cantidad_item_2; ?></td>
-                    <td><?php echo $row->No_Signo . ' ' . $row->precio_item_2; ?></td>
-                    <td>
-                      <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" class="d-grid">
-                        <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-agregar_item position-relative" type="button">Agregar</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+
+              <!--<div class="table-responsive">-->
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Unidad</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">C/U</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><?php echo $row->No_Unidad_Medida; ?></td>
+                      <td><?php echo $row->cantidad_item; ?></td>
+                      <td><?php echo $row->No_Signo . ' ' . $row->precio_item; ?></td>
+                      <td>
+                        <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid">
+                          <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-agregar_item position-relative" type="button">Agregar</button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><?php echo $row->No_Unidad_Medida_2; ?></td>
+                      <td><?php echo $row->cantidad_item_2; ?></td>
+                      <td><?php echo $row->No_Signo . ' ' . $row->precio_item_2; ?></td>
+                      <td>
+                        <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" class="d-grid">
+                          <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-agregar_item position-relative" type="button">Agregar</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              <!--</div>-->
 
               <p class="card-text">
                 <?php echo $row->Txt_Producto; ?>

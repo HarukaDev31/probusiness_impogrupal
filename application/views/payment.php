@@ -118,24 +118,24 @@
               <div class="card-body shadow p-3 bg-body rounded pb-0 pt-0">
                 <div class="row">
                   <div class="col-12">
-                    <div class="form-check" style="cursor: pointer;">
-                      <input style="cursor: pointer;" class="form-check-input mt-4" type="radio" name="arrMedioPago" id="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
-                      <label style="cursor: pointer;" class="ms-3 col-12" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
-                        <div class="modal-cart_shop-div_item">
-                          <span>
-                            <img class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen; ?>">
-                          </span>
-                        </div>
-
-                        <div class="mb-2">
-                          <h6 class="ps-2"><?php echo $row->No_Medio_Pago_Tienda_Virtual; ?></h6>
-                          <div class="modal-cart_shop-div-precio_item ps-2">
-                            <span class="fw-bold">
-                              <span>200-3001727689</span>
-                            </span>
+                    <div class="form-check ps-0" style="cursor: pointer;flex-wrap: wrap-reverse;display: flex;">
+                      <label style="cursor: pointer;" class="col-12" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
+                        <div class="d-flex p-3">
+                          <div class="flex-shrink-0 text-center" style="width:20%">
+                            <img class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
+                          </div>
+                          <div class="mb-2 ps-3">
+                            <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente' : 'Número'); ?></h6>
+                            <div class="modal-cart_shop-div-precio_item ps-2">
+                              <span class="fw-bold">
+                                <span><?php echo $row->No_Cuenta_Bancaria; ?></span>
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </label>
+
+                      <input style="cursor: pointer;margin-bottom: 2.5rem !important;" class="form-check-input" type="radio" name="arrMedioPago" id="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
                     </div>
                   </div>
                 </div>

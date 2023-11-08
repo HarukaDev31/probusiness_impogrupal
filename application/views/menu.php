@@ -6,7 +6,13 @@
           <img class="mb-2" src="<?php echo base_url("assets/images/logo_horizontal_probusiness_claro_2.png?ver=1.0.0"); ?>" alt="" height="45">
         </a>
         
-        <button type="button" id="icon-ver-cart_shop" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#modal_cart_shop">
+        <?php
+        $sClassCartShopHidden = '';
+        if(isset($bCartShop) && $bCartShop==false) {
+          $sClassCartShopHidden = 'd-none';
+        }
+        ?>
+        <button type="button" id="icon-ver-cart_shop" class="btn btn-primary position-relative <?php echo $sClassCartShopHidden; ?>" data-bs-toggle="modal" data-bs-target="#modal_cart_shop">
           <i class="fa-solid fa-bag-shopping fa-2x"></i>
           <span id="span-cart-global_cantidad" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             <?php echo (isset($_SESSION['cart']) ? countBooks($_SESSION['cart']) : '0'); ?>
