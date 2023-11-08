@@ -279,3 +279,23 @@ z-index: 2;
 #voucher::before {
     content: 'your wording';
 }
+
+/* whatsapp */
+.flotante-wp{
+    position: fixed;
+    z-index: 100;
+    bottom: 20px;
+    right: 5px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.size-wp {
+    height: 80px;
+    width: 80px;
+    margin: -8px;
+    display: block;
+    object-fit: cover;
+}

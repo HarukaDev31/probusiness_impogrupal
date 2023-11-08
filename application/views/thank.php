@@ -11,7 +11,10 @@
 //array_debug($arrMedioPago);
 //echo base_url();
 
-$phone = "51" . $arrCabecera['cliente']['Nu_Celular_Entidad'];
+//$phone = "51" . $arrCabecera['cliente']['Nu_Celular_Entidad'];
+$codigo_pais="51";
+$numero_celular="953314683";
+$phone = $codigo_pais . $numero_celular;
 
 //Preparar array para envío de data de pedido para la aplicación
 $message = "!Hola *ProBusiness*!";

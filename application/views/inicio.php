@@ -32,7 +32,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
+  
   <div class="container mt-5">
     <?php
     if ($arrImportacionGrupalProducto['status'] == 'success') {
@@ -102,6 +102,25 @@
                 <?php echo $row->Txt_Producto; ?>
               </p>
 
+              <?php
+              $codigo_pais="51";
+              $numero_celular="953314683";
+              $phone = $codigo_pais . $numero_celular;
+              
+              $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n";
+              $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n\n";
+              $message_wp .= "Unidad: *" . $row->No_Unidad_Medida . "* 📦\n";
+              $message_wp .= "Cantidad: *" . round($row->cantidad_item, 2) . "*\n";
+              $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item, 2, '.', ',') . "*\n\n";
+              
+              $message_wp .= "Unidad: *" . $row->No_Unidad_Medida_2 . "* 📦\n";
+              $message_wp .= "Cantidad: *" . round($row->cantidad_item_2, 2) . "*\n";
+              $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item_2, 2, '.', ',') . "*\n\n";
+              $message_wp = urlencode($message_wp);
+              $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;
+              ?>
+              <a class="btn btn-outline-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+
               <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real --->
               <div class="d-none">
                 <span><strong>Vendidos</strong></span>
@@ -121,6 +140,16 @@
       </div>
     <?php } ?>
   </div>
+  
+  <?php
+  $codigo_pais="51";
+  $numero_celular="953314683";
+  $phone = $codigo_pais . $numero_celular;
+  $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda.";
+  $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;
+  ?>
+  <a class="flotante-wp" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer"><img class="size-wp" src="<?php echo base_url("assets/images/whatsapp.png?ver=2.0"); ?>" alt="ProBusiness WhastApp"></a>
+
 </main>
 
 <div id="div-footer-cart" class="fixed-bottom mt-auto py-3 bg-white footer-cart-shadow" data-bs-toggle="modal" data-bs-target="#modal_cart_shop">
