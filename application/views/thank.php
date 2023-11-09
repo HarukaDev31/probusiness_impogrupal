@@ -17,10 +17,10 @@ $numero_celular="953314683";
 $phone = $codigo_pais . $numero_celular;
 
 //Preparar array para envío de data de pedido para la aplicación
-$message = "!Hola *ProBusiness*!";
-$message .= "\nAcabo de realizar el siguiente pedido.";
+$message = "*¡Hola ProBusiness*! 😁";
+$message .= "\n🚢 Acabo de realizar el siguiente pedido.";
 
-$message .= "\n\n👤 *Información de contacto:*";
+$message .= "\n\n👤 *CONTACTO:*";
 $message .= "\n*Cliente:* " . $arrCabecera['cliente']['No_Entidad'];
 $message .= "\n*" . $arrCabecera['documento']['tipo_documento_identidad'] . "*: " . $arrCabecera['cliente']['Nu_Documento_Identidad'];
 
@@ -28,7 +28,7 @@ $message .= "\n*Nro. Pedido:* " . $arrCabecera['documento']['id_pedido'];
 $message .= "\n*Fecha:* " . ToDateHourBD($arrCabecera['documento']['fecha_registro']);
 
 //Detalle de pedido
-$message .= "\n\n*Detalle de Pedido*\n";
+$message .= "\n\n🛍️ *DETALLE DE PEDIDO*\n";
 $message .= "===============\n";
 foreach($arrDetalle as $row) {
   $row = (array)$row;
@@ -36,21 +36,21 @@ foreach($arrDetalle as $row) {
 }
 
 //Totales
-$message .= "\n*Total a Pagar (50%): " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
-$message .= "\nTotal: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
+$message .= "\n*💁🏻‍♀️ Total a Pagar (50%): " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
+$message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
 
 //enviar cuentas bancarias
 //array_debug($arrMedioPago);
 //Cuentas bancarias
 if($arrMedioPago['status']=='success') {
-  $message .= "\n\n*Cuentas Bancarias*\n";
+  $message .= "\n\n 🏦 *CUENTAS BANCARIAS*\n";
   $message .= "===============\n";
   foreach($arrMedioPago['result'] as $row) {
     $sTipoCuenta = '';
     if ($row->Nu_Tipo_Cuenta==1){
       $sTipoCuenta = ' *Cuenta Corriente*';
     }
-    $message .= "*Banco:* " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta;
+    $message .= "☑️ *Banco:* " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta;
     //$message .= "\n*Moneda:* " . $row->No_Moneda;
     $message .= "\n*Titular:* " . $row->No_Titular_Cuenta;
     $message .= "\n*Número de cuenta:* " . $row->No_Cuenta_Bancaria;
@@ -68,7 +68,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
     <h2 class="text-center mb-4">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?> creado</h2>
     <a class="btn btn-outline-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
 
-    <h3 class="text-center mb-4 fw-bold">Total a pagar (50%) S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
+    <h3 class="text-center mb-4 fw-bold">Total a pagar S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
 
     <form class="form row g-3" role="form" id="attachform" enctype="multipart/form-data">
       <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
