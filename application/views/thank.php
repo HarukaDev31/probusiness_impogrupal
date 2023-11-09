@@ -20,7 +20,8 @@ $phone = $codigo_pais . $numero_celular;
 $message = "*¡Hola ProBusiness*! 😁";
 $message .= "\n🚢 Acabo de realizar el siguiente pedido.";
 
-$message .= "\n\n👤 *CONTACTO:*";
+$message .= "\n\n👤 *CONTACTO:*\n";
+$message .= "===========\n";
 $message .= "\n*Cliente:* " . $arrCabecera['cliente']['No_Entidad'];
 $message .= "\n*" . $arrCabecera['documento']['tipo_documento_identidad'] . "*: " . $arrCabecera['cliente']['Nu_Documento_Identidad'];
 
@@ -29,7 +30,7 @@ $message .= "\n*Fecha:* " . ToDateHourBD($arrCabecera['documento']['fecha_regist
 
 //Detalle de pedido
 $message .= "\n\n🛍️ *DETALLE DE PEDIDO*\n";
-$message .= "===============\n";
+$message .= "====================\n";
 foreach($arrDetalle as $row) {
   $row = (array)$row;
   $message .= "✅ " . round($row['cantidad_item'], 2) . " x *" . $row['nombre_item'] . "* - S/ " . number_format($row['total_item'], 2, '.', ',') . "\n";
@@ -44,13 +45,13 @@ $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " .
 //Cuentas bancarias
 if($arrMedioPago['status']=='success') {
   $message .= "\n\n 🏦 *CUENTAS BANCARIAS*\n";
-  $message .= "===============\n";
+  $message .= "======================\n";
   foreach($arrMedioPago['result'] as $row) {
     $sTipoCuenta = '';
     if ($row->Nu_Tipo_Cuenta==1){
-      $sTipoCuenta = ' *Cuenta Corriente*';
+      $sTipoCuenta = ' Cuenta Corriente';
     }
-    $message .= "☑️ *Banco:* " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta;
+    $message .= "☑️ *Banco: " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta . '*';
     //$message .= "\n*Moneda:* " . $row->No_Moneda;
     $message .= "\n*Titular:* " . $row->No_Titular_Cuenta;
     $message .= "\n*Número de cuenta:* " . $row->No_Cuenta_Bancaria;
