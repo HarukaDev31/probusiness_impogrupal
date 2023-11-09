@@ -9,7 +9,7 @@
               <div class="card-body shadow p-3 bg-body rounded">
                 <div class="row">
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
-                    <label>DNI / RUC / OTROS <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">DNI / RUC / OTROS <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-documento_identidad" inputmode="numeric" name="Nu_Documento_Identidad" class="form-control required input-number" placeholder="Ingresar" maxlength="15" autocomplete="on">
                       <span class="help-block text-danger" id="error"></span>
@@ -17,7 +17,7 @@
                   </div>
                   
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
-                    <label>Nombres y Apellidos <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Nombres y Apellidos <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" inputmode="text" id="payment-nombre_cliente" name="name" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="name">
                       <span class="help-block text-danger" id="error"></span>
@@ -25,7 +25,7 @@
                   </div>
                   
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
-                    <label>Celular <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Celular <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="tel" inputmode="tel" id="payment-celular_cliente" name="tel" class="form-control required input-number" placeholder="Ingresar" maxlength="9" autocomplete="tel">
                       <span class="help-block text-danger" id="error"></span>
@@ -33,7 +33,7 @@
                   </div>
                   
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
-                    <label>Email <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Email <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-email" inputmode="email" name="email" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="email" autocapitalize="none">
                       <span class="help-block text-danger" id="error"></span>
@@ -59,7 +59,7 @@
               <div class="card-body shadow p-3 bg-body rounded">
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-4 mb-3">
-                    <label>Departamento <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Departamento <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <select name="cbo-departamento" id="cbo-departamento" class="form-select">
                         <option value="0" selected="selected">- Seleccionar -</option>
@@ -72,7 +72,7 @@
                   </div>
                   
                   <div class="col-12 col-sm-4 col-md-4 mb-3">
-                    <label>Provincia <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Provincia <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <select name="cbo-provincia" id="cbo-provincia" class="form-select">
                         <option value="0" selected="selected">- Seleccionar -</option>
@@ -82,7 +82,7 @@
                   </div>
 
                   <div class="col-12 col-sm-4 col-md-4 mb-3">
-                    <label>Distrito <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Distrito <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <select name="cbo-distrito" id="cbo-distrito" class="form-select">
                         <option value="0" selected="selected">- Seleccionar -</option>
@@ -92,7 +92,7 @@
                   </div>
 
                   <div class="col-12 col-sm-12 col-md-12 mb-3">
-                    <label>Dirección <span class="label-advertencia text-danger"> *</span></label>
+                    <label class="fw-bold">Dirección <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-direccion" inputmode="text" name="address" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="address">
                       <span class="help-block text-danger" id="error"></span>
