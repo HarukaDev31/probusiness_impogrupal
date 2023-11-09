@@ -1,8 +1,7 @@
 <main><br><br><br>
   <div class="container mt-5">
     <div class="row justify-content-center">
-      <h3 class="text-center fw-bold mb-4">Términos y condiciones</h3>
-
+      <h2 class="text-center fw-bold mb-4">Términos y condiciones</h2>
       <div class="col-sm-12">
         <p>
         - La importación llegará a nombre de Pro Business.<br><br>
