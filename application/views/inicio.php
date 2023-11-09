@@ -104,7 +104,7 @@
 
               <?php
               $codigo_pais="51";
-              $numero_celular="953314683";
+              $numero_celular="932531441";
               $phone = $codigo_pais . $numero_celular;
               
               $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
@@ -144,7 +144,7 @@
   
   <?php
   $codigo_pais="51";
-  $numero_celular="953314683";
+  $numero_celular="932531441";
   $phone = $codigo_pais . $numero_celular;
   $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda.";
   $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;

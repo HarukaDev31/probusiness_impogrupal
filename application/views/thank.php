@@ -13,7 +13,7 @@
 
 //$phone = "51" . $arrCabecera['cliente']['Nu_Celular_Entidad'];
 $codigo_pais="51";
-$numero_celular="953314683";
+$numero_celular="932531441";
 $phone = $codigo_pais . $numero_celular;
 
 //Preparar array para envío de data de pedido para la aplicación
