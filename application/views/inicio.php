@@ -50,8 +50,8 @@
         <div class="row g-0">
           <div class="col-sm-4 position-relative">
             <div class="h-100">
-              <!--<img src="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
-              <img src="https://intranet.probusiness.pe/assets/images/productos/20603287721/elefantepn.png?ver=1" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">
+              <img src="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="rounded float-start" alt="<?php echo $row->No_Producto; ?>">
+              <!--<img src="https://intranet.probusiness.pe/assets/images/productos/20603287721/elefantepn.png?ver=1" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
             </div>
           </div>
 
