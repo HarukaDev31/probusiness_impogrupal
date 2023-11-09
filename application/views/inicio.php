@@ -67,9 +67,9 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">Unidad</th>
-                      <th scope="col">Cantidad</th>
-                      <th scope="col">C/U</th>
+                      <th class="pb-3 pb-sm-0" scope="col">Unidad</th>
+                      <th scope="col">Cantidad Mínima</th>
+                      <th scope="col">Precio Unitario</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -114,6 +114,7 @@
               $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item, 2, '.', ',') . "*\n\n";
               
               $message_wp .= "*" . $row->No_Unidad_Medida_2 . "* 📦\n";
+              $message_wp .= "_(Pedido Mínimo)_\n";
               $message_wp .= "Contiene *" . round($row->cantidad_item_2, 2) . "* unidades\n";
               $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item_2, 2, '.', ',') . "*\n\n";
               $message_wp = urlencode($message_wp);

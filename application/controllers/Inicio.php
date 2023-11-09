@@ -140,4 +140,14 @@ class Inicio extends CI_Controller {
 		}
 		echo json_encode($result);
 	}
+
+	public function terminos(){
+		$arrParams = array();
+		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
+		$this->load->view('header');
+		$this->load->view('menu', array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto));
+		$this->load->view('terminos_y_condiciones');
+		$this->load->view('footer_data');
+		$this->load->view('footer');
+	}
 }
