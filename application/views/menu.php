@@ -30,7 +30,7 @@
           <h1 class="modal-title fs-5 fw-bold">Carrito de Compras</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body modal-cart_shop-body" id="modal-cart-items">
+        <div id="modal-cart-items" class="modal-body modal-cart_shop-body" style="padding-bottom: 7rem !important;">
         </div>
         <div class="modal-footer modal-cart_shop-footer fixed-bottom bg-white border border-0">
           <div id="modal-footer_total" class="d-grid" style="width: 100%;">
