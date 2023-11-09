@@ -19,7 +19,7 @@
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
                     <label>Nombres y Apellidos <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
-                      <input type="text" inputmode="text" id="payment-nombre_cliente" name="name" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="cc-family-name">
+                      <input type="text" inputmode="text" id="payment-nombre_cliente" name="name" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="name">
                       <span class="help-block text-danger" id="error"></span>
                     </div>
                   </div>
@@ -27,7 +27,7 @@
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
                     <label>Celular <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
-                      <input type="text" inputmode="tel" id="payment-celular_cliente" name="tel" class="form-control required input-number" placeholder="Ingresar" maxlength="9" autocomplete="tel-local">
+                      <input type="tel" inputmode="tel" id="payment-celular_cliente" name="tel" class="form-control required input-number" placeholder="Ingresar" maxlength="9" autocomplete="tel">
                       <span class="help-block text-danger" id="error"></span>
                     </div>
                   </div>
@@ -35,7 +35,7 @@
                   <div class="col-12 col-sm-6 col-md-6 mb-3">
                     <label>Email <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
-                      <input type="text" id="payment-email" inputmode="text" name="email" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="email" autocapitalize="none">
+                      <input type="text" id="payment-email" inputmode="email" name="email" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="email" autocapitalize="none">
                       <span class="help-block text-danger" id="error"></span>
                     </div>
                   </div>
