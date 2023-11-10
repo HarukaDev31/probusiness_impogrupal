@@ -107,16 +107,25 @@
               $numero_celular="932531441";
               $phone = $codigo_pais . $numero_celular;
               
+              $sNombreUnidadMedidaWhatsApp = "*" . $row->No_Unidad_Medida . "* 📦";
+              $fTotalItem = ($row->cantidad_item * $row->precio_item);
               $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
               $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n";
-              $message_wp .= "*" . $row->No_Unidad_Medida . "* 📦\n";
+              $message_wp .= $sNombreUnidadMedidaWhatsApp . "\n";
               $message_wp .= "Contiene *" . round($row->cantidad_item, 2) . "* unidades\n";
-              $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item, 2, '.', ',') . "*\n\n";
+              $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item, 2, '.', ',') . "*\n";
+              $message_wp .= "Total: *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($fTotalItem, 2, '.', ',') . "*\n";
+              $message_wp .= "_(Puedes separar con el 50% " . number_format(($fTotalItem / 2), 2, '.', ',') . ")_\n\n";
               
-              $message_wp .= "*" . $row->No_Unidad_Medida_2 . "* 📦\n";
-              $message_wp .= "_(Pedido Mínimo)_\n";
+              $sNombreUnidadMedida2WhatsApp = "*" . $row->No_Unidad_Medida_2 . "* 📦";
+              $fTotalItem = ($row->cantidad_item_2 * $row->precio_item_2);
+              $message_wp .= $sNombreUnidadMedida2WhatsApp . "\n";
               $message_wp .= "Contiene *" . round($row->cantidad_item_2, 2) . "* unidades\n";
               $message_wp .= "Precio (c/u): *" . $arrImportacionGrupalProducto[0]->No_Signo . " " . number_format($row->precio_item_2, 2, '.', ',') . "*\n\n";
+              $message_wp .= "_(Puedes separar con el 50% " . number_format(($fTotalItem / 2), 2, '.', ',') . ")_\n\n";
+
+              $message_wp .= "¿Qué opción eliges " . $sNombreUnidadMedidaWhatsApp . " o " . $sNombreUnidadMedida2WhatsApp . "?";
+              
               $message_wp = urlencode($message_wp);
               $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;
               ?>

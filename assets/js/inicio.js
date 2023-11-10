@@ -1,6 +1,10 @@
 var signo_moneda='S/';
 $(document).ready(function () {
   $('#div-footer-cart').hide();
+
+  //console.log($('#div-delivery_extra_provincia'));
+
+  $('#div-delivery_extra_provincia').hide();
   
   signo_moneda = $('#hidden-global-signo_moneda').val();
 
@@ -93,7 +97,7 @@ $(document).ready(function () {
   });
   
   $(document).on('change', '#cbo-departamento', function () {
-    var id = $(this).val(), response = '';
+    var id = $(this).val(), sTextoDepartamento = $("#cbo-departamento option:selected").text(), response = '';
     $('#cbo-provincia').html('<option value="0" selected="selected">- Cargando -</option>');
     if (id > 0) {
       $.post(base_url + 'Payment/searchForIdProvincia', { ID_Departamento: id }, function (response) {
@@ -111,6 +115,11 @@ $(document).ready(function () {
         }
       }, 'JSON');
     }
+
+    //mostrar delivery
+    $('#div-delivery_extra_provincia').hide();
+    if(sTextoDepartamento!='LIMA')
+      $('#div-delivery_extra_provincia').show();
   });
 
   //Direccion modal usuario primera vez
@@ -137,7 +146,7 @@ $(document).ready(function () {
 
   $(document).on('click', '.btn-completar_pedido', function (e) {
     e.preventDefault();
-    
+
     $('.help-block').empty();
     $('.form-group').removeClass('has-error');
 
@@ -191,6 +200,8 @@ $(document).ready(function () {
       scrollToError($("html, body"), $('#payment-direccion'));
     } else if (sMedioPago===undefined || sMedioPago==0 || sMedioPago=='') {
       alert('Elegir medio de pago');
+    } else if($('#check-terminos').prop('checked') == false) {
+      alert('Deebs aceptar términos y condiciones');
     } else {
       var arrParams = {
         'id_importacion_grupal' : $( '#hidden-global-id_importacion_grupal' ).val(),

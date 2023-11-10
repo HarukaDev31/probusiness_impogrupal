@@ -98,6 +98,12 @@
                       <span class="help-block text-danger" id="error"></span>
                     </div>
                   </div>
+                  
+                  <div class="col-12 col-sm-12 col-md-12" id="div-delivery_extra_provincia">
+                    <div class="alert alert-warning" role="alert">
+                      Para los <strong>socios de provincia</strong> se enviará su carga por agencia <strong>Shalom o Marvisur</strong>. Flete de Almacén - Agencia desde <strong>S/20.00</strong>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -218,6 +224,20 @@
                     </span>
                   </div>
                 </div>
+                
+                <div class="col-12 d-grid">
+                  <!--<p>He leído y estoy de acuerdo con los <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal-terminos">términos y condiciones</button> de la web</p>-->
+                  <!--
+                  <p>He leído y estoy de acuerdo con los <a class="link-offset-2 link-underline link-underline-opacity-0" href="#">términos y condiciones</a> de la web</p>
+                  -->
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="check-terminos">
+                    <label class="form-check-label" for="check-terminos">
+                      He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web
+                    </label>
+                  </div>
+                </div>
+
                 <div class="col-12 d-grid">
                   <button type="button" class="btn btn-primary btn-lg btn-completar_pedido">Finalizar pedido</button>
                 </div>
@@ -262,3 +282,50 @@
     </div>
   </div>
 </main>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-terminos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center fw-bold" id="exampleModalLabel">Términos y condiciones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-sm-12">
+              <p>
+              - La importación llegará a nombre de Pro Business.<br><br>
+              - Se notificará al cliente, los productos que no lleguen
+              al pedido min. para modificar su pedido.<br><br>
+              - Se le brindará una orden de compra para formalizar
+              su pedido.<br><br>
+              - Se creará un grupo privado con los participantes.
+              - Informaremos el proceso de importación.<br><br>
+              - El pago se realiza en soles.<br><br>
+              - No se admiten reembolsos.<br><br>
+              - La fecha de entrega es aprox., ya que se actualizará
+              luego del zarpe de la carga.<br><br>
+              - Es una importación y puede haber una merma del
+              5%.<br><br>
+              - El cliente podrá notificar fallas de fabrica en un
+              plazo máximo de 4 días, después de la entrega.<br><br>
+              - Los productos al por mayor son de alta rotación por
+              ende no se puede ampliar el plazo de notificar.<br><br>
+              - La entrega se realizará en nuestro almacén Jr. Alberto Barton N°527 - Santa Catalina - La Victoria.<br><br>
+              - Se emitirá boleta o factura después de la entrega.<br><br>
+              - Para los socios de provincia se enviará su carga por
+              agencia Shalom o Marvisur. Flete de Almacén -
+              Agencia desde S/20.00
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col" data-bs-dismiss="modal">Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
