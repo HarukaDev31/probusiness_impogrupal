@@ -256,6 +256,14 @@ $(document).ready(function () {
       //$('#myAttachModal').modal('hide');
     });
   });
+
+  $( '#check-terminos2' ).on( 'click', function() {
+    if( $(this).is(':checked') ){
+      $('#check-terminos').prop('checked', true);
+    } else {
+      $('#check-terminos').prop('checked', false);
+    }
+  });
 });
 
 function requestAddCart(arrParams) {

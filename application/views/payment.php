@@ -271,6 +271,16 @@
                     </span>
                   </div>
                 </div>
+                
+                <div class="col-12 d-grid">
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="check-terminos2">
+                    <label class="form-check-label" for="check-terminos2">
+                      He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web
+                    </label>
+                  </div>
+                </div>
+
                 <div class="col-12 d-grid">
                   <button type="button" class="btn btn-primary btn-lg btn-completar_pedido">Finalizar pedido</button>
                 </div>
