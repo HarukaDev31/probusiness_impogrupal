@@ -232,8 +232,8 @@
                   -->
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="check-terminos">
-                    <label class="form-check-label" for="check-terminos">
-                      He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web
+                    <label class="form-check-label" for="check-terminos" style="font-size: .8rem;">
+                      He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important; font-size: .8rem;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web.
                     </label>
                   </div>
                 </div>
@@ -244,8 +244,8 @@
               </div>
 
               <div class="d-block d-sm-none totales-payment fixed-bottom bg-white p-3 shadow pt-0">
-                <div class="col-12 d-grid mt-3">
-                  <div class="modal-cart_shop-div-precio_item pb-3">
+                <div class="col-12 d-grid mt-2">
+                  <div class="modal-cart_shop-div-precio_item pb-2">
                     <span class="fw-bold">
                       Total
                     </span>
@@ -259,7 +259,7 @@
                 </div>
 
                 <div class="col-12 d-grid">
-                  <div class="modal-cart_shop-div-precio_item pb-3">
+                  <div class="modal-cart_shop-div-precio_item pb-2">
                     <span class="fw-bold text-danger fs-5">
                       Total a pagar
                     </span>
@@ -275,8 +275,8 @@
                 <div class="col-12 d-grid">
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="check-terminos2">
-                    <label class="form-check-label" for="check-terminos2">
-                      He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web
+                    <label class="form-check-label" for="check-terminos2" style="font-size: .65rem;">
+                      He leído y acepto los <button type="button" style="text-decoration: none !important; font-size: .65rem;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web.
                     </label>
                   </div>
                 </div>

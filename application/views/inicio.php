@@ -111,8 +111,8 @@
               $sNombreUnidadMedidaWhatsApp = "*" . $row->No_Unidad_Medida . "* 📦";
               $fTotalItem = ($row->cantidad_item * $row->precio_item);
               $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
-              $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n";
-              $message_wp .= "1️🅰️ " . $sNombreUnidadMedidaWhatsApp . "\n";
+              $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n\n";
+              $message_wp .= "🅰️ " . $sNombreUnidadMedidaWhatsApp . "\n";
               $message_wp .= "Contiene *" . round($row->cantidad_item, 2) . "* unidades\n";
               $message_wp .= "Precio (c/u): *" . $sSignoMoneda . " " . number_format($row->precio_item, 2, '.', ',') . "*\n";
               $message_wp .= "Total: *" . $sSignoMoneda . " " . number_format($fTotalItem, 2, '.', ',') . "*\n";
@@ -126,7 +126,7 @@
               $message_wp .= "Total: *" . $sSignoMoneda . " " . number_format($fTotalItem, 2, '.', ',') . "*\n";
               $message_wp .= "_(Puede separar con el 50% " . $sSignoMoneda . " " . number_format(($fTotalItem / 2), 2, '.', ',') . ")_\n\n";
 
-              $message_wp .= "¿Qué opción eliges 🅰️ o 🅱️?";
+              $message_wp .= "¿Qué opción eliges 🅰️ ó 🅱️?";
               
               $message_wp = urlencode($message_wp);
               $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;

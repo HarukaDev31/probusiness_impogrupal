@@ -201,7 +201,7 @@ $(document).ready(function () {
     } else if (sMedioPago===undefined || sMedioPago==0 || sMedioPago=='') {
       alert('Elegir medio de pago');
     } else if($('#check-terminos').prop('checked') == false) {
-      alert('Deebs aceptar términos y condiciones');
+      alert('Debes aceptar términos y condiciones');
     } else {
       var arrParams = {
         'id_importacion_grupal' : $( '#hidden-global-id_importacion_grupal' ).val(),
