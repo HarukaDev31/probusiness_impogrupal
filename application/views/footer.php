@@ -6,6 +6,13 @@
 
     <!--interno-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="<?php echo base_url("assets/js/inicio.js?ver=29.0.0"); ?>"></script>
+
+    <?php if (!isset($js_voucher) && $js_voucher==false) { ?>
+      <script src="<?php echo base_url("assets/js/inicio.js?ver=29.0.0"); ?>"></script>
+    <?php } ?>
+
+    <?php if (isset($js_voucher) && $js_voucher==true) { ?>
+      <script src="<?php echo base_url("assets/js/voucher.js?ver=29.0.0"); ?>"></script>
+    <?php } ?>
   </body>
 </html>

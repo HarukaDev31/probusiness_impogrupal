@@ -18,7 +18,7 @@ $phone = $codigo_pais . $numero_celular;
 
 //Preparar array para envío de data de pedido para la aplicación
 $message = "*¡Hola ProBusiness*! 😁";
-$message .= "\n🚢 Acabo de realizar el siguiente pedido.";
+$message .= "\n🚢 Voy a pagar el saldo del siguiente pedido.";
 
 $message .= "\n\n👤 *CONTACTO:*\n";
 $message .= "===========\n";
@@ -66,8 +66,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
 
   <div class="container mt-5">
     <h2 class="text-center mb-4 pt-3 text-success"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
-    <h2 class="text-center mb-4">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?> creado</h2>
-    <a class="btn btn-outline-success btn-lg btn-block mb-4 shadow" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+    <h2 class="text-center mb-4">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?></h2>
 
     <h3 class="text-center mb-4 fw-bold">Pagar (50%) S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
 

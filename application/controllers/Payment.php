@@ -145,6 +145,57 @@ class Payment extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	public function voucher($iIdPedido=0){
+		if($iIdPedido==0){
+			redirect('Inicio');
+		}
+
+		//get pedido si vence la sesión
+		$arrParams = array( 'id_pedido' => $iIdPedido );
+		$arrResponsePedido = $this->PaymentModel->getPedido($arrParams);
+		if($arrResponsePedido['status']=='success'){
+			$arrPedidoCabecera = $arrResponsePedido['result'][0];
+			
+			$ID_Empresa = $arrPedidoCabecera->ID_Empresa;
+
+			$arrCabecera['cliente']['Nu_Celular_Entidad'] = $arrPedidoCabecera->Nu_Celular_Entidad;
+			$arrCabecera['cliente']['No_Entidad'] = $arrPedidoCabecera->No_Entidad;
+			$arrCabecera['documento']['tipo_documento_identidad'] = $arrPedidoCabecera->tipo_documento_identidad;
+			$arrCabecera['cliente']['Nu_Documento_Identidad'] = $arrPedidoCabecera->Nu_Documento_Identidad;
+			$arrCabecera['cliente']['Txt_Direccion'] = $arrPedidoCabecera->Txt_Direccion;
+
+			$arrCabecera['documento']['id_pedido'] = $arrPedidoCabecera->id_pedido;
+			$arrCabecera['documento']['fecha_registro'] = $arrPedidoCabecera->fecha_registro;
+			$arrCabecera['documento']['importe_total'] = $arrPedidoCabecera->importe_total;
+			$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
+			$arrCabecera['documento']['signo_moneda'] = $arrPedidoCabecera->signo_moneda;
+
+			$arrDetalle = (array)$arrResponsePedido['result'];
+		} else {
+			redirect('Inicio');
+		}
+		
+		//get medio de pago
+		$arrParamsMedioPago = array(
+			'ID_Empresa' => $ID_Empresa
+		);
+		$arrMedioPago = $this->PaymentModel->getMedioPago($arrParamsMedioPago);
+
+		$this->load->view('header');
+		$this->load->view('menu', array(
+				'bCartShop' => false,
+			)
+		);
+		$this->load->view('voucher', array(
+			'arrCabecera' => $arrCabecera,
+			'arrDetalle' => $arrDetalle,
+			'arrMedioPago' => $arrMedioPago
+		));
+		$this->load->view('footer', array(
+			'js_voucher' => true,
+		));
+	}
+
 	function searchForIdProvincia() {
 		$id = $this->input->post('ID_Departamento');
 		if(isset($_SESSION['provincia']) && $_SESSION['provincia']['status']=='success') {
@@ -248,5 +299,58 @@ class Payment extends CI_Controller {
 				));
 			}
 		}
-	}	
+	}
+	
+	public function enviarSegundoVoucherArchivo(){
+		//array_debug($_FILES);
+		//array_debug($this->input->post());
+	
+		$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'heif', 'webp');
+		if(!empty($this->input->post('id_pedido')) && isset($_FILES['voucher'])){
+			$img = $_FILES['voucher']['name'];
+			$tmp = $_FILES['voucher']['tmp_name'];
+			$type = $_FILES['voucher']['type'];
+			// get uploaded file's extension
+			$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+			// check's valid format
+			if(in_array($ext, $valid_extensions)){
+				$path = "assets/images/voucher_deposito/";
+
+				$config['upload_path'] = $path;
+				$config['allowed_types'] = 'png|jpg|jpeg|webp|PNG|JPG|JPEG|WEBP';
+				$config['max_size'] = 1024;//1024 KB = 1 MB
+				$config['encrypt_name'] = TRUE;
+				$config['max_filename'] = '255';
+
+				$this->load->library('upload', $config);
+
+				if (!$this->upload->do_upload('voucher')){
+					echo json_encode(array(
+						'status' => 'warning',
+						'message' => 'No se guardo ' . strip_tags($this->upload->display_errors()) 
+					));
+				} else {
+					$arrUploadFile = $this->upload->data();
+					//array_debug($arrUploadFile);
+
+					//ruta de archivo cloud
+					$Txt_Url_Imagen_Deposito = base_url($path . $arrUploadFile['file_name']);
+
+					//echo $Txt_Url_Imagen_Deposito;
+					$data = array(
+						'Txt_Url_Imagen_Deposito_Segundo_Pago' => $Txt_Url_Imagen_Deposito
+					);
+					$where = array(
+						'ID_Pedido_Cabecera' => $this->input->post('id_pedido')
+					);
+					echo json_encode($this->PaymentModel->addVoucherPedido($data, $where));
+				}
+			} else {
+				echo json_encode(array(
+					'status' => 'warning',
+					'message' => 'Extensión inválida ' . $type
+				));
+			}
+		}
+	}
 }
