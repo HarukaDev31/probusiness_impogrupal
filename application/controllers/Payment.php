@@ -39,14 +39,17 @@ class Payment extends CI_Controller {
 			$arrDepartamento = $this->PaymentModel->getDepartamento();
 
 			//get provincia
-			$_SESSION['provincia'] = $this->PaymentModel->getProvincia();
-
+			if(!isset($_SESSION['provincia'])) {
+				$_SESSION['provincia'] = $this->PaymentModel->getProvincia();
+			}
 			//get distrito
-			$arrImportacionGrupalProducto_ = $arrImportacionGrupalProducto['result'];
-			$arrParamsUbigeo = array(
-				'ID_Empresa' => $arrImportacionGrupalProducto_[0]->ID_Empresa
-			);
-			$_SESSION['distrito'] = $this->PaymentModel->getDistrito($arrParamsUbigeo);
+			if(!isset($_SESSION['distrito'])) {
+				$arrImportacionGrupalProducto_ = $arrImportacionGrupalProducto['result'];
+				$arrParamsUbigeo = array(
+					'ID_Empresa' => $arrImportacionGrupalProducto_[0]->ID_Empresa
+				);
+				$_SESSION['distrito'] = $this->PaymentModel->getDistrito($arrParamsUbigeo);
+			}
 		}
 
 		$this->load->view('header');

@@ -1,14 +1,14 @@
 <main><br><br>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-12 col-sm-8 col-md-8">
+      <div class="col-12 col-sm-12 col-md-7 col-lg-8">
         <div class="col-12 col-sm-12 col-md-12">
           <h2 class="text-left mb-3 fw-bold">Información de contacto</h2>
           <form>
             <div class="card" style="border: none;">
               <div class="card-body shadow p-3 bg-body rounded">
                 <div class="row">
-                  <div class="col-12 col-sm-6 col-md-6 mb-3">
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-3">
                     <label class="fw-bold">DNI / RUC / OTROS <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-documento_identidad" inputmode="numeric" name="Nu_Documento_Identidad" class="form-control required input-number" placeholder="Ingresar" maxlength="15" autocomplete="on">
@@ -16,7 +16,7 @@
                     </div>
                   </div>
                   
-                  <div class="col-12 col-sm-6 col-md-6 mb-3">
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-3">
                     <label class="fw-bold">Nombres y Apellidos <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" inputmode="text" id="payment-nombre_cliente" name="name" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="name">
@@ -24,7 +24,7 @@
                     </div>
                   </div>
                   
-                  <div class="col-12 col-sm-6 col-md-6 mb-3">
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-3">
                     <label class="fw-bold">Celular <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="tel" inputmode="tel" id="payment-celular_cliente" name="tel" class="form-control required input-number" placeholder="Ingresar" maxlength="9" autocomplete="tel">
@@ -32,7 +32,7 @@
                     </div>
                   </div>
                   
-                  <div class="col-12 col-sm-6 col-md-6 mb-3">
+                  <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-3">
                     <label class="fw-bold">Email <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-email" inputmode="email" name="email" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="email" autocapitalize="none">
@@ -58,7 +58,7 @@
             <div class="card" style="border: none;">
               <div class="card-body shadow p-3 bg-body rounded">
                 <div class="row">
-                  <div class="col-12 col-sm-4 col-md-4 mb-3">
+                  <div class="col-12 col-sm-4 col-md-6 col-lg-4 mb-3">
                     <label class="fw-bold">Departamento <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <select name="cbo-departamento" id="cbo-departamento" class="form-select">
@@ -71,7 +71,7 @@
                     <span class="help-block text-danger" id="error"></span>
                   </div>
                   
-                  <div class="col-12 col-sm-4 col-md-4 mb-3">
+                  <div class="col-12 col-sm-4 col-md-6 col-lg-4 mb-3">
                     <label class="fw-bold">Provincia <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <select name="cbo-provincia" id="cbo-provincia" class="form-select">
@@ -81,7 +81,7 @@
                     <span class="help-block text-danger" id="error"></span>
                   </div>
 
-                  <div class="col-12 col-sm-4 col-md-4 mb-3">
+                  <div class="col-12 col-sm-4 col-md-12 col-lg-4 mb-3">
                     <label class="fw-bold">Distrito <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <select name="cbo-distrito" id="cbo-distrito" class="form-select">
@@ -91,7 +91,7 @@
                     <span class="help-block text-danger" id="error"></span>
                   </div>
 
-                  <div class="col-12 col-sm-12 col-md-12 mb-3">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-3">
                     <label class="fw-bold">Dirección <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-direccion" inputmode="text" name="address" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="address">
@@ -158,7 +158,7 @@
         
       </div>
       
-      <div class="col-12 col-sm-4 col-md-4">
+      <div class="col-12 col-sm-12 col-md-5 col-lg-4">
         <div class="col-12 col-sm-12 col-md-12 sticky-top">
           <h2 class="text-center mb-3 fw-bold">Resumen</h2>
             <div class="card" style="border: none;">
@@ -199,11 +199,11 @@
               <div class="d-none d-sm-block">
                 <div class="col-12 d-grid mt-3">
                   <div class="modal-cart_shop-div-precio_item pb-3">
-                    <span class="fw-bold">
+                    <span class="fw-normal">
                       Total
                     </span>
 
-                    <span class="fw-bold float-right">
+                    <span class="fw-normal float-right">
                       <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
                       <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                       S/ <span><?php echo $fTotalImportePedido; ?></span>
@@ -213,11 +213,11 @@
 
                 <div class="col-12 d-grid">
                   <div class="modal-cart_shop-div-precio_item pb-3">
-                    <span class="fw-bold text-danger fs-5">
-                      Total a pagar
+                    <span class="fw-bold fs-6">
+                      Separa con el (50%)
                     </span>
 
-                    <span class="fw-bold float-right text-danger fs-5">
+                    <span class="fw-bold float-right fs-5">
                       <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
                       <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                       S/ <span><?php echo round(($fTotalImportePedido / 2), 2); ?></span>
@@ -226,10 +226,6 @@
                 </div>
                 
                 <div class="col-12 d-grid">
-                  <!--<p>He leído y estoy de acuerdo con los <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal-terminos">términos y condiciones</button> de la web</p>-->
-                  <!--
-                  <p>He leído y estoy de acuerdo con los <a class="link-offset-2 link-underline link-underline-opacity-0" href="#">términos y condiciones</a> de la web</p>
-                  -->
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="check-terminos">
                     <label class="form-check-label" for="check-terminos" style="font-size: .8rem;">
@@ -243,14 +239,14 @@
                 </div>
               </div>
 
-              <div class="d-block d-sm-none totales-payment fixed-bottom bg-white p-3 shadow pt-0">
+              <div class="d-block d-sm-none totales-payment fixed-bottom bg-white shadow-new p-3 pt-0">
                 <div class="col-12 d-grid mt-2">
                   <div class="modal-cart_shop-div-precio_item pb-2">
-                    <span class="fw-bold">
+                    <span class="fw-normal">
                       Total
                     </span>
 
-                    <span class="fw-bold float-right">
+                    <span class="fw-normal float-right">
                       <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
                       <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                       S/ <span><?php echo $fTotalImportePedido; ?></span>
@@ -260,11 +256,11 @@
 
                 <div class="col-12 d-grid">
                   <div class="modal-cart_shop-div-precio_item pb-2">
-                    <span class="fw-bold text-danger fs-5">
-                      Total a pagar
+                    <span class="fw-bold fs-5">
+                      Separa con el (50%)
                     </span>
 
-                    <span class="fw-bold float-right text-danger fs-5">
+                    <span class="fw-bold float-right fs-5">
                       <input type="hidden" id="hidden-cart_shop-cantidad_total" class="form-control" value="<?php echo $fTotalCantidadPedido; ?>">
                       <input type="hidden" id="hidden-cart_shop-importe_total" class="form-control" value="<?php echo $fTotalImportePedido; ?>">
                       S/ <span><?php echo round(($fTotalImportePedido / 2), 2); ?></span>

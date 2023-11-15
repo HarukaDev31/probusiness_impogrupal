@@ -52,7 +52,7 @@ class Inicio extends CI_Controller {
 						$_SESSION['cart'][$key]['id_unidad_medida'] = $id_unidad_medida;
 						$_SESSION['cart'][$key]['id_unidad_medida_2'] = $id_unidad_medida_2;
 						$_SESSION['cart'][$key]['precio_item'] = $precio_item;
-						$_SESSION['cart'][$key]['total_item'] = $total_item;
+						$_SESSION['cart'][$key]['total_item'] += $total_item;
 						$_SESSION['cart'][$key]['nombre_item'] = $nombre_item;
 						$_SESSION['cart'][$key]['url_imagen_item'] = $url_imagen_item;
 						$existProduct = true;

@@ -278,6 +278,7 @@ function requestAddCart(arrParams) {
       $('#span-cart-global_cantidad').html(response.count);
       $('#div-cart_items').html(response.count + ' producto' + sCaracterPalabra);
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
+      $('.div-cart_total_adelanto').html('Adelanta (50%) ' + signo_moneda + ' ' + (parseFloat(response.total_item) / 2) );
 
       $('#div-footer-cart').show();
   
@@ -311,6 +312,7 @@ function requestRemoveCart(arrParams) {
       $('#span-cart-global_cantidad').html(response.count);
       $('#div-cart_items').html(response.count + ' producto' + sCaracterPalabra);
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
+      $('.div-cart_total_adelanto').html('Adelanta (50%) ' + signo_moneda + ' ' + (parseFloat(response.total_item) / 2) );
 
       $('#div-footer-cart').show();
 
@@ -390,10 +392,11 @@ function modalCartShop(){
           sHmtlModalCartShopSinItem += '<div class="container">';
             sHmtlModalCartShopSinItem += '<div class="row">';
               sHmtlModalCartShopSinItem += '<div class="col">';
-                sHmtlModalCartShopSinItem += '<span id="modal-total_cantidad-cart_shop" class="fw-bold">Cantidad: <label id="label-total_cantidad">' + response.count + '</label></span>';
+                sHmtlModalCartShopSinItem += '<span id="modal-total_cantidad-cart_shop" class="fw-normal"><label id="label-total_cantidad">' + response.count + ' productos</label></span>';
+                sHmtlModalCartShopSinItem += '<br><span id="modal-total_importe-cart_shop" class="fw-bold"><label id="label-total_importe">' + $('#hidden-global-signo_moneda').val() + ' ' + response.total_item + '</label></span>';
               sHmtlModalCartShopSinItem += '</div>';
               sHmtlModalCartShopSinItem += '<div class="col" style="text-align: right;">';
-                sHmtlModalCartShopSinItem += '<span id="modal-total_importe-cart_shop" class="fw-bold">Total: <label id="label-total_importe">' + $('#hidden-global-signo_moneda').val() + ' ' + response.total_item + '</label></span>';
+                sHmtlModalCartShopSinItem += '<span id="modal-total_importe-cart_shop" class="fw-normal">Separa con (50%)<br><label id="label-total_importe" class="fw-bold">' + $('#hidden-global-signo_moneda').val() + ' ' + (parseFloat(response.total_item) / 2) + '</label></span>';
               sHmtlModalCartShopSinItem += '</div>';
             sHmtlModalCartShopSinItem += '</div>';
           sHmtlModalCartShopSinItem += '</div>';

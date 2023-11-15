@@ -169,11 +169,14 @@
     <div class="row">
       <div class="col-5 col-sm-6">
         <div id="div-cart_items"></div>
-        <div id="div-cart_total" class="fw-bold fs-5"></div>
+        <div id="div-cart_total" class="fw-bold fs-6"></div>
+        <div id="" class="text-left fw-bold fs-5 div-cart_total_adelanto d-none d-sm-block" style="font-size: 1.10rem !important;"></div>
       </div>
       <div class="col-7 col-sm-6">
-        <div class="d-grid">
-          <button id="btn-ver-cart_shop" class="btn btn-primary me-md-2 btn-lg" type="button">Ver mi pedido</button>
+        <!--<div id="" class="text-left fw-bold fs-5 div-cart_total_adelanto d-block d-sm-none" style="font-size: 1.10rem !important;"></div>-->
+        <div id="" class="mb-1 text-center fw-bold fs-6 div-cart_total_adelanto d-block d-sm-none" style="font-size: .95rem !important;"></div>
+        <div class="d-grid mt-0 mt-sm-3">
+          <button id="btn-ver-cart_shop" class="btn btn-primary me-md-2 btn-lg" type="button">Ver pedido</button>
         </div>
       </div>
     </div>
