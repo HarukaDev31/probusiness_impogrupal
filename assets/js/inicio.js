@@ -278,7 +278,7 @@ function requestAddCart(arrParams) {
       $('#span-cart-global_cantidad').html(response.count);
       $('#div-cart_items').html(response.count + ' producto' + sCaracterPalabra);
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
-      $('.div-cart_total_adelanto').html('Adelanta (50%) ' + signo_moneda + ' ' + (parseFloat(response.total_item) / 2) );
+      $('.div-cart_total_adelanto').html('Separa con (50%) ' + signo_moneda + ' ' + (parseFloat(response.total_item) / 2) );
 
       $('#div-footer-cart').show();
   
@@ -312,7 +312,7 @@ function requestRemoveCart(arrParams) {
       $('#span-cart-global_cantidad').html(response.count);
       $('#div-cart_items').html(response.count + ' producto' + sCaracterPalabra);
       $('#div-cart_total').html(signo_moneda + ' ' + response.total_item);
-      $('.div-cart_total_adelanto').html('Adelanta (50%) ' + signo_moneda + ' ' + (parseFloat(response.total_item) / 2) );
+      $('.div-cart_total_adelanto').html('Separa con (50%) ' + signo_moneda + ' ' + (parseFloat(response.total_item) / 2) );
 
       $('#div-footer-cart').show();
 
