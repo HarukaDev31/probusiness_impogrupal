@@ -61,7 +61,6 @@ IGC.Nu_Estado = 1";
                 WHERE IGPC.ID_Importacion_Grupal = " . $row->ID_Importacion_Grupal . " AND IGPD.ID_Producto = " . $row->ID_Producto;
                 
                 $objItem = $this->db->query($query)->row();
-                array_debug($objItem);
                 $iTotalCantidadItem = 0;
                 if(is_object($objItem)){
                     $iTotalCantidadItem = $objItem->total_cantidad_item;
