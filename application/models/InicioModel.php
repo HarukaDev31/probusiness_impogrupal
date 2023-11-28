@@ -30,7 +30,8 @@ UM2.No_Unidad_Medida AS No_Unidad_Medida_2,
 ITEM.Qt_Unidad_Medida_2 AS cantidad_item_2,
 ITEM.Ss_Precio_Importacion_2 AS precio_item_2,
 ITEM.Nu_Activar_Item_Lae_Shop AS estado_item,
-ITEM.Txt_Producto
+ITEM.Txt_Producto,
+ITEM.Qt_Pedido_Minimo_Proveedor
 FROM
 importacion_grupal_cabecera AS IGC
 JOIN importacion_grupal_detalle AS IGD ON(IGD.ID_Importacion_Grupal = IGC.ID_Importacion_Grupal)
@@ -52,10 +53,26 @@ IGC.Nu_Estado = 1";
         }
         $arrResponseSQL = $this->db->query($query);
         if ( $arrResponseSQL->num_rows() > 0 ){
+            $result = $arrResponseSQL->result();
+            foreach($result as $row){
+                $query = "SELECT SUM(Qt_Producto) AS total_cantidad_item FROM
+                importacion_grupal_pedido_cabecera AS IGPC
+                JOIN importacion_grupal_pedido_detalle AS IGPD ON(IGPD.ID_Pedido_Cabecera = IGPC.ID_Pedido_Cabecera)
+                WHERE IGPC.ID_Importacion_Grupal = " . $row->ID_Importacion_Grupal . " AND IGPD.ID_Producto = " . $row->ID_Producto;
+                
+                $objItem = $this->db->query($query)->row();
+                array_debug($objItem);
+                $iTotalCantidadItem = 0;
+                if(is_object($objItem)){
+                    $iTotalCantidadItem = $objItem->total_cantidad_item;
+                }
+
+                $row->total_cantidad_vendida = $iTotalCantidadItem;
+            }
             return array(
                 'status' => 'success',
                 'message' => 'Si hay registros',
-                'result' => $arrResponseSQL->result()
+                'result' => $result
             );
         }
         

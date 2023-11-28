@@ -37,6 +37,8 @@
     <?php
     if ($arrImportacionGrupalProducto['status'] == 'success') {
       $arrImportacionGrupalProducto = $arrImportacionGrupalProducto['result'];
+
+      //array_debug($arrImportacionGrupalProducto);
     ?>
       <h1 class="text-center"><?php echo $arrImportacionGrupalProducto[0]->No_Importacion_Grupal; ?></h1>
       <p class="text-center lead mb-5">
@@ -99,8 +101,22 @@
               <!--</div>-->
 
               <p class="card-text">
-                <?php echo $row->Txt_Producto; ?>
+                <?php echo nl2br($row->Txt_Producto); ?>
               </p>
+
+              <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real style="width: 80%;" --->
+              <?php
+              $row->total_cantidad_vendida = round($row->total_cantidad_vendida, 0);
+              $fPorcentajeVentas = ($row->total_cantidad_vendida*100);
+              $fPorcentajeVentas = ($fPorcentajeVentas / $row->Qt_Pedido_Minimo_Proveedor);
+              ?>
+
+              <div class="mb-4">
+                <span><strong>Vendidos</strong></span>
+                <div class="progress" style="height: 35px;">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $fPorcentajeVentas; ?>%;" aria-valuenow="<?php echo $row->total_cantidad_vendida; ?>" aria-valuemin="0" aria-valuemax="100"><span class="text-white"><strong><?php echo $row->total_cantidad_vendida; ?> / <?php echo $row->Qt_Pedido_Minimo_Proveedor; ?></strong></span></div>
+                </div>
+              </div>
 
               <?php
               $codigo_pais="51";
@@ -131,15 +147,8 @@
               $message_wp = urlencode($message_wp);
               $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;
               ?>
-              <a class="btn btn-outline-success btn-lg btn-block mb-4" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+              <a class="btn btn-outline-success btn-lg btn-block mb-3" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
 
-              <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real --->
-              <div class="d-none">
-                <span><strong>Vendidos</strong></span>
-                <div class="progress" style="height: 35px;">
-                  <div class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar" style="width: 80%;" aria-valuenow="200" aria-valuemin="0" aria-valuemax="100"><span class="text-black"><strong>200/240</strong></span></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
