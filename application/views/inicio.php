@@ -6,12 +6,12 @@
     </div>
     
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="10000">
+      <div class="carousel-item active" data-bs-interval="1000">
         <img src="<?php echo base_url("assets/images/banner_importacion_grupal.jpg?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
         </div>
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
+      <div class="carousel-item" data-bs-interval="1000">
         <img src="<?php echo base_url("assets/images/portada_login.jpg?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
         </div>
