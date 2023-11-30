@@ -75,7 +75,7 @@
                 ?>
                 <div class="fotorama" data-nav="thumbs" data-width="100%" data-maxwidth="100%"  
      data-ratio="700/467"
-     data-minheight="390"
+     data-minheight="350"
      data-maxheight="100%" <?php echo $data_allowfullscreen; ?> data-loop="true" data-thumbwidth="100" data-thumbheight="100" data-arrows="true" data-click="false" data-swipe="true">
                   <?php
                   foreach ($row->imagenes as $row_imagen) {
