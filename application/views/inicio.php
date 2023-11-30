@@ -62,11 +62,12 @@
                 $data_allowfullscreen = 'data-allowfullscreen="true"';
                 if(!empty($row->Txt_Url_Video_Lae_Shop)){
                   $data_allowfullscreen = 'data-allowfullscreen="false"';
-                  $imgSvg = '<img class="text-danger" src=\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/></svg>\' alt=\'Video\'>';
-                  $videoHtml = '<a href="'.$row->Txt_Url_Video_Lae_Shop.'" data-video="true">'.$imgSvg.'</a>';
+                  //$imgSvg = '<img class="text-danger" src=\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/></svg>\' alt=\'Video\'>';
+                  //$videoHtml = '<a href="'.$row->Txt_Url_Video_Lae_Shop.'" data-video="true">'.$imgSvg.'</a>';
+                  $videoHtml = '<a href="'.$row->Txt_Url_Video_Lae_Shop.'" data-video="true"></a>';
                 }
                 ?>
-                <div class="fotorama" data-nav="thumbs" data-width="100%" data-maxwidth="100%" <?php echo $data_allowfullscreen; ?> data-loop="true" data-arrows="true" data-click="false" data-swipe="true">
+                <div class="fotorama" data-nav="thumbs" data-width="100%" data-maxwidth="100%" <?php echo $data_allowfullscreen; ?> data-loop="true" data-thumbwidth="100" data-thumbheight="100" data-arrows="true" data-click="false" data-swipe="true">
                   <?php
                   foreach ($row->imagenes as $row_imagen) {
                   ?>
@@ -75,7 +76,7 @@
                     </a>
                   <?php
                   }
-                  //echo $videoHtml;
+                  echo $videoHtml;
                   ?>
                 </div>
               </div>
