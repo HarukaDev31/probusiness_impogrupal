@@ -2,6 +2,7 @@
 class InicioModel extends CI_Model{
 	public function __construct(){
 		parent::__construct();
+		$this->Url     = "https://intranet.probusiness.pe/assets/images/productos/20603287721/";
     }
   
     public function getImportacionGrupalProducto($arrParams){
@@ -31,7 +32,8 @@ ITEM.Qt_Unidad_Medida_2 AS cantidad_item_2,
 ITEM.Ss_Precio_Importacion_2 AS precio_item_2,
 ITEM.Nu_Activar_Item_Lae_Shop AS estado_item,
 ITEM.Txt_Producto,
-ITEM.Qt_Pedido_Minimo_Proveedor
+ITEM.Qt_Pedido_Minimo_Proveedor,
+ITEM.Txt_Url_Video_Lae_Shop
 FROM
 importacion_grupal_cabecera AS IGC
 JOIN importacion_grupal_detalle AS IGD ON(IGD.ID_Importacion_Grupal = IGC.ID_Importacion_Grupal)
@@ -67,6 +69,9 @@ IGC.Nu_Estado = 1";
                 }
 
                 $row->total_cantidad_vendida = $iTotalCantidadItem;
+                $row->imagenes = $this->getProductoImagen($row->ID_Producto);
+                //array_debug($this->getProductoImagen($row->ID_Producto));
+				//array_debug($this->getProductoImagen($row->ID_Producto,$rows[0]->Nu_Documento_Identidad));
             }
             return array(
                 'status' => 'success',
@@ -80,4 +85,11 @@ IGC.Nu_Estado = 1";
             'message' => 'No hay registros'
         );
     }
+    
+	public function getProductoImagen($ID_Producto){
+		$Path 			= 	$this->Url;
+		$query 			=	"SELECT CONCAT(\"{$Path}\",No_Producto_Imagen) AS No_Producto_Imagen FROM producto_imagen WHERE ID_Producto = {$ID_Producto} ORDER BY ID_Predeterminado DESC";
+		$arrResponseSQL =	$this->db->query($query);
+		return $arrResponseSQL->result();
+	}
 }

@@ -40,4 +40,36 @@
 
       gtag('config', 'G-GRS998X0NR');
     </script>
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <style>
+      .footer_bottom.gradiente-btn {
+        display:none !important;
+      }
+      .fotorama__fullscreen-icon {
+        background: url('../img/bg.png') no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+        width: 100% !important;
+        height: 100% !important;
+        right: 0 !important;
+        top: 0 !important;
+        z-index: 10 !important;
+      }
+      .fotorama__nav--thumbs {
+        text-align: left;
+      }
+      .fotorama__thumb-border, .fotorama__thumb {
+        border-radius: 8px;
+      }
+      .fotorama__fullscreen-icon {
+        cursor: grab;
+      }
+      .fotorama--fullscreen, .fotorama__img {
+        border-radius: 8px !important;
+      }
+
+      @media (max-width: 575.98px) {
+        .div-one_image_item {
+          margin-top: 1rem;
+        }
+      }
+    </style>
   </head>

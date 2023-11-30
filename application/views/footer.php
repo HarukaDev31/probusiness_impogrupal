@@ -6,12 +6,14 @@
 
     <!--interno-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 
-    <?php if (!isset($js_voucher) && $js_voucher==false) { ?>
+    <?php if (!isset($js_voucher)) { ?>
       <script src="<?php echo base_url("assets/js/inicio.js?ver=36.0.0"); ?>"></script>
     <?php } ?>
 
-    <?php if (isset($js_voucher) && $js_voucher==true) { ?>
+    <?php if (isset($js_voucher)) { ?>
       <script src="<?php echo base_url("assets/js/voucher.js?ver=29.0.0"); ?>"></script>
     <?php } ?>
   </body>
