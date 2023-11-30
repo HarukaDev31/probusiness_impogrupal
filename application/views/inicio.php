@@ -52,6 +52,12 @@
         <div class="row g-0">
           <div class="col-sm-4 position-relative">
             <div class="col-sm-12 p-4">
+              <h2 class="card-title mb-3">
+                <a class="link-dark text-decoration-none" href="#" target="_blank">
+                  <?php echo $row->No_Producto; ?>
+                </a>
+              </h2>
+
               <div class="h-100">
                 <!--<img src="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
                 <!--<img src="https://intranet.probusiness.pe/assets/images/productos/20603287721/elefantepn.png?ver=1" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
@@ -67,7 +73,12 @@
                   $videoHtml = '<a href="'.$row->Txt_Url_Video_Lae_Shop.'" data-video="true"></a>';
                 }
                 ?>
-                <div class="fotorama" data-nav="thumbs" data-width="100%" data-maxwidth="100%" <?php echo $data_allowfullscreen; ?> data-loop="true" data-thumbwidth="100" data-thumbheight="100" data-arrows="true" data-click="false" data-swipe="true">
+                <div class="fotorama" data-nav="thumbs" data-width="100%" data-maxwidth="100%"  
+     data-ratio="700/467"
+     data-minwidth="400"
+     data-maxwidth="1000"
+     data-minheight="300"
+     data-maxheight="100%" <?php echo $data_allowfullscreen; ?> data-loop="true" data-thumbwidth="100" data-thumbheight="100" data-arrows="true" data-click="false" data-swipe="true">
                   <?php
                   foreach ($row->imagenes as $row_imagen) {
                   ?>
@@ -85,12 +96,6 @@
 
           <div class="col-sm-8">
             <div class="card-body">
-              <h2 class="card-title mb-3">
-                <a class="link-dark text-decoration-none" href="#" target="_blank">
-                  <?php echo $row->No_Producto; ?>
-                </a>
-              </h2>
-
               <!--<div class="table-responsive">-->
                 <table class="table table-hover">
                   <thead>
