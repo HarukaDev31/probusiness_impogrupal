@@ -53,9 +53,9 @@
           <div class="col-sm-4 position-relative">
             <div class="col-sm-12 p-4">
               <h5 class="card-title mb-3 fw-bold">
-                <a class="link-dark text-decoration-none" href="#" target="_blank">
+                <span class="link-dark text-decoration-none" href="#" target="_blank">
                   <?php echo $row->No_Producto; ?>
-                </a>
+                </span>
               </h5>
 
               <div class="h-100">
