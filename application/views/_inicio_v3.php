@@ -59,12 +59,17 @@
               </h5>
 
               <div class="h-100">
+                <!--<img src="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
+                <!--<img src="https://intranet.probusiness.pe/assets/images/productos/20603287721/elefantepn.png?ver=1" class="img-thumbnail border-0 rounded float-start" alt="<?php echo $row->No_Producto; ?>">-->
+
                 <?php
                 $imgSvg = '';
                 $videoHtml = '';
                 $data_allowfullscreen = 'data-allowfullscreen="true"';
                 if(!empty($row->Txt_Url_Video_Lae_Shop)){
                   $data_allowfullscreen = 'data-allowfullscreen="false"';
+                  //$imgSvg = '<img class="text-danger" src=\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/></svg>\' alt=\'Video\'>';
+                  //$videoHtml = '<a href="'.$row->Txt_Url_Video_Lae_Shop.'" data-video="true">'.$imgSvg.'</a>';
                   $videoHtml = '<a href="'.$row->Txt_Url_Video_Lae_Shop.'" data-video="true"></a>';
                 }
                 ?>
@@ -97,7 +102,7 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th class="pb-3 pb-sm-2" scope="col">Unidad</th>
+                      <th class="pb-3 pb-sm-0" scope="col">Unidad</th>
                       <th scope="col">Cantidad Mínima</th>
                       <th scope="col">Precio Unitario</th>
                       <th scope="col"></th>
@@ -110,7 +115,7 @@
                       <td><?php echo $row->No_Signo . ' ' . $row->precio_item; ?></td>
                       <td>
                         <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid">
-                          <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
+                          <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-agregar_item position-relative" type="button">Agregar</button>
                         </div>
                       </td>
                     </tr>
@@ -120,7 +125,7 @@
                       <td><?php echo $row->No_Signo . ' ' . $row->precio_item_2; ?></td>
                       <td>
                         <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" class="d-grid">
-                          <button id="btn-agregar_ite-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
+                          <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-primary btn-agregar_item position-relative" type="button">Agregar</button>
                         </div>
                       </td>
                     </tr>
@@ -213,7 +218,7 @@
         <!--<div id="" class="text-left fw-bold fs-5 div-cart_total_adelanto d-block d-sm-none" style="font-size: 1.10rem !important;"></div>-->
         <div id="" class="mb-1 text-center fw-bold fs-6 div-cart_total_adelanto d-block d-sm-none" style="font-size: .95rem !important;"></div>
         <div class="d-grid mt-0 mt-sm-3">
-          <button id="btn-ver-cart_shop" class="btn btn-success me-md-2 btn-lg" type="button">Ver pedido</button>
+          <button id="btn-ver-cart_shop" class="btn btn-primary me-md-2 btn-lg" type="button">Ver pedido</button>
         </div>
       </div>
     </div>

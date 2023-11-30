@@ -235,7 +235,7 @@
                 </div>
 
                 <div class="col-12 d-grid">
-                  <button type="button" class="btn btn-primary btn-lg btn-completar_pedido">Finalizar pedido</button>
+                  <button type="button" class="btn btn-success btn-lg btn-completar_pedido">Finalizar pedido</button>
                 </div>
               </div>
 

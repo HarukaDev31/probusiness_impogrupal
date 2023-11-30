@@ -55,6 +55,7 @@
       }
       .fotorama__nav--thumbs {
         text-align: left;
+        margin-top: 1.5rem;
       }
       .fotorama__thumb-border, .fotorama__thumb {
         border-radius: 8px;
@@ -64,12 +65,6 @@
       }
       .fotorama--fullscreen, .fotorama__img {
         border-radius: 8px !important;
-      }
-
-      @media (max-width: 575.98px) {
-        .div-one_image_item {
-          margin-top: 1rem;
-        }
       }
     </style>
   </head>
