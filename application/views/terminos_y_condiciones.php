@@ -25,7 +25,7 @@
         - Se emitirá boleta o factura después de la entrega.<br><br>
         - Para los socios de provincia se enviará su carga por
         agencia Shalom o Marvisur. Flete de Almacén -
-        Agencia desde S/20.00
+        Agencia desde <strong>S/20.00</strong>
         </p>
       </div>
     </div>
