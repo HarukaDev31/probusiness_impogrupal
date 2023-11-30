@@ -133,9 +133,11 @@
 
               <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real style="width: 80%;" --->
               <?php
-              $row->total_cantidad_vendida = round($row->total_cantidad_vendida, 0);
-              $fPorcentajeVentas = ($row->total_cantidad_vendida*100);
-              $fPorcentajeVentas = ($fPorcentajeVentas / $row->Qt_Pedido_Minimo_Proveedor);
+              if($row->total_cantidad_vendida>0) {
+                $row->total_cantidad_vendida = round($row->total_cantidad_vendida, 0);
+                $fPorcentajeVentas = ($row->total_cantidad_vendida*100);
+                $fPorcentajeVentas = ($fPorcentajeVentas / $row->Qt_Pedido_Minimo_Proveedor);
+              }
               ?>
 
               <div class="mb-4">
