@@ -10,11 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 
     <?php if (!isset($js_voucher)) { ?>
-      <script src="<?php echo base_url("assets/js/inicio.js?ver=36.0.0"); ?>"></script>
+      <script src="<?php echo base_url("assets/js/inicio.js?ver=37.0.0"); ?>"></script>
     <?php } ?>
 
     <?php if (isset($js_voucher)) { ?>
-      <script src="<?php echo base_url("assets/js/voucher.js?ver=29.0.0"); ?>"></script>
+      <script src="<?php echo base_url("assets/js/voucher.js?ver=37.0.0"); ?>"></script>
     <?php } ?>
   </body>
 </html>
