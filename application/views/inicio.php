@@ -133,6 +133,7 @@
 
               <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real style="width: 80%;" --->
               <?php
+              $fPorcentajeVentas=0;
               if($row->total_cantidad_vendida>0) {
                 $row->total_cantidad_vendida = round($row->total_cantidad_vendida, 0);
                 $fPorcentajeVentas = ($row->total_cantidad_vendida*100);
