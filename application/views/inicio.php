@@ -127,7 +127,6 @@
                   </tbody>
                 </table>
               <!--</div>-->
-
               <p class="card-text">
                 <?php echo nl2br($row->Txt_Producto); ?>
               </p>
