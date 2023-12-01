@@ -21,7 +21,7 @@ $message = "*¡Hola ProBusiness*! 😁";
 $message .= "\n🚢 Voy a pagar el saldo del siguiente pedido.";
 
 $message .= "\n\n👤 *CONTACTO:*\n";
-$message .= "===========\n";
+$message .= "===========";
 $message .= "\n*Cliente:* " . $arrCabecera['cliente']['No_Entidad'];
 $message .= "\n*" . $arrCabecera['documento']['tipo_documento_identidad'] . "*: " . $arrCabecera['cliente']['Nu_Documento_Identidad'];
 
