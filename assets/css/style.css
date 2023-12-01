@@ -1,3 +1,88 @@
+.number-input {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 0;
+}
+  
+.number-input >div {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+  
+.number-input div input{
+    padding: 5px 0;
+    height: 44px !important;
+    text-align: center;
+    border-radius: 5px;
+    border:none;
+    background: white;
+    border:1px solid #e9d9f2;
+    color: #000;
+}
+  
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+  
+input[type=number] { -moz-appearance:textfield; }
+  
+.plus{
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    outline: none;
+    border:none;
+    margin-bottom: 1px;
+    border-radius: 5px;
+    transition: .5s;
+}
+  
+.minus svg{
+    color: #222;
+}
+
+.plus svg{
+    color: #222;
+}
+  
+.minus:focus{
+    outline: none;
+}
+  
+.plus:focus{
+    outline: none;
+}
+  
+.minus{
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    outline: none;
+    border:none;
+    margin-bottom: 1px;
+    border-radius: 5px;
+}
+
+.number-input button {
+    font-size: .8rem;
+}
+
+@media not all and (min-resolution:.001dpcm){
+    @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+    .number-input.md-number-input.safari_only button:before, 
+      .number-input.md-number-input.safari_only button:after {
+        margin-top: -.6rem;
+      }
+    }
+}
+
 .menu-shadow {
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15),inset 0 -1px 0 rgba(255,255,255,0.15);
 }

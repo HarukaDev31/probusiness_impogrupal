@@ -75,8 +75,22 @@ $(document).ready(function () {
     const id_unidad_medida_2 = $( this ).data('id_unidad_medida_2');
     const nombre_item = $( this ).data('nombre_item');
     const url_imagen_item = $( this ).data('url_imagen_item');
-    const cantidad_item = parseFloat($( this ).data('cantidad_item'));
-    const precio_item = parseFloat($( this ).data('precio_item'));
+    //const cantidad_item = parseFloat($( this ).data('cantidad_item'));
+    const cantidad_item = parseFloat($('#input_cantidad_item-' + id_item).val());
+    var precio_item = parseFloat($( this ).data('precio_item'));
+
+    //console.log('item > ' + id_item_bd);
+    $("#table_item-" + id_item_bd + " > tbody > tr").each(function(){
+      fila = $(this);
+      var fListaCantidad = parseFloat(fila.find(".td-cantidad_item").text());
+      var fListaPrecio = parseFloat(fila.find(".td-precio_item").text());
+      //console.log('precio > ' + fListaPrecio);
+      if( cantidad_item > fListaCantidad ) {
+        precio_item = fListaPrecio;
+      }
+    });
+    //console.log('precio final > ' + precio_item);
+
     const total_item = (cantidad_item * precio_item);
 
     $('#btn-agregar_item-' + id_item).prop('disabled', true);
@@ -107,7 +121,18 @@ $(document).ready(function () {
     const nombre_item = $( this ).data('nombre_item');
     const url_imagen_item = $( this ).data('url_imagen_item');
     const cantidad_item = parseFloat($( this ).data('cantidad_item'));
-    const precio_item = parseFloat($( this ).data('precio_item'));
+    var precio_item = parseFloat($( this ).data('precio_item'));
+    
+    $("#table_item-" + id_item_bd + " > tbody > tr").each(function(){
+      fila = $(this);
+      var fListaCantidad = parseFloat(fila.find(".td-cantidad_item").text());
+      var fListaPrecio = parseFloat(fila.find(".td-precio_item").text());
+      //console.log('precio > ' + fListaPrecio);
+      if( cantidad_item > fListaCantidad ) {
+        precio_item = fListaPrecio;
+      }
+    });
+    
     const total_item = (cantidad_item * precio_item);
 
     $('#btn-quitar_item-' + id_item).prop('disabled', true);
@@ -548,4 +573,60 @@ function scrollToError( $sMetodo, $IdElemento ){
   $sMetodo.animate({
     scrollTop: $IdElemento.offset().top - 100
   }, 'slow');
+}
+
+function subir(id) {
+  var fCantidadActual = $('#input_cantidad_item-' + id).val();
+  var fCantidadActual = parseInt(fCantidadActual) + 1;
+  $('#input_cantidad_item-' + id).val(fCantidadActual);
+}
+
+function bajar(id) {
+  var fCantidadMinimaPedido = $('#input_cantidad_item-' + id).data('cantidad_item_minima');
+  var fCantidadActual = $('#input_cantidad_item-' + id).val();
+
+  //console.log('cantidad minima > ' + fCantidadMinimaPedido);
+  //console.log('cantidad enviada > ' + fCantidadActual);
+
+  var fCantidadActual = parseInt(fCantidadActual) - 1;
+  $('#input_cantidad_item-' + id).val(fCantidadActual);
+  if (fCantidadActual < fCantidadMinimaPedido) {
+    $('#input_cantidad_item-' + id).val(fCantidadMinimaPedido);
+  }
+}
+
+function validateStockNow(event){
+  //console.log('id item > ' + event.target.dataset.id_item);
+  //console.log('cantidad enviada > ' + event.target.value);
+
+  var iIdItem = event.target.dataset.id_item, fCantidadActualCliente = event.target.value, fCantidadMinimaPedido = event.target.dataset.cantidad_item_minima;
+  fCantidadActualCliente = parseFloat(fCantidadActualCliente);
+  fCantidadMinimaPedido = parseFloat(fCantidadMinimaPedido);
+  $('#input_cantidad_item-' + iIdItem).val(fCantidadMinimaPedido);
+  if ( fCantidadActualCliente > fCantidadMinimaPedido ) {
+    $('#input_cantidad_item-' + iIdItem).val(fCantidadActualCliente);
+  }
+}
+
+function verificarPrecioxMayor(input_data) {
+    $("#table-modal_forma_pago > tbody > tr").each(function(){
+      fila = $(this);
+      $iVerificarIdMedioPagoGuardado = fila.find(".iIdMedioPago").text();
+      $Sum_Ss_Monto_Total += parseFloat(fila.find(".fTotal").text());
+    });
+
+    /*
+    var fPrecio = input_data.attr('data-ss_precio_item'), fPrecioOferta = input_data.attr('data-ss_precio_oferta_item'), sSignoMoneda = input_data.attr('data-signo_moneda'), iIdItem = input_data.attr('data-id_item'), fCantidad = $('#cantidad_libro_' + iIdItem).val();
+    let fPrecio_Nuevo = fPrecioOferta > 0.00 ? fPrecioOferta : fPrecio;
+    if(arrPreciosxMayor.length > 0){
+        const temp = arrPreciosxMayor.find(precio => fCantidad >= precio.quantity) || {};
+        if(Object.keys(temp).length != 0) {
+            fPrecio_Nuevo = parseFloat(temp.price);
+        }
+    }
+    var fPorcentajeDescuento = (((fPrecio - parseFloat(fPrecio_Nuevo)) / fPrecio) * 100);
+    $( '#cantidad_libro_' + iIdItem ).attr('data-price',parseFloat(fPrecio_Nuevo));
+    $( '#precio_libro_' + iIdItem ).text(sSignoMoneda + ' ' + Number(fPrecio_Nuevo).toFixed(2));
+    $( '#descuento_libro_u_mv_' + iIdItem ).text('-' + Number(fPorcentajeDescuento).toFixed(2) + ' %');
+    */
 }

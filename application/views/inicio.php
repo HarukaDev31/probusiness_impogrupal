@@ -82,7 +82,9 @@
               </h2>
                 -->
               <!--<div class="table-responsive">-->
-                <table class="table table-hover">
+                
+
+                <table id="table_item-<?php echo $row->ID_Producto; ?>" class="table table-hover">
                   <thead>
                     <tr>
                       <th class="pb-3 pb-sm-2" scope="col">Unidad</th>
@@ -93,27 +95,37 @@
                   </thead>
                   <tbody>
                     <tr>
+                      <td class="d-none td-precio_item"><?php echo $row->precio_item; ?></td>
                       <td><?php echo $row->No_Unidad_Medida; ?></td>
-                      <td><?php echo $row->cantidad_item; ?></td>
+                      <td class="td-cantidad_item"><?php echo $row->cantidad_item; ?></td>
                       <td><?php echo $row->No_Signo . ' ' . $row->precio_item; ?></td>
                       <td>
-                        <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid">
-                          <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
-                        </div>
                       </td>
                     </tr>
                     <tr>
+                      <td class="d-none td-precio_item"><?php echo $row->precio_item_2; ?></td>
                       <td><?php echo $row->No_Unidad_Medida_2; ?></td>
-                      <td><?php echo $row->cantidad_item_2; ?></td>
+                      <td class="td-cantidad_item"><?php echo $row->cantidad_item_2; ?></td>
                       <td><?php echo $row->No_Signo . ' ' . $row->precio_item_2; ?></td>
                       <td>
+                        <!--
                         <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" class="d-grid">
                           <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-id_unidad_medida="" data-id_unidad_medida_2="<?php echo $row->ID_Unidad_Medida_2; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida_2; ?>" data-cantidad_item="<?php echo $row->cantidad_item_2; ?>" data-precio_item="<?php echo $row->precio_item_2; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
                         </div>
+                        -->
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                
+                <div class="col-12 col-sm-5 col-xl-12 col-md-12 number-input md-number-input item-unitario">
+                  <!-- background: #92dda9; --><button style="width: 30%; height: 30px; " class="plus" onclick="subir(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-plus"></i></button>
+                  <input style="width: 40%;" onkeyup="validateStockNow(event);" class="text-center mb-2 pt-0 pb-1 input-cantidad_item input-decimal form-control" id="input_cantidad_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item_minima="<?php echo $row->cantidad_item; ?>" value="<?php echo $row->cantidad_item; ?>">
+                  <!-- background: #92dda9; --><button style="width: 30%; height: 30px;" class="minus" onclick="bajar(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-minus"></i></button>
+                </div>
+                <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid">
+                  <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
+                </div>
               <!--</div>-->
               <p class="card-text">
                 <?php echo nl2br($row->Txt_Producto); ?>
