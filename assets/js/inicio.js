@@ -1,16 +1,8 @@
 var signo_moneda='S/';
 $(document).ready(function () {
-  $(".input-cantidad_item").focus();
-
-  $(".input-cantidad_item").keydown(function(){
-    alert('hola');
-  });
-  $(".input-cantidad_item").keypress(function(){
-    alert('hola2');
-  });
-  $(".input-cantidad_item").keyup(function(){
-    alert('hola3');
-  });
+  $(".input-cantidad_item").click(function(){
+    $(this).select();  
+  })
 
   $(document).on('click', '#btn-enviar_whatsapp_item', function (e) {
     e.preventDefault();
