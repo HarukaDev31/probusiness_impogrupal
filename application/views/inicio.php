@@ -1,8 +1,8 @@
 <main>
   <div id="carouselExampleDark" class="carousel carousel-dark slide mt-5" data-bs-ride="carousel" style="margin-top: 4rem !important;">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width: 10px;height: 10px;border-radius: 100%;"></button>
+      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2" style="width: 10px;height: 10px;border-radius: 100%;"></button>
     </div>
     
     <div class="carousel-inner">
@@ -12,19 +12,11 @@
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="3000">
-        <img src="<?php echo base_url("assets/images/portada_login.jpg?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
+        <img src="<?php echo base_url("assets/images/banner_importacion_grupal_carga.png?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
   
   <div class="container mt-5">
@@ -38,6 +30,8 @@
       <p class="text-center lead mb-5">
         Fecha de Inicio: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Inicio); ?> y
         Fecha de Cierre: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Fin); ?>
+        <br>
+        <?php echo nl2br($arrImportacionGrupalProducto[0]->Txt_Importacion_Grupal); ?>
       </p>
 
       <!-- diseño de item -->
@@ -149,7 +143,7 @@
               $phone = $codigo_pais . $numero_celular;
               $sSignoMoneda = $arrImportacionGrupalProducto[0]->No_Signo;
               
-              $sNombreUnidadMedidaWhatsApp = "*" . $row->No_Unidad_Medida . "* 📦";
+              $sNombreUnidadMedidaWhatsApp = "*" . trim($row->No_Unidad_Medida) . "* 📦";
               $fTotalItem = ($row->cantidad_item * $row->precio_item);
               $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
               $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n\n";
@@ -159,7 +153,7 @@
               $message_wp .= "Total: *" . $sSignoMoneda . " " . number_format($fTotalItem, 2, '.', ',') . "*\n";
               $message_wp .= "_(Puede separar con el 50% " . $sSignoMoneda . " " . number_format(($fTotalItem / 2), 2, '.', ',') . ")_\n\n";
               
-              $sNombreUnidadMedida2WhatsApp = "*" . $row->No_Unidad_Medida_2 . "* 📦";
+              $sNombreUnidadMedida2WhatsApp = "*" . trim($row->No_Unidad_Medida_2) . "* 📦";
               $fTotalItem = ($row->cantidad_item_2 * $row->precio_item_2);
               $message_wp .= "🅱️ " . $sNombreUnidadMedida2WhatsApp . "\n";
               $message_wp .= "Contiene *" . round($row->cantidad_item_2, 2) . "* unidades\n";
