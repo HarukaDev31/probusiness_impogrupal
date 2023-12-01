@@ -64,7 +64,7 @@
                 foreach ($arrShipping->result as $row) {
                   if ( $row->Nu_Valor == 6) {//delivery ?>
                   <label class="tipo_compra-invitado-envio-domi me-3 border border-radius rounded mb-0 py-4 col-md-4 col-lg-3 cursor-pointer col-6 d-flex flex-column justify-content-center" for="invitadodelivery" style="cursor:pointer">
-                    <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadodelivery" data-name="<?php echo $row->No_Tipo_Envio; ?>" value="<?php echo $row->ID; ?>">
+                    <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadodelivery" data-name="<?php echo $row->No_Tipo_Envio; ?>" data-nu_valor="<?php echo $row->Nu_Valor; ?>" value="<?php echo $row->ID; ?>">
                     <i class="fas tipo_compra-invitado-ico-domi fa-truck h1 mx-auto"></i>
                     <h3 class="text-center h6 mt-2 tipo_compra-invitado-h3-tipo-recepcion-delivery"><?php echo $row->No_Tipo_Envio; ?></h3>
                   </label>
