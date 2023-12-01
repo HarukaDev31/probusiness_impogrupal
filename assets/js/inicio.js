@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     const codigo_pais="51";
     const numero_celular="932531441";
-    const phone = codigo_pais . numero_celular;
+    const phone = codigo_pais + numero_celular;
     signo_moneda = $('#hidden-global-signo_moneda').val();
 
     const id_item_bd = $(this).data('id_item_bd');
