@@ -99,9 +99,10 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
                         <img style="height: auto;   max-height: 60px;" class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
                       </div>
                       <div class="modal-cart_shop-body_item ps-3">
-                        <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente' : 'Número'); ?></h6>
+                        <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente Soles' : ''); ?></h6>
                         <div class="modal-cart_shop-div-precio_item ps-2">
                           <span class="fw-bold">
+                            <span><?php echo $row->No_Titular_Cuenta; ?></span><br>
                             <span><?php echo $row->No_Cuenta_Bancaria; ?></span>
                           </span>
                         </div>
