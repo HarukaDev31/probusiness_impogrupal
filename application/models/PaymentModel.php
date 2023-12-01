@@ -156,6 +156,14 @@ class PaymentModel extends CI_Model{
                 'Txt_Email_Entidad'	=> $arrHeader['Txt_Email_Entidad']
             );
 
+            $arrCliente = array_merge($arrCliente, array(
+                    "ID_Departamento" => $arrHeader['id_departamento'],
+                    "ID_Provincia" => $arrHeader['id_provincia'],
+                    "ID_Distrito" => $arrHeader['id_distrito'],
+                    "ID_Pais" => 1
+                )
+            );
+
             if ($this->db->insert('entidad', $arrCliente) > 0) {
                 $ID_Entidad = $this->db->insert_id();
             } else {
