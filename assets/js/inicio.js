@@ -481,7 +481,7 @@ function modalCartShop(){
               sHmtlModalCartShopSinItem += '<div class="col-12">';
                 sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div_item" id="">';
                   sHmtlModalCartShopSinItem += '<a href="#" class="modal-cart_shop-img_item">';
-                    sHmtlModalCartShopSinItem += '<img src="' + row.url_imagen_item + '" class="shadow-sm bg-body rounded">';
+                    sHmtlModalCartShopSinItem += '<img src="' + row.url_imagen_item + '" class="shadow-sm bg-body">';
                   sHmtlModalCartShopSinItem += '</a>';
                   sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-body_item ps-3">';
                     sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item text-dark">' + row.nombre_item + '</h3>';

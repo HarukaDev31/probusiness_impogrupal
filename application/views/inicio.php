@@ -61,7 +61,7 @@
                   foreach ($row->imagenes as $row_imagen) {
                   ?>
                     <a href="<?php echo $row_imagen->No_Producto_Imagen;?>">
-                      <img src="<?php echo $row_imagen->No_Producto_Imagen;?>" class="img-thumbnail border-0 rounded float-start" alt="<?php echo quitarCaracteresEspeciales($row->No_Producto); ?>" style="cursor: grab !important;">
+                      <img src="<?php echo $row_imagen->No_Producto_Imagen;?>" class="img-thumbnail border-0 float-start" alt="<?php echo quitarCaracteresEspeciales($row->No_Producto); ?>" style="cursor: grab !important;">
                     </a>
                   <?php
                   }

@@ -191,7 +191,7 @@
                       <label style="cursor: pointer;" class="col-12" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
                         <div class="d-flex p-3">
                           <div class="flex-shrink-0 text-center" style="width:20%;display: flex;flex-direction: column;justify-content: center;">
-                            <img style="height: auto;max-height: 60px;" class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
+                            <img style="height: auto;max-height: 60px;" class="img-medio_pago shadow-sm bg-body" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
                           </div>
                           <div class="mb-2 ps-3">
                             <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente Soles' : ''); ?></h6>
