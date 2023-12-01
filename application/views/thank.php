@@ -146,7 +146,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
               <div class="col-12">
                 <div class="modal-cart_shop-div_item" id="delete_item_562260">
                   <a href="#" class="modal-cart_shop-img_item">
-                    <img class="shadow-sm bg-body rounded" src="<?php echo $row['url_imagen_item']; ?>">
+                    <img class="shadow-sm bg-body" src="<?php echo $row['url_imagen_item']; ?>">
                   </a>
                   <div class="modal-cart_shop-body_item">
                     <h6 class="ps-2"><?php echo $row['nombre_item']; ?></h6>
