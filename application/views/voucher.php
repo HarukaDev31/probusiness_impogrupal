@@ -20,8 +20,8 @@ $phone = $codigo_pais . $numero_celular;
 $message = "*¡Hola ProBusiness*! 😁";
 $message .= "\n🚢 Voy a pagar el saldo del siguiente pedido.";
 
-$message .= "\n\n👤 *CONTACTO:*\n";
-$message .= "===========";
+$message .= "\n\n👤 *CONTACTO*\n";
+$message .= "=============";
 $message .= "\n*Cliente:* " . $arrCabecera['cliente']['No_Entidad'];
 $message .= "\n*" . $arrCabecera['documento']['tipo_documento_identidad'] . "*: " . $arrCabecera['cliente']['Nu_Documento_Identidad'];
 
@@ -44,8 +44,8 @@ $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " .
 //array_debug($arrMedioPago);
 //Cuentas bancarias
 if($arrMedioPago['status']=='success') {
-  $message .= "\n\n 🏦 *CUENTAS BANCARIAS*\n";
-  $message .= "======================\n";
+  $message .= "\n\n 🏦 *FORMA DE PAGO*\n";
+  $message .= "===================\n";
   foreach($arrMedioPago['result'] as $row) {
     $sTipoCuenta = '';
     if ($row->Nu_Tipo_Cuenta==1){
