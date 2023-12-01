@@ -24,7 +24,7 @@ $(document).ready(function () {
       console.log('precio > ' + fListaPrecio);
       console.log('cantidad lista > ' + fListaCantidad);
       console.log('cantidad > ' + cantidad_item);
-      if( cantidad_item > fListaCantidad ) {
+      if( cantidad_item >= fListaCantidad ) {
         precio_item = fListaPrecio;
       }
     });
@@ -131,7 +131,7 @@ $(document).ready(function () {
       var fListaCantidad = parseFloat(fila.find(".td-cantidad_item").text());
       var fListaPrecio = parseFloat(fila.find(".td-precio_item").text());
       //console.log('precio > ' + fListaPrecio);
-      if( cantidad_item > fListaCantidad ) {
+      if( cantidad_item >= fListaCantidad ) {
         precio_item = fListaPrecio;
       }
     });
