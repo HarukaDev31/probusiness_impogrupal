@@ -118,15 +118,13 @@
                   </tbody>
                 </table>
                 
-                <div class="row">
-                  <div class="ps-3 pe-3 pb-2 pb-sm-0 col-12 col-sm-6 col-md-6 col-xl-6 number-input md-number-input item-unitario">
-                    <!-- background: #92dda9; --><button style="width: 30%; height: auto; " class="plus" onclick="subir(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-plus"></i></button>
-                    <input style="width: 40%;" onkeyup="validateStockNow(event);" class="text-center input-cantidad_item input-decimal form-control" id="input_cantidad_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item_minima="<?php echo $row->cantidad_item; ?>" value="<?php echo $row->cantidad_item; ?>">
-                    <!-- background: #92dda9; --><button style="width: 30%; height: auto;" class="minus" onclick="bajar(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-minus"></i></button>
-                  </div>
-                  <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid col-12 col-sm-6 col-md-6 col-xl-6">
-                    <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
-                  </div>
+                <div class="col-12 col-sm-5 col-xl-12 col-md-12 number-input md-number-input item-unitario">
+                  <!-- background: #92dda9; --><button style="width: 30%; height: 30px; " class="plus" onclick="subir(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-plus"></i></button>
+                  <input style="width: 40%;" onkeyup="validateStockNow(event);" class="text-center mb-2 pt-0 pb-1 input-cantidad_item input-decimal form-control" id="input_cantidad_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item_minima="<?php echo $row->cantidad_item; ?>" value="<?php echo $row->cantidad_item; ?>">
+                  <!-- background: #92dda9; --><button style="width: 30%; height: 30px;" class="minus" onclick="bajar(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-minus"></i></button>
+                </div>
+                <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid">
+                  <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
                 </div>
               <!--</div>-->
               <p class="card-text">
@@ -151,7 +149,37 @@
                 </div>
               </div>
 
-              <a id="btn-enviar_whatsapp_item" class="btn btn-outline-success btn-lg btn-block mb-3" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" style="width:100%">Pedir por WhatsApp</a>
+              <?php
+              $codigo_pais="51";
+              $numero_celular="932531441";
+              $phone = $codigo_pais . $numero_celular;
+              $sSignoMoneda = $arrImportacionGrupalProducto[0]->No_Signo;
+              
+              $sNombreUnidadMedidaWhatsApp = "*" . trim($row->No_Unidad_Medida) . "* 📦";
+              $fTotalItem = ($row->cantidad_item * $row->precio_item);
+              $message_wp = "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
+              $message_wp .= "✅ Producto: *" . quitarCaracteresEspeciales($row->No_Producto) . "*\n\n";
+              $message_wp .= "🅰️ " . $sNombreUnidadMedidaWhatsApp . "\n";
+              $message_wp .= "Contiene *" . round($row->cantidad_item, 2) . "* unidades\n";
+              $message_wp .= "Precio (c/u): *" . $sSignoMoneda . " " . number_format($row->precio_item, 2, '.', ',') . "*\n";
+              $message_wp .= "Total: *" . $sSignoMoneda . " " . number_format($fTotalItem, 2, '.', ',') . "*\n";
+              $message_wp .= "_(Puede separar con el 50% " . $sSignoMoneda . " " . number_format(($fTotalItem / 2), 2, '.', ',') . ")_\n\n";
+              
+              $sNombreUnidadMedida2WhatsApp = "*" . trim($row->No_Unidad_Medida_2) . "* 📦";
+              $fTotalItem = ($row->cantidad_item_2 * $row->precio_item_2);
+              $message_wp .= "🅱️ " . $sNombreUnidadMedida2WhatsApp . "\n";
+              $message_wp .= "Contiene *" . round($row->cantidad_item_2, 2) . "* unidades\n";
+              $message_wp .= "Precio (c/u): *" . $sSignoMoneda . " " . number_format($row->precio_item_2, 2, '.', ',') . "*\n";
+              $message_wp .= "Total: *" . $sSignoMoneda . " " . number_format($fTotalItem, 2, '.', ',') . "*\n";
+              $message_wp .= "_(Puede separar con el 50% " . $sSignoMoneda . " " . number_format(($fTotalItem / 2), 2, '.', ',') . ")_\n\n";
+
+              $message_wp .= "¿Qué opción eliges 🅰️ ó 🅱️?";
+              
+              $message_wp = urlencode($message_wp);
+              $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message_wp;
+              ?>
+              <a class="btn btn-outline-success btn-lg btn-block mb-3" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
+
             </div>
           </div>
         </div>

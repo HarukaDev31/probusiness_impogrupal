@@ -1,5 +1,46 @@
 var signo_moneda='S/';
 $(document).ready(function () {
+  $(document).on('click', '#btn-enviar_whatsapp_item', function (e) {
+    e.preventDefault();
+
+    const codigo_pais="51";
+    const numero_celular="932531441";
+    const phone = codigo_pais . numero_celular;
+    signo_moneda = $('#hidden-global-signo_moneda').val();
+
+    const id_item_bd = $(this).data('id_item_bd');
+    const id_item = $(this).data('id_item');
+    const cantidad_item = $('#input_cantidad_item-' + id_item).val();
+    var precio_item= $(this).data('precio_item');
+
+    $("#table_item-" + id_item_bd + " > tbody > tr").each(function(){
+      fila = $(this);
+      var fListaCantidad = parseFloat(fila.find(".td-cantidad_item").text());
+      var fListaPrecio = parseFloat(fila.find(".td-precio_item").text());
+      console.log('precio > ' + fListaPrecio);
+      console.log('cantidad lista > ' + fListaCantidad);
+      console.log('cantidad > ' + cantidad_item);
+      if( cantidad_item > fListaCantidad ) {
+        precio_item = fListaPrecio;
+      }
+    });
+
+    var message_wp = '';
+    message_wp += "Hola *ProBusiness*. Me gustaría comprar el producto de tu tienda: \n\n";
+    message_wp += "✅ Producto: *" + $(this).data('nombre_item') + "*\n\n";
+    message_wp += "Cantidad: *" + number_format(cantidad_item, 2) + "*\n";
+
+    var fTotalItem = (parseFloat(cantidad_item) * parseFloat(precio_item));
+
+    message_wp += "Precio Unitario: *" + signo_moneda + " " + number_format(precio_item, 2) + "*\n";
+    message_wp += "Total: *" + signo_moneda + " " + number_format(fTotalItem, 2) + "*\n";
+    message_wp += "_(Puede separar con el 50% " + signo_moneda + " " + number_format((fTotalItem / 2), 2) + ")_\n\n";
+    
+    message_wp = encodeURIComponent(message_wp);
+    var url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + message_wp;
+    
+    window.open(url, "_blank");
+  });
 
   $(document).on('click', '.tipo_compra-invitado-tienda-reco', function () {
     $('.tipo_compra-invitado-envio-domi').css('background', "#ffffff");
@@ -442,16 +483,22 @@ function modalCartShop(){
                     sHmtlModalCartShopSinItem += '</div>';
                     
                     sHmtlModalCartShopSinItem += '<div class="row">';
-                      sHmtlModalCartShopSinItem += '<div class="col-6">';
+                      sHmtlModalCartShopSinItem += '<div class="col-5">';
                         sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-cantidad_item" style="float: left;">';
                           sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1">Cant: ' + row.cantidad_item +  '</p>';
                         sHmtlModalCartShopSinItem += '</div>';
                       sHmtlModalCartShopSinItem += '</div>';
 
-                      sHmtlModalCartShopSinItem += '<div class="col-6">';
+                      sHmtlModalCartShopSinItem += '<div class="col-5">';
+                        sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-precio_item" style="float: left;">';
+                          sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1">P.U.: ' + row.precio_item +  '</p>';
+                        sHmtlModalCartShopSinItem += '</div>';
+                      sHmtlModalCartShopSinItem += '</div>';
+
+                      sHmtlModalCartShopSinItem += '<div class="col-2">';
                         sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-eliminar_item">';
                           sHmtlModalCartShopSinItem += '<button class="btn btn-default text-danger btn-quitar_item" id="btn-quitar_item-' + row.id_item + '" data-id_unidad_medida_2="' + row.id_unidad_medida_2 + '" data-id_unidad_medida="' + row.id_unidad_medida + '" data-id_item="' + row.id_item + '" data-cantidad_item="' + row.cantidad_item + '" data-precio_item="' + row.precio_item + '" data-nombre_item="' + row.nombre_item + '" data-url_imagen_item="' + row.url_imagen_item + '">';
-                          sHmtlModalCartShopSinItem += '<i aria-hidden="true" class="fas fa-trash-alt text-danger"></i> Eliminar';
+                          sHmtlModalCartShopSinItem += '<i aria-hidden="true" class="fas fa-trash-alt text-danger"></i>';
                           sHmtlModalCartShopSinItem += '</button>';
                         sHmtlModalCartShopSinItem += '</div>';
                       sHmtlModalCartShopSinItem += '</div>';
@@ -629,4 +676,25 @@ function verificarPrecioxMayor(input_data) {
     $( '#precio_libro_' + iIdItem ).text(sSignoMoneda + ' ' + Number(fPrecio_Nuevo).toFixed(2));
     $( '#descuento_libro_u_mv_' + iIdItem ).text('-' + Number(fPorcentajeDescuento).toFixed(2) + ' %');
     */
+}
+
+function number_format(amount, decimals) {
+  amount += ''; // por si pasan un numero en vez de un string
+  amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+
+  decimals = decimals || 0; // por si la variable no fue fue pasada
+
+  // si no es un numero o es igual a cero retorno el mismo cero
+  if (isNaN(amount) || amount === 0) 
+    return parseFloat(0).toFixed(decimals);
+
+  // si es mayor o menor que cero retorno el valor formateado como numero
+  amount = '' + amount.toFixed(decimals);
+
+  var amount_parts = amount.split('.'), regexp = /(\d+)(\d{3})/;
+
+  while (regexp.test(amount_parts[0]))
+    amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+
+  return amount_parts.join('.');
 }
