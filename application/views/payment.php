@@ -49,9 +49,71 @@
         //array_debug($arrDepartamento);
         //array_debug($arrProvincia);
         //array_debug($arrDistrito);
+        //array_debug($arrWhareHouse);
         ?>
 
-        <div class="col-12 col-sm-12 col-md-12">
+        <div class="container-fluid div-finalizar_compra-tipo_entrega div-tipo_compra-invitado mt-2 mb-3">
+					<div class="box-tipo-envio">
+            <h2 class="text-left mb-3 fw-bold">¿Donde recibirás tú compra?</h2>
+						<?php if ( $arrShipping->status=='success' ) { ?>
+							<div class="box-interno-envio px-1 d-flex col-12 justify-content-center">
+                <?php
+                //$sInstruccionesRecojoDelivery='';
+                //$sInstruccionesRecojoTienda='';
+                foreach ($arrShipping->result as $row) {
+                  if ( $row->Nu_Valor == 6) {//delivery ?>
+                  <label class="tipo_compra-invitado-envio-domi me-3 border border-radius rounded mb-0 py-4 col-md-4 col-lg-3 cursor-pointer col-6 d-flex flex-column justify-content-center" for="invitadodelivery" style="cursor:pointer">
+                    <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadodelivery" data-nu_valor="<?php echo $row->Nu_Valor; ?>" value="<?php echo $row->ID; ?>">
+                    <i class="fas tipo_compra-invitado-ico-domi fa-truck h1 mx-auto"></i>
+                    <h3 class="text-center h6 mt-2 tipo_compra-invitado-h3-tipo-recepcion-delivery"><?php echo $row->No_Tipo_Envio; ?></h3>
+                  </label>
+                  <?php
+                    //$sInstruccionesRecojoDelivery=$row->Txt_Instrucciones_Recojo_Tienda_Lae_Shop;
+                  }
+                  if ( $row->Nu_Valor == 7) {//recojo en tienda ?>
+                  <label class="tipo_compra-invitado-tienda-reco me-3 rounded border border-radius mb-0 py-4 col-md-4 col-lg-3 cursor-pointer col-6 d-flex flex-column justify-content-center" for="invitadorecojo" style="cursor:pointer">
+                    <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadorecojo" data-nu_valor="<?php echo $row->Nu_Valor; ?>" value="<?php echo $row->ID; ?>">
+                    <i class="fas fa-store tipo_compra-invitado-ico-tienda h1 mx-auto"></i>
+                    <h3 class="text-center h6 mt-2 tipo_compra-invitado-h3-tipo-recepcion-tienda"><?php echo $row->No_Tipo_Envio; ?></h3>
+                  </label>
+                  <?php
+                    //$sInstruccionesRecojoTienda=$row->Txt_Instrucciones_Recojo_Tienda_Lae_Shop;
+                  }
+                } ?>
+							</div>
+						<?php } else { ?>
+							<h4 class="h4-finalizar_compra-direccion_usuario-title"><?php echo $arrTiposEnvio->message; ?></h4>
+						<?php } ?>
+					</div>
+				</div>
+
+				<div class="dire_cb div-tipo_compra-invitado-finalizar_compra-recojo_tienda div-finalizar_compra-recojo_tienda d-none mt-0 mb-3" style="">
+          <div class="card" style="border: none;">
+            <div class="card-body shadow p-3 bg-body rounded">
+              <h4 class="text-left mb-3 fw-bold">Recojo en tienda</h4>
+              <?php if ( $arrWareHouse->status=='success' ) {
+                $arrWareHouse = $arrWareHouse->result[0]; ?>
+                <input type="hidden" id="hidden-global-moneda_signo-tipo_compra-invitado" value="<?php echo $arrWareHouse->No_Signo; ?>">
+                <input type="hidden" id="hidden-id_almacen_retiro_tienda-tipo_compra-invitado" value="<?php echo $arrWareHouse->ID_Almacen; ?>">
+                <span class="span-finalizar_compra-comprobante-texto"><strong>Dirección:</strong> <?php echo $arrWareHouse->Txt_Direccion_Almacen . ' - ' . $arrWareHouse->No_Departamento . ' - ' . $arrWareHouse->No_Provincia . ' - ' . $arrWareHouse->No_Distrito; ?></span>
+                  <?php if(!empty($sInstruccionesRecojoTienda)){ ?>
+                    <span class="span-finalizar_compra-comprobante-texto">
+                      <div style="margin-top: .5rem !important;">
+                        <strong>Instrucciones:</strong><br>
+                        <?php echo nl2br($sInstruccionesRecojoTienda); ?>
+                      </div>
+                    </span>
+                  <?php } ?>
+              <?php } else { ?>
+                <input type="hidden" id="hidden-global-moneda_signo-tipo_compra-invitado" value="S/">
+                <input type="hidden" id="hidden-id_almacen_retiro_tienda-tipo_compra-invitado" value="0">
+                <span class="span-finalizar_compra-comprobante-texto"><?php echo $arrWareHouse->message; ?></span>
+              <?php } ?>
+            </div>
+          </div>
+				</div>
+
+        <div class="div-tipo_compra-invitado-finalizar_compra-direccion_usuario col-12 col-sm-12 col-md-12 d-none">
           <!--direccion-->
           <h2 class="text-left mb-3 fw-bold">Dirección</h2>
           <form>

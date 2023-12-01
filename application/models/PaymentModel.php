@@ -3,6 +3,46 @@ class PaymentModel extends CI_Model{
 	public function __construct(){
 		parent::__construct();
     }
+    
+	// Obtener informacion de tienda laeshop
+	public function getInformationWarehouse( $arrParams ){
+		$query = "SELECT
+ALMA.ID_Almacen,
+ALMA.Txt_Direccion_Almacen,
+D.No_Departamento,
+P.No_Provincia,
+DTR.No_Distrito,
+'S/' AS No_Signo
+FROM
+almacen AS ALMA
+JOIN organizacion AS ORG ON(ORG.ID_Organizacion = ALMA.ID_Organizacion)
+JOIN distrito AS DTR ON(DTR.ID_Distrito = ALMA.ID_Distrito)
+JOIN provincia AS P ON(P.ID_Provincia = ALMA.ID_Provincia)
+JOIN departamento AS D ON(D.ID_Departamento = ALMA.ID_Departamento)
+WHERE
+ALMA.ID_Almacen=" . $arrParams['ID_Empresa'] . " LIMIT 1";
+
+		if ( !$this->db->simple_query($query) ){
+			$error = $this->db->error();
+			return array(
+				'status' => 'error',
+				'message' => '¡Oops! Algo salió mal. Inténtalo mas tarde',
+				//'error' => $error
+			);
+		}
+		$arrResponseSQL = $this->db->query($query);
+		if ( $arrResponseSQL->num_rows() > 0 ){
+			return array(
+				'status' => 'success',
+				'result' => $arrResponseSQL->result(),
+			);
+		}
+
+		return array(
+			'status' => 'error',
+			'message' => 'No se encontró registro(s)',
+		);
+	}
   
     public function getDepartamento(){
         //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
@@ -156,13 +196,15 @@ class PaymentModel extends CI_Model{
                 'Txt_Email_Entidad'	=> $arrHeader['Txt_Email_Entidad']
             );
 
-            $arrCliente = array_merge($arrCliente, array(
-                    "ID_Departamento" => $arrHeader['id_departamento'],
-                    "ID_Provincia" => $arrHeader['id_provincia'],
-                    "ID_Distrito" => $arrHeader['id_distrito'],
-                    "ID_Pais" => 1
-                )
-            );
+            if ($arrHeader['tipo_shipping']==6) {//6=delivery
+                $arrCliente = array_merge($arrCliente, array(
+                        "ID_Departamento" => $arrHeader['id_departamento'],
+                        "ID_Provincia" => $arrHeader['id_provincia'],
+                        "ID_Distrito" => $arrHeader['id_distrito'],
+                        "ID_Pais" => $arrHeader['id_pais']
+                    )
+                );
+            }
 
             if ($this->db->insert('entidad', $arrCliente) > 0) {
                 $ID_Entidad = $this->db->insert_id();
@@ -178,7 +220,7 @@ class PaymentModel extends CI_Model{
 
         $dEmision = dateNow('fecha');
         $dRegistroHora = dateNow('fecha_hora');
-
+array_debug($arrHeader);
 		$arrSaleOrder = array(
             'ID_Empresa' => $arrHeader['id_empresa'],
             'ID_Organizacion' => $arrHeader['id_organizacion'],
@@ -194,7 +236,10 @@ class PaymentModel extends CI_Model{
 			'ID_Distrito' => $arrHeader['id_distrito'],
 			'ID_Medio_Pago' => $arrHeader['id_medio_pago'],
             'Nu_Estado' => 1,//1=Pendiente, 2=Confirmado y 3=Finalizado
-            'Fe_Registro' => $dRegistroHora
+            'Fe_Registro' => $dRegistroHora,
+			'Nu_Tipo_Recepcion' => $arrHeader['tipo_shipping'],
+			'ID_Tabla_Dato_Tipo_Recepcion' => $arrHeader['nu_valor_tipo_shipping'],
+			'ID_Almacen_Retiro_Tienda' => $arrHeader['id_almacen_retiro_tienda']
 		);
 		
 		$this->db->insert('importacion_grupal_pedido_cabecera', $arrSaleOrder);
@@ -298,4 +343,28 @@ CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
             return array('status' => 'success', 'message' => 'Se guardo correctamente');
 		return array('status' => 'warning', 'message' => 'Problemas al guardar');
     }
+
+	public function getShipping($arrParams){
+		$query = "SELECT ID_Metodo_Entrega_Tienda_Virtual AS ID, Nu_Tipo_Metodo_Entrega_Tienda_Virtual AS Nu_Valor, No_Metodo_Entrega_Tienda_Virtual AS No_Tipo_Envio, ID_Estatus_Promo, Nu_Monto_Compra, Nu_Costo_Envio, Txt_Terminos, Txt_Instrucciones_Recojo_Tienda_Lae_Shop FROM metodo_entrega_tienda_virtual WHERE ID_Empresa = " . $arrParams['ID_Empresa'] . " AND Nu_Estado = 1";
+
+		if ( !$this->db->simple_query($query) ){
+			$error = $this->db->error();
+			return array(
+				'status' => 'error',
+				'message' => '¡Oops! Algo salió mal. Inténtalo mas tarde'
+			);
+		}
+		$arrResponseSQL = $this->db->query($query);
+		if ( $arrResponseSQL->num_rows() > 0 ){
+			return array(
+				'status' => 'success',
+				'result' => $arrResponseSQL->result(),
+			);
+		}
+
+		return array(
+			'status' => 'error',
+			'message' => 'No se encontró registro(s)',
+		);
+	}
 }

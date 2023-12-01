@@ -22,12 +22,24 @@ class Payment extends CI_Controller {
 		
 		//get medio de pago
 		$arrMedioPago = array();
+		$arrShipping = array();
+		$arrWareHouse = array();
 		if($arrImportacionGrupalProducto['status'] == 'success') {
 			$arrImportacionGrupalProducto_ = $arrImportacionGrupalProducto['result'];
 			$arrParamsMedioPago = array(
 				'ID_Empresa' => $arrImportacionGrupalProducto_[0]->ID_Empresa
 			);
 			$arrMedioPago = $this->PaymentModel->getMedioPago($arrParamsMedioPago);
+			
+			$arrParamsShipping = array(
+				'ID_Empresa' => $arrImportacionGrupalProducto_[0]->ID_Empresa
+			);
+			$arrShipping = (object)$this->PaymentModel->getShipping($arrParamsShipping);
+			
+			$arrParamsWhareHouse = array(
+				'ID_Empresa' => $arrImportacionGrupalProducto_[0]->ID_Empresa
+			);
+			$arrWareHouse = (object)$this->PaymentModel->getInformationWarehouse($arrParamsWhareHouse);
 		}
 		
 		//get ubigeo
@@ -60,6 +72,8 @@ class Payment extends CI_Controller {
 		);
 		$this->load->view('payment', array(
 				'arrMedioPago' => $arrMedioPago,
+				'arrShipping' => $arrShipping,
+				'arrWareHouse' => $arrWareHouse,
 				'arrDepartamento' => $arrDepartamento
 			)
 		);

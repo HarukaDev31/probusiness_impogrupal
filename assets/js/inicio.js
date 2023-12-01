@@ -1,5 +1,48 @@
 var signo_moneda='S/';
 $(document).ready(function () {
+
+  $(document).on('click', '.tipo_compra-invitado-tienda-reco', function () {
+    $('.tipo_compra-invitado-envio-domi').css('background', "#ffffff");
+    $('.tipo_compra-invitado-tienda-reco').css('background', "#ffffff");
+
+    $('.tipo_compra-invitado-ico-domi').removeClass('color-eboom');
+    $('.tipo_compra-invitado-ico-tienda').addClass('color-eboom');
+    $('.tipo_compra-invitado-h3-tipo-recepcion-delivery').removeClass('color-eboom');
+    $('.tipo_compra-invitado-h3-tipo-recepcion-tienda').addClass('color-eboom');
+    
+    $('.div-tipo_compra-invitado-finalizar_compra-direccion_usuario').addClass('d-none');
+    $('.div-tipo_compra-invitado-finalizar_compra-recojo_tienda').removeClass('d-none');
+
+    $(this).css('background', "#f5f5f5");
+
+    $('#invitadodelivery').prop('checked', false);
+    $('#invitadorecojo').prop('checked', true);
+    $('#invitadodelivery').attr('checked', false);
+    $('#invitadorecojo').attr('checked', true);
+
+    $('.div-payment-delivery').addClass('d-none');
+  })
+
+  $(document).on('click', '.tipo_compra-invitado-envio-domi', function () {
+    $('.tipo_compra-invitado-envio-domi').css('background', "#ffffff");
+    $('.tipo_compra-invitado-tienda-reco').css('background', "#ffffff");
+
+    $('.tipo_compra-invitado-ico-domi').addClass('color-eboom');
+    $('.tipo_compra-invitado-ico-tienda').removeClass('color-eboom');
+    $('.tipo_compra-invitado-h3-tipo-recepcion-delivery').addClass('color-eboom');
+    $('.tipo_compra-invitado-h3-tipo-recepcion-tienda').removeClass('color-eboom');
+
+    $('.div-tipo_compra-invitado-finalizar_compra-direccion_usuario').removeClass('d-none');
+    $('.div-tipo_compra-invitado-finalizar_compra-recojo_tienda').addClass('d-none');
+
+    $(this).css('background', "#f5f5f5");
+
+    $('#invitadodelivery').prop('checked', true);
+    $('#invitadorecojo').prop('checked', false);
+    $('#invitadodelivery').attr('checked', true);
+    $('#invitadorecojo').attr('checked', false);
+})
+
   $('#div-footer-cart').hide();
 
   //console.log($('#div-delivery_extra_provincia'));
@@ -156,39 +199,41 @@ $(document).ready(function () {
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');
       $('#payment-documento_identidad').closest('.form-group').removeClass('has-success').addClass('has-error');
-
+//alert('1');
       scrollToError($("html, body"), $('#payment-documento_identidad'));
     } else if ($("#payment-nombre_cliente").val().trim().length < 3) {
       $('#payment-nombre_cliente').closest('.form-group').find('.help-block').html('Mínimo 3 caracteres');
       $('#payment-nombre_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
-
+      //alert('2');
       scrollToError($("html, body"), $('#payment-nombre_cliente'));
     } else if ($("#payment-celular_cliente").val().trim().length < 9) {
       $('#payment-celular_cliente').closest('.form-group').find('.help-block').html('9 dígitos');
       $('#payment-celular_cliente').closest('.form-group').removeClass('has-success').addClass('has-error');
-
+      //alert('3');
       scrollToError($("html, body"), $('#payment-celular_cliente'));
     } else if ($("#payment-email").val().trim().length < 1) {
       $('#payment-email').closest('.form-group').find('.help-block').html('Ingresar Email');
       $('#payment-email').closest('.form-group').removeClass('has-success').addClass('has-error');
-
+      //alert('4');
       scrollToError($("html, body"), $('#payment-documento_identidad'));
     } else if (!checkEmail($('#payment-email').val())) {
       $('#payment-email').closest('.form-group').find('.help-block').html('Email inválido');
       $('#payment-email').closest('.form-group').addClass('has-success').removeClass('has-error');
 
       scrollToError($("html, body"), $('#payment-email'));
-    } else if ($("#cbo-departamento").val() == 0) {
+    } else if ($('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').val()===undefined || $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').val()==0 || $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').val()=='') {
+        alert('Elige donde recibes tu compra');
+    } else if ($('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').data('nu_valor') == 6 && $("#cbo-departamento").val() == 0) {
       $('#cbo-departamento').closest('.form-group').find('.help-block').html('Elegir departamento');
       $('#cbo-departamento').closest('.form-group').removeClass('has-success').addClass('has-error');
 
       scrollToError($("html, body"), $('#cbo-departamento'));
-    } else if ($("#cbo-provincia").val() == 0) {
+    } else if ($('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').data('nu_valor') == 6 && $("#cbo-provincia").val() == 0) {
       $('#cbo-provincia').closest('.form-group').find('.help-block').html('Elegir provincia');
       $('#cbo-provincia').closest('.form-group').removeClass('has-success').addClass('has-error');
 
       scrollToError($("html, body"), $('#cbo-provincia'));
-    } else if ($("#cbo-distrito").val() == 0) {
+    } else if ($('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').data('nu_valor') == 6 && $("#cbo-distrito").val() == 0) {
       $('#cbo-distrito').closest('.form-group').find('.help-block').html('Elegir distrito');
       $('#cbo-distrito').closest('.form-group').removeClass('has-success').addClass('has-error');
 
@@ -224,6 +269,9 @@ $(document).ready(function () {
         'id_distrito' : $( '#cbo-distrito' ).val(),
         'Txt_Direccion' : $('#payment-direccion').val(),
         'id_medio_pago' : iIdMedioPago,
+        'tipo_shipping' : $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').val(),
+        'nu_valor_tipo_shipping' : $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').data('nu_valor'),
+        'id_almacen_retiro_tienda' : $('#hidden-id_almacen_retiro_tienda-tipo_compra-invitado').val(),
       };
       addPedido(arrParams);
     }
