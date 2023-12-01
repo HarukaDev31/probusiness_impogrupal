@@ -91,7 +91,7 @@
                     <span class="help-block text-danger" id="error"></span>
                   </div>
 
-                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-3">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-3 d-none">
                     <label class="fw-bold">Dirección <span class="label-advertencia text-danger"> *</span></label>
                     <div class="form-group">
                       <input type="text" id="payment-direccion" inputmode="text" name="address" class="form-control required" placeholder="Ingresar" maxlength="100" autocomplete="address">

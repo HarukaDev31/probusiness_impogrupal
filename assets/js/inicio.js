@@ -193,12 +193,15 @@ $(document).ready(function () {
       $('#cbo-distrito').closest('.form-group').removeClass('has-success').addClass('has-error');
 
       scrollToError($("html, body"), $('#cbo-distrito'));
-    } else if ($("#payment-direccion").val().trim().length < 10) {
+    }
+    /* else if ($("#payment-direccion").val().trim().length < 10) {
       $('#payment-direccion').closest('.form-group').find('.help-block').html('Mínimo 10 caracteres');
       $('#payment-direccion').closest('.form-group').removeClass('has-success').addClass('has-error');
 
       scrollToError($("html, body"), $('#payment-direccion'));
-    } else if (sMedioPago===undefined || sMedioPago==0 || sMedioPago=='') {
+    } 
+    */
+   else if (sMedioPago===undefined || sMedioPago==0 || sMedioPago=='') {
       alert('Elegir medio de pago');
     } else if($('#check-terminos').prop('checked') == false) {
       alert('Debes aceptar términos y condiciones');
