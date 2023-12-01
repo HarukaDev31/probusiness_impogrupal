@@ -115,6 +115,7 @@ class Payment extends CI_Controller {
 			//get pedido si vence la sesión
 			$arrParams = array( 'id_pedido' => $iIdPedido );
 			$arrResponsePedido = $this->PaymentModel->getPedido($arrParams);
+			array_debug($arrResponsePedido);
 			if($arrResponsePedido['status']=='success'){
 				$arrPedidoCabecera = $arrResponsePedido['result'][0];
 				
@@ -131,6 +132,12 @@ class Payment extends CI_Controller {
 				$arrCabecera['documento']['importe_total'] = $arrPedidoCabecera->importe_total;
 				$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
 				$arrCabecera['documento']['signo_moneda'] = $arrPedidoCabecera->signo_moneda;
+				$arrCabecera['documento']['tipo_envio'] = $arrPedidoCabecera->tipo_envio;
+				$arrCabecera['documento']['id_medio_pago'] = $arrPedidoCabecera->id_medio_pago;
+				$arrCabecera['documento']['nombre_tipo_envio'] = $arrPedidoCabecera->nombre_tipo_envio;
+				$arrCabecera['documento']['departamento_cliente'] = $arrPedidoCabecera->departamento_cliente;
+				$arrCabecera['documento']['provincia_cliente'] = $arrPedidoCabecera->provincia_cliente;
+				$arrCabecera['documento']['distrito_cliente'] = $arrPedidoCabecera->distrito_cliente;
 
 				$arrDetalle = (array)$arrResponsePedido['result'];
 			} else {
@@ -187,6 +194,11 @@ class Payment extends CI_Controller {
 			$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
 			$arrCabecera['documento']['signo_moneda'] = $arrPedidoCabecera->signo_moneda;
 			$arrCabecera['documento']['id_medio_pago'] = $arrPedidoCabecera->id_medio_pago;
+			$arrCabecera['documento']['tipo_envio'] = $arrPedidoCabecera->tipo_envio;
+			$arrCabecera['documento']['nombre_tipo_envio'] = $arrPedidoCabecera->nombre_tipo_envio;
+			$arrCabecera['documento']['departamento_cliente'] = $arrPedidoCabecera->departamento_cliente;
+			$arrCabecera['documento']['provincia_cliente'] = $arrPedidoCabecera->provincia_cliente;
+			$arrCabecera['documento']['distrito_cliente'] = $arrPedidoCabecera->distrito_cliente;
 
 			$arrDetalle = (array)$arrResponsePedido['result'];
 		} else {

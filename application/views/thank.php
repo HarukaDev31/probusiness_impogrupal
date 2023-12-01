@@ -42,6 +42,13 @@ $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " .
 
 //🛵 Tipo de envío: Delivery a Agencia
 //📍Ubigeo: Áncash - Huaraz - Huaraz
+if( $arrCabecera['documento']['tipo_envio'] == '6' ){
+  $message .= "\n 🛵 Tipo de envío: " . $arrCabecera['documento']['nombre_tipo_envio'];
+  $message .= "\n 📍 Ubigeo: " . $arrCabecera['documento']['departamento_cliente'] . " - " . $arrCabecera['documento']['provincia_cliente'] . " - " . $arrCabecera['documento']['distrito_cliente'];
+} else if( $arrCabecera['documento']['tipo_envio'] == '7' ){
+  $message .= "\n 🛎️ Tipo de envío: " . $arrCabecera['documento']['nombre_tipo_envio'];
+  $message .= "\n 📍 Dirección: CAL. ALBERTO BARTON NRO 527 URB. SANTA CATALINA - LIMA - LIMA - La Victoria ";
+}
 
 //enviar cuentas bancarias
 //array_debug($arrMedioPago);

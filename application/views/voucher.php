@@ -37,7 +37,7 @@ foreach($arrDetalle as $row) {
 }
 
 //Totales
-$message .= "\n*💁🏻‍♀️ Separar con (50%): " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
+$message .= "\n*💁🏻‍♀️ Total a Pagar: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
 $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
 
 //enviar cuentas bancarias

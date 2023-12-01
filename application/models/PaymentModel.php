@@ -281,6 +281,11 @@ ALMA.ID_Almacen=" . $arrParams['ID_Empresa'] . " LIMIT 1";
                     'cantidad_total' => $arrHeader['cantidad_total'],
                     'signo_moneda' => $arrHeader['signo_moneda'],
                     'id_medio_pago' => $arrHeader['id_medio_pago'],
+                    'tipo_envio' => $arrHeader['nu_valor_tipo_shipping'],
+                    'nombre_tipo_envio' => $arrHeader['nombre_tipo_envio'],
+                    'departamento_cliente' => $arrHeader['departamento_cliente'],
+                    'provincia_cliente' => $arrHeader['provincia_cliente'],
+                    'distrito_cliente' => $arrHeader['distrito_cliente'],
                 )
 			);
 		}
@@ -295,6 +300,7 @@ CAB.Fe_Registro AS fecha_registro,
 CAB.Qt_Total AS cantidad_total,
 CAB.Ss_Total AS importe_total,
 CAB.ID_Medio_Pago AS id_medio_pago,
+CAB.Nu_Tipo_Recepcion AS tipo_envio,
 CLI.No_Entidad,
 CLI.Nu_Celular_Entidad,
 TDI.No_Tipo_Documento_Identidad_Breve AS tipo_documento_identidad,
@@ -305,14 +311,22 @@ ITEM.No_Producto AS nombre_item,
 ITEM.No_Imagen_Item AS url_imagen_item,
 DET.Ss_Precio AS precio_item,
 DET.Ss_Total AS total_item,
-MONE.No_Signo AS signo_moneda
+MONE.No_Signo AS signo_moneda,
+TDRECEP.No_Metodo_Entrega_Tienda_Virtual AS nombre_tipo_envio,
+DEPCLI.No_Departamento AS departamento_cliente,
+PROCLI.No_Provincia AS provincia_cliente,
+DISCLI.No_Distrito AS distrito_cliente
 FROM
 importacion_grupal_pedido_cabecera AS CAB
 JOIN importacion_grupal_pedido_detalle AS DET ON(CAB.ID_Pedido_Cabecera = DET.ID_Pedido_Cabecera)
+JOIN metodo_entrega_tienda_virtual AS TDRECEP ON(TDRECEP.ID_Metodo_Entrega_Tienda_Virtual = CAB.ID_Tabla_Dato_Tipo_Recepcion)
 JOIN producto AS ITEM ON(ITEM.ID_Producto = DET.ID_Producto)
 JOIN entidad AS CLI ON(CAB.ID_Entidad = CLI.ID_Entidad)
 JOIN tipo_documento_identidad AS TDI ON(TDI.ID_Tipo_Documento_Identidad = CLI.ID_Tipo_Documento_Identidad)
 JOIN moneda AS MONE ON(MONE.ID_Moneda = CAB.ID_Moneda)
+LEFT JOIN departamento AS DEPCLI ON(DEPCLI.ID_Departamento = CAB.ID_Departamento)
+LEFT JOIN provincia AS PROCLI ON(PROCLI.ID_Provincia = CAB.ID_Provincia)
+LEFT JOIN distrito_tienda_virtual AS DISCLI ON(DISCLI.ID_Distrito = CAB.ID_Distrito)
 WHERE
 CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
 
