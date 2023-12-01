@@ -55,7 +55,7 @@ if( $arrCabecera['documento']['tipo_envio'] == '6' ){
 //Cuentas bancarias
 if($arrMedioPago['status']=='success') {
   $message .= "\n\n 🏦 *FORMA DE PAGO*\n";
-  $message .= "===================\n";
+  $message .= "==================\n";
   foreach($arrMedioPago['result'] as $row) {
     $sTipoCuenta = '';
     if( $arrCabecera['documento']['id_medio_pago'] == $row->ID_Medio_Pago ) {
@@ -66,7 +66,6 @@ if($arrMedioPago['status']=='success') {
       //$message .= "\n*Moneda:* " . $row->No_Moneda;
       $message .= "\n*Titular:* " . $row->No_Titular_Cuenta;
       $message .= "\n*Número de cuenta:* " . $row->No_Cuenta_Bancaria;
-      $message .= "\n\n";
     }
   }
 }

@@ -45,7 +45,7 @@ $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " .
 //Cuentas bancarias
 if($arrMedioPago['status']=='success') {
   $message .= "\n\n 🏦 *FORMA DE PAGO*\n";
-  $message .= "===================\n";
+  $message .= "==================\n";
   foreach($arrMedioPago['result'] as $row) {
     $sTipoCuenta = '';
     if ($row->Nu_Tipo_Cuenta==1){
