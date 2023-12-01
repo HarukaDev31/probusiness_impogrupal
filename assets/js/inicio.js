@@ -33,13 +33,13 @@ $(document).ready(function () {
     message_wp += "Hola *ProBusiness* 👋🏻\n\n";
     message_wp += "🛍️ Me gustaría comprar el producto de tu tienda: \n\n";
     message_wp += "✅ Producto: *" + $(this).data('nombre_item') + "*\n\n";
-    message_wp += "Cantidad: *" + number_format(cantidad_item, 2) + "*\n";
+    message_wp += "📦 Cantidad: *" + number_format(cantidad_item, 2) + "*\n";
 
     var fTotalItem = (parseFloat(cantidad_item) * parseFloat(precio_item));
-    message_wp += "Precio Unitario: *" + signo_moneda + " " + number_format(precio_item, 2) + "*\n";
+    message_wp += "☑️ Precio Unitario: *" + signo_moneda + " " + number_format(precio_item, 2) + "*\n";
     message_wp += "*Total: " + signo_moneda + " " + number_format(fTotalItem, 2) + "*\n\n";
 
-    message_wp += "➡️ _(Puede separar con el 50% " + signo_moneda + " " + number_format((fTotalItem / 2), 2) + ")_";
+    message_wp += "💁🏻 _(Puede separar con el 50% " + signo_moneda + " " + number_format((fTotalItem / 2), 2) + ")_";
     
     message_wp = encodeURIComponent(message_wp);
     var url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + message_wp;

@@ -280,6 +280,7 @@ ALMA.ID_Almacen=" . $arrParams['ID_Empresa'] . " LIMIT 1";
                     'importe_total' => $arrHeader['importe_total'],
                     'cantidad_total' => $arrHeader['cantidad_total'],
                     'signo_moneda' => $arrHeader['signo_moneda'],
+                    'id_medio_pago' => $arrHeader['id_medio_pago'],
                 )
 			);
 		}
@@ -293,6 +294,7 @@ CAB.ID_Pedido_Cabecera AS id_pedido,
 CAB.Fe_Registro AS fecha_registro,
 CAB.Qt_Total AS cantidad_total,
 CAB.Ss_Total AS importe_total,
+CAB.ID_Medio_Pago AS id_medio_pago,
 CLI.No_Entidad,
 CLI.Nu_Celular_Entidad,
 TDI.No_Tipo_Documento_Identidad_Breve AS tipo_documento_identidad,

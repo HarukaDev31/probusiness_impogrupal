@@ -186,6 +186,7 @@ class Payment extends CI_Controller {
 			$arrCabecera['documento']['importe_total'] = $arrPedidoCabecera->importe_total;
 			$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
 			$arrCabecera['documento']['signo_moneda'] = $arrPedidoCabecera->signo_moneda;
+			$arrCabecera['documento']['id_medio_pago'] = $arrPedidoCabecera->id_medio_pago;
 
 			$arrDetalle = (array)$arrResponsePedido['result'];
 		} else {

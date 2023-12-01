@@ -40,22 +40,27 @@ foreach($arrDetalle as $row) {
 $message .= "\n*💁🏻‍♀️ Separa con (50%): " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
 $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
 
+//🛵 Tipo de envío: Delivery a Agencia
+//📍Ubigeo: Áncash - Huaraz - Huaraz
+
 //enviar cuentas bancarias
 //array_debug($arrMedioPago);
 //Cuentas bancarias
 if($arrMedioPago['status']=='success') {
-  $message .= "\n\n 🏦 *CUENTAS BANCARIAS*\n";
+  $message .= "\n\n 🏦 *FORMA DE PAGO*\n";
   $message .= "======================\n";
   foreach($arrMedioPago['result'] as $row) {
     $sTipoCuenta = '';
-    if ($row->Nu_Tipo_Cuenta==1){
-      $sTipoCuenta = ' Cuenta Corriente';
+    if( $arrCabecera['documento']['id_medio_pago'] == $row->ID_Medio_Pago ) {
+      if ($row->Nu_Tipo_Cuenta==1){
+        $sTipoCuenta = ' Cuenta Corriente';
+      }
+      $message .= "☑️ *Banco: " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta . '*';
+      //$message .= "\n*Moneda:* " . $row->No_Moneda;
+      $message .= "\n*Titular:* " . $row->No_Titular_Cuenta;
+      $message .= "\n*Número de cuenta:* " . $row->No_Cuenta_Bancaria;
+      $message .= "\n\n";
     }
-    $message .= "☑️ *Banco: " . $row->No_Medio_Pago_Tienda_Virtual . $sTipoCuenta . '*';
-    //$message .= "\n*Moneda:* " . $row->No_Moneda;
-    $message .= "\n*Titular:* " . $row->No_Titular_Cuenta;
-    $message .= "\n*Número de cuenta:* " . $row->No_Cuenta_Bancaria;
-    $message .= "\n\n";
   }
 }
 

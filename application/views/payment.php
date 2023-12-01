@@ -291,7 +291,7 @@
                 
                 <div class="col-12 d-grid">
                   <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="check-terminos">
+                    <input class="form-check-input" type="checkbox" value="" id="check-terminos" style="cursor:pointer;">
                     <label class="form-check-label" for="check-terminos" style="font-size: .8rem;">
                       He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important; font-size: .8rem;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web.
                     </label>
