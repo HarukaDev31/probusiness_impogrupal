@@ -115,7 +115,7 @@ class Payment extends CI_Controller {
 			//get pedido si vence la sesión
 			$arrParams = array( 'id_pedido' => $iIdPedido );
 			$arrResponsePedido = $this->PaymentModel->getPedido($arrParams);
-			array_debug($arrResponsePedido);
+			//array_debug($arrResponsePedido);
 			if($arrResponsePedido['status']=='success'){
 				$arrPedidoCabecera = $arrResponsePedido['result'][0];
 				
