@@ -269,8 +269,8 @@ $(document).ready(function () {
         'id_distrito' : $( '#cbo-distrito' ).val(),
         'Txt_Direccion' : $('#payment-direccion').val(),
         'id_medio_pago' : iIdMedioPago,
-        'tipo_shipping' : $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').val(),
         'nu_valor_tipo_shipping' : $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').data('nu_valor'),
+        'tipo_shipping' : $('input[name="radio-tipo_compra-invitado-tipo-recojo"]:checked').val(),
         'id_almacen_retiro_tienda' : $('#hidden-id_almacen_retiro_tienda-tipo_compra-invitado').val(),
       };
       addPedido(arrParams);

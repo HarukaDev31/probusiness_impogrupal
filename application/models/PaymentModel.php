@@ -196,7 +196,7 @@ ALMA.ID_Almacen=" . $arrParams['ID_Empresa'] . " LIMIT 1";
                 'Txt_Email_Entidad'	=> $arrHeader['Txt_Email_Entidad']
             );
 
-            if ($arrHeader['tipo_shipping']==6) {//6=delivery
+            if ($arrHeader['nu_valor_tipo_shipping']==6) {//6=delivery
                 $arrCliente = array_merge($arrCliente, array(
                         "ID_Departamento" => $arrHeader['id_departamento'],
                         "ID_Provincia" => $arrHeader['id_provincia'],
@@ -220,7 +220,7 @@ ALMA.ID_Almacen=" . $arrParams['ID_Empresa'] . " LIMIT 1";
 
         $dEmision = dateNow('fecha');
         $dRegistroHora = dateNow('fecha_hora');
-array_debug($arrHeader);
+//array_debug($arrHeader);
 		$arrSaleOrder = array(
             'ID_Empresa' => $arrHeader['id_empresa'],
             'ID_Organizacion' => $arrHeader['id_organizacion'],
@@ -237,8 +237,8 @@ array_debug($arrHeader);
 			'ID_Medio_Pago' => $arrHeader['id_medio_pago'],
             'Nu_Estado' => 1,//1=Pendiente, 2=Confirmado y 3=Finalizado
             'Fe_Registro' => $dRegistroHora,
-			'Nu_Tipo_Recepcion' => $arrHeader['tipo_shipping'],
-			'ID_Tabla_Dato_Tipo_Recepcion' => $arrHeader['nu_valor_tipo_shipping'],
+			'Nu_Tipo_Recepcion' => $arrHeader['nu_valor_tipo_shipping'],
+			'ID_Tabla_Dato_Tipo_Recepcion' => $arrHeader['tipo_shipping'],
 			'ID_Almacen_Retiro_Tienda' => $arrHeader['id_almacen_retiro_tienda']
 		);
 		

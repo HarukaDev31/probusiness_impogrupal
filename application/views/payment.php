@@ -49,6 +49,7 @@
         //array_debug($arrDepartamento);
         //array_debug($arrProvincia);
         //array_debug($arrDistrito);
+        //array_debug($arrShipping);
         //array_debug($arrWhareHouse);
         ?>
 
