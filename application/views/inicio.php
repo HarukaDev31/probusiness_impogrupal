@@ -26,10 +26,10 @@
 
       //array_debug($arrImportacionGrupalProducto);
     ?>
-      <h1 class="text-center"><?php echo $arrImportacionGrupalProducto[0]->No_Importacion_Grupal; ?></h1>
+      <h1 class="text-center fw-bold mb-4"><?php echo $arrImportacionGrupalProducto[0]->No_Importacion_Grupal; ?></h1>
       <p class="text-center lead mb-5">
-        Fecha de Inicio: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Inicio); ?> y
-        Fecha de Cierre: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Fin); ?>
+        ☑️ Fecha de Apertura: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Inicio); ?> y
+        ☑️ Fecha de Cierre: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Fin); ?>
         <br>
         <?php echo nl2br($arrImportacionGrupalProducto[0]->Txt_Importacion_Grupal); ?>
       </p>
