@@ -80,7 +80,7 @@ $(document).ready(function () {
   });
 
   $(document).on('click', '.payment-medio_pago', function () {
-    $('.payment').removeClass('color-eboom');
+    $('.payment-medio_pago').removeClass('color-eboom');
     $('input:radio[name="radio-medio_pago"]').attr('checked',false);
     $('#label-medio_pago-' + $(this).data('id')).addClass('color-eboom');
     $('#' + $(this).data('id')).attr('checked', true);

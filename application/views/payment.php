@@ -183,7 +183,7 @@
               //array_debug($row);
             ?>
             
-            <label id="label-medio_pago-<?php echo $row->ID_Medio_Pago; ?>" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>" class="payment payment-medio_pago me-3 rounded border border-radius mb-0 py-4 col-12 d-flex flex-column justify-content-center" style="cursor:pointer">
+            <label id="label-medio_pago-<?php echo $row->ID_Medio_Pago; ?>" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>" class="payment-medio_pago me-3 rounded border border-radius mb-0 py-4 col-12 d-flex flex-column justify-content-center" style="cursor:pointer">
               <input type="radio" class="d-none" name="radio-medio_pago" id="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>" value="<?php echo $row->ID_Medio_Pago; ?>">
               <div class="d-flex p-3">
                 <div class="flex-shrink-0 text-center" style="width:20%;display: flex;flex-direction: column;justify-content: center;">
