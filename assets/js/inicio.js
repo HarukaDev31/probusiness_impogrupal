@@ -47,15 +47,25 @@ $(document).ready(function () {
     window.open(url, "_blank");
   });
 
-  $(document).on('click', '.tipo_compra-invitado-tienda-reco', function () {
-    $('.tipo_compra-invitado-envio-domi').css('background', "#ffffff");
-    $('.tipo_compra-invitado-tienda-reco').css('background', "#ffffff");
+  $(document).on('click', '.tipo_compra-invitado-envio-domi', function () {
+    $('.tipo_compra-invitado-tienda-reco').removeClass('color-eboom');
+    $('.tipo_compra-invitado-envio-domi').addClass('color-eboom');
 
-    $('.tipo_compra-invitado-ico-domi').removeClass('color-eboom');
-    $('.tipo_compra-invitado-ico-tienda').addClass('color-eboom');
-    $('.tipo_compra-invitado-h3-tipo-recepcion-delivery').removeClass('color-eboom');
-    $('.tipo_compra-invitado-h3-tipo-recepcion-tienda').addClass('color-eboom');
-    
+    $('.div-tipo_compra-invitado-finalizar_compra-direccion_usuario').removeClass('d-none');
+    $('.div-tipo_compra-invitado-finalizar_compra-recojo_tienda').addClass('d-none');
+
+    $(this).css('background', "#f5f5f5");
+
+    $('#invitadodelivery').prop('checked', true);
+    $('#invitadorecojo').prop('checked', false);
+    $('#invitadodelivery').attr('checked', true);
+    $('#invitadorecojo').attr('checked', false);
+  });
+
+  $(document).on('click', '.tipo_compra-invitado-tienda-reco', function () {
+    $('.tipo_compra-invitado-envio-domi').removeClass('color-eboom');
+    $('.tipo_compra-invitado-tienda-reco').addClass('color-eboom');
+
     $('.div-tipo_compra-invitado-finalizar_compra-direccion_usuario').addClass('d-none');
     $('.div-tipo_compra-invitado-finalizar_compra-recojo_tienda').removeClass('d-none');
 
@@ -67,27 +77,7 @@ $(document).ready(function () {
     $('#invitadorecojo').attr('checked', true);
 
     $('.div-payment-delivery').addClass('d-none');
-  })
-
-  $(document).on('click', '.tipo_compra-invitado-envio-domi', function () {
-    $('.tipo_compra-invitado-envio-domi').css('background', "#ffffff");
-    $('.tipo_compra-invitado-tienda-reco').css('background', "#ffffff");
-
-    $('.tipo_compra-invitado-ico-domi').addClass('color-eboom');
-    $('.tipo_compra-invitado-ico-tienda').removeClass('color-eboom');
-    $('.tipo_compra-invitado-h3-tipo-recepcion-delivery').addClass('color-eboom');
-    $('.tipo_compra-invitado-h3-tipo-recepcion-tienda').removeClass('color-eboom');
-
-    $('.div-tipo_compra-invitado-finalizar_compra-direccion_usuario').removeClass('d-none');
-    $('.div-tipo_compra-invitado-finalizar_compra-recojo_tienda').addClass('d-none');
-
-    $(this).css('background', "#f5f5f5");
-
-    $('#invitadodelivery').prop('checked', true);
-    $('#invitadorecojo').prop('checked', false);
-    $('#invitadodelivery').attr('checked', true);
-    $('#invitadorecojo').attr('checked', false);
-})
+  });
 
   $('#div-footer-cart').hide();
 
