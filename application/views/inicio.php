@@ -28,8 +28,8 @@
     ?>
       <h1 class="text-center fw-bold mb-4"><?php echo $arrImportacionGrupalProducto[0]->No_Importacion_Grupal; ?></h1>
       <p class="text-center lead mb-5">
-        ☑️ Fecha de Apertura: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Inicio); ?> y
-        ☑️ Fecha de Cierre: <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Fin); ?>
+        ☑️ <strong>Fecha de Apertura:</strong> <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Inicio); ?> y
+        ☑️ <strong>Fecha de Cierre:</strong> <?php echo ToDateBD($arrImportacionGrupalProducto[0]->Fe_Fin); ?>
         <br>
         <?php echo nl2br($arrImportacionGrupalProducto[0]->Txt_Importacion_Grupal); ?>
       </p>
