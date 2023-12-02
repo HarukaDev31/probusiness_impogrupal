@@ -79,6 +79,13 @@ $(document).ready(function () {
     $('.div-payment-delivery').addClass('d-none');
   });
 
+  $(document).on('click', '.payment-medio_pago', function () {
+    $('.payment').removeClass('color-eboom');
+    $('input:radio[name="radio-medio_pago"]').attr('checked',false);
+    $('#label-medio_pago-' + $(this).data('id')).addClass('color-eboom');
+    $('#' + $(this).data('id')).attr('checked', true);
+  });
+
   $('#div-footer-cart').hide();
 
   //console.log($('#div-delivery_extra_provincia'));
@@ -254,8 +261,11 @@ $(document).ready(function () {
     $('.help-block').empty();
     $('.form-group').removeClass('has-error');
 
-    const sMedioPago = $("input[name='arrMedioPago']:checked").val();
-    const iIdMedioPago = $("input[name='arrMedioPago']:checked").data('id');
+    const sMedioPago = $("input[name='radio-medio_pago']:checked").val();
+    const iIdMedioPago = $("input[name='radio-medio_pago']:checked").data('id');
+
+    console.log('sMedioPago > ' + sMedioPago);
+    console.log('iIdMedioPago > ' + iIdMedioPago);
 
     if ($("#payment-documento_identidad").val().trim().length < 6) {
       $('#payment-documento_identidad').closest('.form-group').find('.help-block').html('Ingresar número');

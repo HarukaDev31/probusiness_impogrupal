@@ -200,8 +200,42 @@
                 </div>
               </div>
             </label>
+
+            <!--
+            <div class="card mb-3" style="border: none;">
+              <div class="payment card-body shadow p-3 bg-body rounded pb-0 pt-0" data-id="<?php echo $row->ID_Medio_Pago; ?>">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-check ps-0" style="cursor: pointer;flex-wrap: wrap-reverse;display: flex;">
+                      <label style="cursor: pointer;" class="payment-medio_pago col-12" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
+                        <div class="d-flex p-3">
+                          <div class="flex-shrink-0 text-center" style="width:20%;display: flex;flex-direction: column;justify-content: center;">
+                            <img style="height: auto;max-height: 60px;" class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
+                          </div>
+                          <div class="mb-2 ps-3">
+                            <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente Soles' : ''); ?></h6>
+                            <div class="modal-cart_shop-div-precio_item ps-2">
+                              <span class="fw-bold">
+                                <span><?php echo $row->No_Titular_Cuenta; ?></span><br>
+                                <span><?php echo $row->No_Cuenta_Bancaria; ?></span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+
+                      <input style="cursor: pointer;margin-bottom: 2.5rem !important;" class="form-check-input" type="radio" name="arrMedioPago" id="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            -->
+
             <?php
             }
+          } else {
+
           }
           ?>
         </div>
@@ -278,7 +312,7 @@
                 <div class="col-12 d-grid">
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="check-terminos" style="cursor:pointer;">
-                    <label class="form-check-label" for="check-terminos" style="font-size: .8rem; cursor:pointer;">
+                    <label class="form-check-label" for="check-terminos" style="font-size: .8rem;">
                       He leído y estoy de acuerdo con los <button type="button" style="text-decoration: none !important; font-size: .8rem;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-1">términos y condiciones</button> de la web.
                     </label>
                   </div>
@@ -321,7 +355,7 @@
                 <div class="col-12 d-grid">
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" value="" id="check-terminos2">
-                    <label class="form-check-label" for="check-terminos2" style="font-size: .65rem; cursor:pointer;">
+                    <label class="form-check-label" for="check-terminos2" style="font-size: .65rem;">
                       He leído y acepto los <button type="button" style="text-decoration: none !important; font-size: .65rem;margin-bottom: .2rem !important;" data-bs-toggle="modal" data-bs-target="#modal-terminos" class="btn btn-link p-0 mb-0">términos y condiciones</button> de la web.
                     </label>
                   </div>
@@ -357,7 +391,7 @@
               al pedido min. para modificar su pedido.<br><br>
               - Se le brindará una orden de compra para formalizar
               su pedido.<br><br>
-              - Se creará un grupo privado con los participantes.<br><br>
+              - Se creará un grupo privado con los participantes.
               - Informaremos el proceso de importación.<br><br>
               - El pago se realiza en soles.<br><br>
               - No se admiten reembolsos.<br><br>

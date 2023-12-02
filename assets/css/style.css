@@ -93,13 +93,18 @@ input[type=number] { -moz-appearance:textfield; }
     box-shadow: 0px 10px 5px rgba(0,0,0,.15), 0px -10px 5px rgba(0,0,0,.15);
 }
 
-.payment-tipo_envio {
-    transition: 0.5s;
+.payment {
+    transition: 0.4s;
 }
 
-.payment-tipo_envio:hover {
+.payment:hover {
     color: white !important;
-    background: #FF500B !important;
+    background-color: #FF500B !important;
+}
+
+.payment:active,.payment:focus {
+    color: white !important;
+    background-color: #FF500B !important;
 }
 
 .color-eboom {
