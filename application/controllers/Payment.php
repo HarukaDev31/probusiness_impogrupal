@@ -284,7 +284,7 @@ class Payment extends CI_Controller {
 	
 		$img = $_FILES['voucher']['name'];
 		if(!empty($img)){
-			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'heif', 'webp');
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'heif', 'heic', 'webp');
 			if(!empty($this->input->post('id_pedido')) && isset($_FILES['voucher'])){
 				$tmp = $_FILES['voucher']['tmp_name'];
 				$type = $_FILES['voucher']['type'];
@@ -295,8 +295,8 @@ class Payment extends CI_Controller {
 					$path = "assets/images/voucher_deposito/";
 
 					$config['upload_path'] = $path;
-					$config['allowed_types'] = 'png|jpg|jpeg|webp|PNG|JPG|JPEG|WEBP';
-					$config['max_size'] = 1024;//1024 KB = 1 MB
+					$config['allowed_types'] = 'png|jpg|jpeg|heif|heic|webp|PNG|JPG|JPEG|HEIF|HEIC|WEBP';
+					$config['max_size'] = 5120;//1024 KB = 1 MB
 					$config['encrypt_name'] = TRUE;
 					$config['max_filename'] = '255';
 
@@ -349,7 +349,7 @@ class Payment extends CI_Controller {
 	
 		$img = $_FILES['voucher']['name'];
 		if(!empty($img)){
-			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'heif', 'webp');
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp' , 'heif', 'heic', 'webp');
 			if(!empty($this->input->post('id_pedido')) && isset($_FILES['voucher'])){
 				$tmp = $_FILES['voucher']['tmp_name'];
 				$type = $_FILES['voucher']['type'];
@@ -360,8 +360,8 @@ class Payment extends CI_Controller {
 					$path = "assets/images/voucher_deposito/";
 
 					$config['upload_path'] = $path;
-					$config['allowed_types'] = 'png|jpg|jpeg|webp|PNG|JPG|JPEG|WEBP';
-					$config['max_size'] = 1024;//1024 KB = 1 MB
+					$config['allowed_types'] = 'png|jpg|jpeg|heif|heic|webp|PNG|JPG|JPEG|HEIF|HEIC|WEBP';
+					$config['max_size'] = 5120;//1024 KB = 1 MB
 					$config['encrypt_name'] = TRUE;
 					$config['max_filename'] = '255';
 
