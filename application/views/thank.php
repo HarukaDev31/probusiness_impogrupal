@@ -114,11 +114,10 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
       ?>
     </div>
 
-    <form class="form row g-3 mb-3 mb-sm-4" role="form" id="attachform" enctype="multipart/form-data">
+    <form class="form row g-3 mb-3 mb-sm-4 mt-1" role="form" id="attachform" enctype="multipart/form-data">
       <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
       <div class="col-12 col-sm-8" style="cursor: pointer">
         <div>
-          <label class="form-label" for="voucher">Subir archivo</label>
           <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
         </div>
       </div>

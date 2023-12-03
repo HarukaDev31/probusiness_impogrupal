@@ -166,6 +166,7 @@ class Payment extends CI_Controller {
 			'arrDetalle' => $arrDetalle,
 			'arrMedioPago' => $arrMedioPago
 		));
+		$this->load->view('footer_data');
 		$this->load->view('footer');
 	}
 
@@ -221,6 +222,7 @@ class Payment extends CI_Controller {
 			'arrDetalle' => $arrDetalle,
 			'arrMedioPago' => $arrMedioPago
 		));
+		$this->load->view('footer_data');
 		$this->load->view('footer', array(
 			'js_voucher' => true,
 		));
