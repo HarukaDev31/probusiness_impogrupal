@@ -165,7 +165,7 @@
               <div class="mb-4">
                 <div class="mb-2"><strong>Vendidos</strong></div>
                 <div class="progress" style="height: 35px;">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $fPorcentajeVentas; ?>%;" aria-valuenow="<?php echo $row->total_cantidad_vendida; ?>" aria-valuemin="0" aria-valuemax="100"><span class="text-white"><strong><?php echo $row->total_cantidad_vendida; ?> / <?php echo $row->Qt_Pedido_Minimo_Proveedor; ?></strong></span></div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $fPorcentajeVentas; ?>%; background-color: #FF500B !important;" aria-valuenow="<?php echo $row->total_cantidad_vendida; ?>" aria-valuemin="0" aria-valuemax="100"><span class="text-white"><strong><?php echo $row->total_cantidad_vendida; ?> / <?php echo $row->Qt_Pedido_Minimo_Proveedor; ?></strong></span></div>
                 </div>
               </div>
 
