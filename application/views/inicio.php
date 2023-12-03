@@ -129,10 +129,10 @@
                   </div>
                 </div>
               <!--</div>-->
-              <div class="accordion accordion-flush border mt-3" id="<?php echo $row->ID_Producto; ?>">
-                <div class="accordion-item">
+              <div class="accordion accordion-flush border rounded mt-3" id="<?php echo $row->ID_Producto; ?>">
+                <div class="accordion-item rounded">
                   <h2 class="accordion-header" id="flush-headingOne-<?php echo $row->ID_Producto; ?>">
-                    <button class="accordion-button btn-success collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-<?php echo $row->ID_Producto; ?>" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <button class="accordion-button rounded collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-<?php echo $row->ID_Producto; ?>" aria-expanded="false" aria-controls="flush-collapseOne">
                       <h5 class="card-title fw-bold">
                         Características
                       </h5>
