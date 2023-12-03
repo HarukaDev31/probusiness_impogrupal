@@ -1,5 +1,5 @@
 <main>
-<br><br>
+<br>
 <!--
 <br><br>
 -->
@@ -70,81 +70,87 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
 
     <h3 class="text-center mb-4 fw-bold">Pagar (50%) S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
 
-    <form class="form row g-3" role="form" id="attachform" enctype="multipart/form-data">
-      <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
-      <div class="col-12 col-sm-12" style="cursor: pointer">
-        <div class="input-group custom-file-voucher">
-          <label class="input-group-text" for="voucher">Subir archivo</label>
-          <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
-        </div>
-      </div>
-      <div class="col-12 col-sm-12">
-        <button type="submit" id="btn-file_voucher" class="btn btn-success btn-lg btn-block shadow" style="width:100%">Enviar</button>
-      </div>
-    </form>
-
     <div class="row">
       <?php
       if($arrMedioPago['status']=='success') { ?>
-        <div class="col-12 col-sm-6 col-md-6">
+        <div class="col-12">
           <h2 class="text-left mb-4 fw-bold">Cuentas Bancarias</h2>
+          <div class="row">
           <?php foreach($arrMedioPago['result'] as $row){ ?>
-            <div class="card mb-3" style="border: none;">
-              <div class="card-body shadow p-3 bg-body rounded pb-0 pt-0">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="modal-cart_shop-div_item">
-                      <div class="modal-cart_shop-img_item">
-                        <img style="height: auto;   max-height: 60px;" class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
-                      </div>
-                      <div class="modal-cart_shop-body_item ps-3">
-                        <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente' : ''); ?></h6>
-                        <div class="modal-cart_shop-div-precio_item ps-2">
-                          <span class="fw-bold">
-                            <span><?php echo $row->No_Titular_Cuenta; ?></span><br>
-                            <span><?php echo $row->No_Cuenta_Bancaria; ?></span>
-                          </span>
-                        </div>
-                      </div>
+            <div class="card mb-3 col-12 col-sm-4 bg-transparent" style="border: none;">
+              <div class="card-body shadow-sm p-3 bg-body rounded pb-0 pt-0">
+                <div class="modal-cart_shop-div_item">
+                  <div class="modal-cart_shop-img_item">
+                    <img style="height: auto;   max-height: 60px;" class="img-medio_pago shadow-sm bg-body rounded" src="<?php echo $row->Txt_Url_Imagen . '?ver=1.0.0'; ?>">
+                  </div>
+                  <div class="modal-cart_shop-body_item ps-3">
+                    <h6 class="ps-2"><?php echo ($row->Nu_Tipo_Cuenta == 1 ? 'Cuenta Corriente Soles' : ''); ?></h6>
+                    <div class="modal-cart_shop-div-precio_item ps-2">
+                      <span class="fw-bold">
+                        <span><?php echo $row->No_Titular_Cuenta; ?></span><br>
+                        <span><?php echo $row->No_Cuenta_Bancaria; ?></span>
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           <?php } //for each medio de pago ?>
+          </div>
         </div>
       <?php
       }//if each medio de pago
       ?>
-      
+    </div>
+
+    <form class="form row g-3" role="form" id="attachform" enctype="multipart/form-data">
+      <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
+      <div class="col-12 col-sm-8" style="cursor: pointer">
+        <div class="input-group custom-file-voucher">
+          <label class="input-group-text" for="voucher">Subir archivo</label>
+          <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
+        </div>
+      </div>
+      <div class="col-12 col-sm-4">
+        <button type="submit" id="btn-file_voucher" class="btn btn-success btn-lg btn-block shadow" style="width:100%">Enviar voucher</button>
+      </div>
+    </form>
+
+    <div class="row">      
       <div class="col-12 col-sm-6 col-md-6 mt-3 mt-sm-0">
         <h2 class="text-left mb-4 fw-bold">Resumen</h2>
-          <div class="card" style="border: none;">
-          <div class="card-body shadow p-3 bg-body rounded pt-0 mb-3">
+          <div class="card" style="border: none;background: transparent !important;">
+          <div class="card-body shadow-sm p-3 bg-body rounded pt-0 mb-3">
             <?php //aqui borrar session carrito ?>
             <?php
             $fTotalCantidadPedido = 0;
             $fTotalImportePedido = 0;
             foreach($arrDetalle as $row){
+              //array_debug($row);
               $row = (array)$row;
               $fTotalCantidadPedido = $row['cantidad_item'];
               $fTotalImportePedido = $row['total_item'];
             ?>
             <div class="row div-line">
               <div class="col-12">
-                <div class="modal-cart_shop-div_item" id="delete_item_562260">
+                <div class="modal-cart_shop-div_item">
                   <a href="#" class="modal-cart_shop-img_item">
                     <img class="shadow-sm bg-body" src="<?php echo $row['url_imagen_item']; ?>">
                   </a>
-                  <div class="modal-cart_shop-body_item">
-                    <h6 class="ps-2"><?php echo $row['nombre_item']; ?></h6>
+                  <div class="modal-cart_shop-body_item ps-2">
+                    <h6 class="ps-2 fw-semibold ps-2"><?php echo $row['nombre_item']; ?></h6>
+                    <div class="modal-cart_shop-div-precio_item ps-2 mb-1">
+                      <span class="fw-semibold">
+                        S/ <span ><?php echo number_format($row['total_item'], 2, '.', ','); ?></span>
+                      </span>
+                    </div>
                     <div class="modal-cart_shop-div-precio_item ps-2">
-                      <span class="fw-bold">
-                        Cant: <span data-total_producto="80" id="total-por-producto_562260"><?php echo round($row['cantidad_item'], 2); ?></span>
+                      <span class="fw-semibold">
+                        Cant: <span><?php echo round($row['cantidad_item'], 2); ?></span>
                       </span>
 
-                      <span class="fw-bold float-right">
-                        S/ <span data-total_producto="80" id="total-por-producto_562260"><?php echo number_format($row['total_item'], 2, '.', ','); ?></span>
+                      <span class="fw-semibold float-right">
+                        S/ <span><?php echo number_format($row['precio_item'], 2, '.', ','); ?></span>
                       </span>
                     </div>
                   </div>

@@ -72,7 +72,7 @@
                     //$sInstruccionesRecojoDelivery=$row->Txt_Instrucciones_Recojo_Tienda_Lae_Shop;
                   }
                   if ( $row->Nu_Valor == 7) {//recojo en tienda ?>
-                  <label class="bg-white payment tipo_compra-invitado-tienda-reco me-3 rounded border border-radius mb-0 py-4 col-md-4 col-lg-3 col-6 d-flex flex-column justify-content-center" for="invitadorecojo" style="cursor:pointer">
+                  <label class="shadow-sm bg-white payment tipo_compra-invitado-tienda-reco me-3 rounded border border-radius mb-0 py-4 col-md-4 col-lg-3 col-6 d-flex flex-column justify-content-center" for="invitadorecojo" style="cursor:pointer">
                     <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadorecojo" data-name="<?php echo $row->No_Tipo_Envio; ?>" data-nu_valor="<?php echo $row->Nu_Valor; ?>" value="<?php echo $row->ID; ?>">
                     <i class="fas fa-store tipo_compra-invitado-ico-tienda h1 mx-auto"></i>
                     <h3 class="text-center h6 mt-2 tipo_compra-invitado-h3-tipo-recepcion-tienda"><?php echo $row->No_Tipo_Envio; ?></h3>
@@ -222,7 +222,7 @@
               ?>
               <div class="row div-line">
                 <div class="col-12">
-                  <div class="modal-cart_shop-div_item" id="delete_item_562260">
+                  <div class="modal-cart_shop-div_item">
                     <a href="#" class="modal-cart_shop-img_item">
                       <img class="shadow-sm bg-body" src="<?php echo $row['url_imagen_item']; ?>">
                     </a>
@@ -230,16 +230,16 @@
                       <h6 class="ps-2 fw-6 fw-semibold"><?php echo $row['nombre_item']; ?></h6>
                       <div class="modal-cart_shop-div-precio_item ps-2 mb-1">
                         <span class="fw-semibold">
-                          S/ <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['total_item']; ?></span>
+                          S/ <span><?php echo $row['total_item']; ?></span>
                         </span>
                       </div>
                       <div class="modal-cart_shop-div-precio_item ps-2">
                         <span class="fw-semibold">
-                          Cant: <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['cantidad_item']; ?></span>
+                          Cant: <span><?php echo $row['cantidad_item']; ?></span>
                         </span>
 
                         <span class="fw-semibold float-right">
-                          Precio: <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['precio_item']; ?></span>
+                          Precio: <span><?php echo $row['precio_item']; ?></span>
                         </span>
                       </div>
                     </div>

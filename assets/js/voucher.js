@@ -18,7 +18,7 @@ $(document).ready(function () {
     })
     .done(function(response) {
       $('#btn-file_voucher').prop('disabled', false);
-      $('#btn-file_voucher').html('Enviar');
+      $('#btn-file_voucher').html('Enviar voucher');
 
       console.log(response);
       if(response.status=='success'){
