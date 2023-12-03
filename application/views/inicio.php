@@ -36,11 +36,11 @@
 
       <!-- diseño de item -->
       <?php foreach ($arrImportacionGrupalProducto as $row) { ?>
-      <div class="card border-0 rounded shadow-sm mt-5">
+      <div class="card border-0 rounded shadow-sm mt-3">
         <div class="row g-0">
           <div class="col-sm-4 position-relative">
             <div class="col-sm-12 p-4">
-              <h5 class="card-title mb-3 fw-bold">
+              <h5 class="card-title mb-0 fw-bold">
                 <span class="link-dark text-decoration-none" href="#" target="_blank">
                   <?php echo $row->No_Producto; ?>
                 </span>
