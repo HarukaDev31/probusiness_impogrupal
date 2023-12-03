@@ -85,7 +85,7 @@
                 
 
                 <table id="table_item-<?php echo $row->ID_Producto; ?>" class="table table-hover">
-                  <thead>
+                  <thead class="table-light">
                     <tr>
                       <th class="pb-3 pb-sm-2" scope="col">Unidad</th>
                       <th scope="col">Cantidad Mínima</th>
