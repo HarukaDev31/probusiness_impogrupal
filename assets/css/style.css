@@ -351,6 +351,7 @@ z-index: 2;
 }
 
 /* file voucher */
+/*
 .custom-file-voucher #voucher {
     margin-left: -2px !important;
 }
@@ -373,8 +374,9 @@ z-index: 2;
 }
 
 #voucher::before {
-    content: 'No se selecciono archivo';
+    content: '...';
 }
+*/
 
 /* whatsapp */
 .flotante-wp{

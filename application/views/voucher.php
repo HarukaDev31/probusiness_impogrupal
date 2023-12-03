@@ -108,7 +108,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
       <div class="col-12 col-sm-8" style="cursor: pointer">
         <div class="input-group custom-file-voucher">
           <label class="input-group-text" for="voucher">Subir archivo</label>
-          <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
+          <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*"  onchange="$('#voucher').html(this.files[0].name)">
         </div>
       </div>
       <div class="col-12 col-sm-4">
