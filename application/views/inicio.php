@@ -120,17 +120,35 @@
                 
                 <div class="row">
                   <div class="ps-3 pe-3 pb-2 pb-sm-0 col-12 col-sm-6 col-md-6 col-xl-6 number-input md-number-input item-unitario">
-                    <!-- background: #92dda9; --><button style="width: 30%; height: auto; " class="plus" onclick="subir(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-plus"></i></button>
+                    <!-- background: #92dda9; --><button style="width: 30%; height: auto; " class="border bg-light plus" onclick="subir(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-plus"></i></button>
                     <input style="width: 40%;" onkeyup="validateStockNow(event);" inputmode="numeric" class="text-center input-cantidad_item input-decimal form-control" id="input_cantidad_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item_minima="<?php echo $row->cantidad_item; ?>" value="<?php echo $row->cantidad_item; ?>">
-                    <!-- background: #92dda9; --><button style="width: 30%; height: auto;" class="minus" onclick="bajar(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-minus"></i></button>
+                    <!-- background: #92dda9; --><button style="width: 30%; height: auto;" class="border bg-light minus" onclick="bajar(<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>)"><i style="font-size: .5rem;" class="fas fa-minus"></i></button>
                   </div>
                   <div id="div-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" class="d-grid col-12 col-sm-6 col-md-6 col-xl-6">
                     <button id="btn-agregar_item-<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-id_unidad_medida_2="" data-id_unidad_medida="<?php echo $row->ID_Unidad_Medida; ?>" data-id_item_bd="<?php echo $row->ID_Producto; ?>" data-id_item="<?php echo $row->ID_Producto . $row->ID_Unidad_Medida; ?>" data-cantidad_item="<?php echo $row->cantidad_item; ?>" data-precio_item="<?php echo $row->precio_item; ?>" data-nombre_item="<?php echo $row->No_Producto; ?>" data-url_imagen_item="<?php echo $row->No_Imagen_Item . '?ver=' . $row->Nu_Version_Imagen; ?>" class="btn btn-success btn-agregar_item position-relative" type="button">Agregar</button>
                   </div>
                 </div>
               <!--</div>-->
+              <div class="accordion accordion-flush border mt-3" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button btn-success collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      
+                      <h5 class="card-title fw-bold">
+                        Características
+                      </h5>
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                      <?php echo nl2br($row->Txt_Producto); ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <p class="card-text">
-                <?php echo nl2br($row->Txt_Producto); ?>
+                <?php //echo nl2br($row->Txt_Producto); ?>
               </p>
 
               <!-- oculto falta agregar solucion amarrada a los pedidos para saber cuanto se está vendiendo en tiempo real style="width: 80%;" --->
@@ -146,7 +164,7 @@
               ?>
 
               <div class="mb-4">
-                <span><strong>Vendidos</strong></span>
+                <div class="mb-2"><strong>Vendidos</strong></div>
                 <div class="progress" style="height: 35px;">
                   <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo $fPorcentajeVentas; ?>%;" aria-valuenow="<?php echo $row->total_cantidad_vendida; ?>" aria-valuemin="0" aria-valuemax="100"><span class="text-white"><strong><?php echo $row->total_cantidad_vendida; ?> / <?php echo $row->Qt_Pedido_Minimo_Proveedor; ?></strong></span></div>
                 </div>

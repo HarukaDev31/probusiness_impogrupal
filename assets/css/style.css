@@ -46,20 +46,8 @@ input[type=number] { -moz-appearance:textfield; }
     transition: .5s;
 }
   
-.minus svg{
-    color: #222;
-}
-
-.plus svg{
-    color: #222;
-}
-  
-.minus:focus{
-    outline: none;
-}
-  
-.plus:focus{
-    outline: none;
+.plus:hover,.minus:hover{
+    background-color: #e1e1e1 !important;
 }
   
 .minus{
@@ -412,4 +400,14 @@ z-index: 2;
     -webkit-box-shadow: 0px -27px 21px -39px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px -27px 21px -39px rgba(0,0,0,0.75);
     box-shadow: 0px -27px 21px -39px rgba(0,0,0,0.75);
+}
+
+.accordion-button:not(.collapsed) {
+    color: #212529 !important;
+}
+
+.accordion-button:focus,
+.accordion-button:active{
+    box-shadow: none !important;
+    border-color: #202020 !important;
 }
