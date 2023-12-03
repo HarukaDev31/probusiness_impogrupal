@@ -129,17 +129,16 @@
                   </div>
                 </div>
               <!--</div>-->
-              <div class="accordion accordion-flush border mt-3" id="accordionFlushExample">
+              <div class="accordion accordion-flush border mt-3" id="<?php echo $row->ID_Producto; ?>">
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button btn-success collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      
+                  <h2 class="accordion-header" id="flush-headingOne-<?php echo $row->ID_Producto; ?>">
+                    <button class="accordion-button btn-success collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-<?php echo $row->ID_Producto; ?>" aria-expanded="false" aria-controls="flush-collapseOne">
                       <h5 class="card-title fw-bold">
                         Características
                       </h5>
                     </button>
                   </h2>
-                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-<?php echo $row->ID_Producto; ?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne-<?php echo $row->ID_Producto; ?>" data-bs-parent="#<?php echo $row->ID_Producto; ?>">
                     <div class="accordion-body">
                       <?php echo nl2br($row->Txt_Producto); ?>
                     </div>
