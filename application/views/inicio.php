@@ -58,13 +58,19 @@
                 ?>
                 <div class="fotorama" data-nav="thumbs" data-width="100%" data-maxwidth="100%" data-ratio="700/467" data-minheight="350" data-maxheight="100%" <?php echo $data_allowfullscreen; ?> data-loop="true" data-thumbwidth="100" data-thumbheight="100" data-arrows="true" data-click="false" data-swipe="true">
                   <?php
-                  echo $videoHtml;
+                  $bPintoVideo = false;
+                  $i=1;
                   foreach ($row->imagenes as $row_imagen) {
                   ?>
                     <a href="<?php echo $row_imagen->No_Producto_Imagen;?>">
                       <img src="<?php echo $row_imagen->No_Producto_Imagen;?>" class="img-thumbnail border-0 float-start" alt="<?php echo quitarCaracteresEspeciales($row->No_Producto); ?>" style="cursor: grab !important;">
                     </a>
                   <?php
+                    if($i == 1 && !empty($videoHtml) && $bPintoVideo!=true){
+                      echo $videoHtml;
+                      $bPintoVideo = true;
+                    }
+                    ++$i;
                   }
                   ?>
                 </div>
