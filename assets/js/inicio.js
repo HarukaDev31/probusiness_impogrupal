@@ -484,9 +484,9 @@ function modalCartShop(){
                     sHmtlModalCartShopSinItem += '<img src="' + row.url_imagen_item + '" class="shadow-sm bg-body">';
                   sHmtlModalCartShopSinItem += '</a>';
                   sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-body_item ps-3">';
-                    sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item text-dark">' + row.nombre_item + '</h3>';
+                    sHmtlModalCartShopSinItem += '<h3 class="modal-cart_shop-title_item fs-6 text-dark fw-semibold mb-1">' + row.nombre_item + '</h3>';
                     sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-div-precio_item">';
-                      sHmtlModalCartShopSinItem += '<span class="fw-bold">';
+                      sHmtlModalCartShopSinItem += '<span class="fw-semibold">';
                       sHmtlModalCartShopSinItem += 'S/ <span data-total_item="" data-id_item="">' + row.total_item + '</span>';
                       sHmtlModalCartShopSinItem += '</span>';
                     sHmtlModalCartShopSinItem += '</div>';
@@ -494,13 +494,13 @@ function modalCartShop(){
                     sHmtlModalCartShopSinItem += '<div class="row">';
                       sHmtlModalCartShopSinItem += '<div class="col-5">';
                         sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-cantidad_item" style="float: left;">';
-                          sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1">Cant: ' + row.cantidad_item +  '</p>';
+                          sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1 fw-semibold">Cant: ' + row.cantidad_item +  '</p>';
                         sHmtlModalCartShopSinItem += '</div>';
                       sHmtlModalCartShopSinItem += '</div>';
 
                       sHmtlModalCartShopSinItem += '<div class="col-5">';
                         sHmtlModalCartShopSinItem += '<div class="modal-cart_shop-precio_item" style="float: left;">';
-                          sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1">P.U.: ' + row.precio_item +  '</p>';
+                          sHmtlModalCartShopSinItem += '<p class="fs-6 mt-1 mb-1 fw-semibold">Precio: ' + row.precio_item +  '</p>';
                         sHmtlModalCartShopSinItem += '</div>';
                       sHmtlModalCartShopSinItem += '</div>';
 

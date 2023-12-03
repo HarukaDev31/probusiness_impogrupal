@@ -6,12 +6,12 @@
     </div>
     
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="3000">
+      <div class="carousel-item active" data-bs-interval="5000">
         <img src="<?php echo base_url("assets/images/banner_importacion_grupal.jpg?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
         </div>
       </div>
-      <div class="carousel-item" data-bs-interval="3000">
+      <div class="carousel-item" data-bs-interval="5000">
         <img src="<?php echo base_url("assets/images/banner_importacion_grupal_carga.png?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
         </div>
@@ -36,7 +36,7 @@
 
       <!-- diseño de item -->
       <?php foreach ($arrImportacionGrupalProducto as $row) { ?>
-      <div class="card border-0 rounded shadow mt-5">
+      <div class="card border-0 rounded shadow-sm mt-5">
         <div class="row g-0">
           <div class="col-sm-4 position-relative">
             <div class="col-sm-12 p-4">

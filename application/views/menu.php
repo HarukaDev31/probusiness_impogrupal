@@ -1,4 +1,4 @@
-<body>
+<body class="bg-light">
   <header>
     <nav class="fixed-top navbar bg-light menu-shadow p-0 pt-0 pt-sm-2">
       <div class="container-fluid">

@@ -3,8 +3,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
+    <meta name="author" content="Geancarlos collazos, escala tu startup y automatiza tú negocio">
+    <meta name="generator" content="">
     
     <link rel="shortcut icon" href="<?php echo base_url("assets/images/favicon/favicon.ico?ver=5.0"); ?>">
     <link rel="apple-touch-icon-precomposed" sizes="192x192" href="<?php echo base_url("assets/images/favicon/android-chrome-512x512.png?ver=5.0"); ?>">
@@ -22,7 +22,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/style.css?ver=39.0.0'; ?>">
+    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/style.css?ver=40.0.0'; ?>">
 
     <meta name="theme-color" content="#FF6700">
 		<meta name="msapplication-navbutton-color" content="#FF6700"/>

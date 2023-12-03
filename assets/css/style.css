@@ -93,11 +93,13 @@ input[type=number] { -moz-appearance:textfield; }
     box-shadow: 0px 10px 5px rgba(0,0,0,.15), 0px -10px 5px rgba(0,0,0,.15);
 }
 
-.payment {
+.payment,
+.payment-medio_pago {
     transition: 0.4s;
 }
 
-.payment:hover {
+.payment:hover,
+.payment-medio_pago:hover {
     color: white !important;
     background-color: #FF500B !important;
 }

@@ -6,7 +6,7 @@
           <h2 class="text-left mb-3 fw-bold">Información de contacto</h2>
           <form>
             <div class="card" style="border: none;">
-              <div class="card-body shadow p-3 bg-body rounded">
+              <div class="card-body shadow-sm p-3 bg-body rounded">
                 <div class="row">
                   <div class="col-12 col-sm-6 col-md-12 col-lg-6 mb-3">
                     <label class="fw-bold">DNI / RUC / OTROS <span class="label-advertencia text-danger"> *</span></label>
@@ -63,7 +63,7 @@
                 //$sInstruccionesRecojoTienda='';
                 foreach ($arrShipping->result as $row) {
                   if ( $row->Nu_Valor == 6) {//delivery ?>
-                  <label class="payment tipo_compra-invitado-envio-domi me-3 border border-radius rounded mb-0 py-4 col-md-4 col-lg-3 col-6 d-flex flex-column justify-content-center" for="invitadodelivery" style="cursor:pointer">
+                  <label class="shadow-sm bg-white payment tipo_compra-invitado-envio-domi me-3 border border-radius rounded mb-0 py-4 col-md-4 col-lg-3 col-6 d-flex flex-column justify-content-center" for="invitadodelivery" style="cursor:pointer">
                     <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadodelivery" data-name="<?php echo $row->No_Tipo_Envio; ?>" data-nu_valor="<?php echo $row->Nu_Valor; ?>" value="<?php echo $row->ID; ?>">
                     <i class="fas tipo_compra-invitado-ico-domi fa-truck h1 mx-auto"></i>
                     <h3 class="text-center h6 mt-2 tipo_compra-invitado-h3-tipo-recepcion-delivery"><?php echo $row->No_Tipo_Envio; ?></h3>
@@ -72,7 +72,7 @@
                     //$sInstruccionesRecojoDelivery=$row->Txt_Instrucciones_Recojo_Tienda_Lae_Shop;
                   }
                   if ( $row->Nu_Valor == 7) {//recojo en tienda ?>
-                  <label class="payment tipo_compra-invitado-tienda-reco me-3 rounded border border-radius mb-0 py-4 col-md-4 col-lg-3 col-6 d-flex flex-column justify-content-center" for="invitadorecojo" style="cursor:pointer">
+                  <label class="bg-white payment tipo_compra-invitado-tienda-reco me-3 rounded border border-radius mb-0 py-4 col-md-4 col-lg-3 col-6 d-flex flex-column justify-content-center" for="invitadorecojo" style="cursor:pointer">
                     <input type="radio" class="d-none" name="radio-tipo_compra-invitado-tipo-recojo" id="invitadorecojo" data-name="<?php echo $row->No_Tipo_Envio; ?>" data-nu_valor="<?php echo $row->Nu_Valor; ?>" value="<?php echo $row->ID; ?>">
                     <i class="fas fa-store tipo_compra-invitado-ico-tienda h1 mx-auto"></i>
                     <h3 class="text-center h6 mt-2 tipo_compra-invitado-h3-tipo-recepcion-tienda"><?php echo $row->No_Tipo_Envio; ?></h3>
@@ -90,7 +90,7 @@
 
 				<div class="dire_cb div-tipo_compra-invitado-finalizar_compra-recojo_tienda div-finalizar_compra-recojo_tienda d-none mt-0 mb-3" style="">
           <div class="card" style="border: none;">
-            <div class="card-body shadow p-3 bg-body rounded">
+            <div class="card-body shadow-sm p-3 bg-body rounded">
               <h4 class="text-left mb-3 fw-bold">Recojo en tienda</h4>
               <?php if ( $arrWareHouse->status=='success' ) {
                 $arrWareHouse = $arrWareHouse->result[0]; ?>
@@ -119,7 +119,7 @@
           <h2 class="text-left mb-3 fw-bold">Dirección</h2>
           <form>
             <div class="card" style="border: none;">
-              <div class="card-body shadow p-3 bg-body rounded">
+              <div class="card-body shadow-sm p-3 bg-body rounded">
                 <div class="row">
                   <div class="col-12 col-sm-4 col-md-6 col-lg-4 mb-3">
                     <label class="fw-bold">Departamento <span class="label-advertencia text-danger"> *</span></label>
@@ -183,7 +183,7 @@
               //array_debug($row);
             ?>
             
-            <label id="label-medio_pago-<?php echo $row->ID_Medio_Pago; ?>" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>" class="payment-medio_pago me-3 rounded border border-radius mb-0 py-4 col-12 d-flex flex-column justify-content-center" style="cursor:pointer">
+            <label id="label-medio_pago-<?php echo $row->ID_Medio_Pago; ?>" for="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>" class="shadow-sm mb-3 payment-medio_pago bg-white me-3 rounded border border-radius mb-0 py-4 col-12 d-flex flex-column justify-content-center" style="cursor:pointer">
               <input type="radio" class="d-none" name="radio-medio_pago" id="<?php echo $row->ID_Medio_Pago; ?>" data-id="<?php echo $row->ID_Medio_Pago; ?>" value="<?php echo $row->ID_Medio_Pago; ?>">
               <div class="d-flex p-3">
                 <div class="flex-shrink-0 text-center" style="width:20%;display: flex;flex-direction: column;justify-content: center;">
@@ -212,7 +212,7 @@
         <div class="col-12 col-sm-12 col-md-12 sticky-top">
           <h2 class="text-center mb-3 fw-bold">Resumen</h2>
             <div class="card" style="border: none;">
-            <div class="card-body shadow p-3 bg-body rounded pt-0">
+            <div class="card-body shadow-sm p-3 bg-body rounded pt-0">
               <?php
               $fTotalCantidadPedido = 0;
               $fTotalImportePedido = 0;
@@ -226,15 +226,20 @@
                     <a href="#" class="modal-cart_shop-img_item">
                       <img class="shadow-sm bg-body" src="<?php echo $row['url_imagen_item']; ?>">
                     </a>
-                    <div class="modal-cart_shop-body_item">
-                      <h6 class="ps-2"><?php echo $row['nombre_item']; ?></h6>
+                    <div class="modal-cart_shop-body_item ps-2">
+                      <h6 class="ps-2 fw-6 fw-semibold"><?php echo $row['nombre_item']; ?></h6>
+                      <div class="modal-cart_shop-div-precio_item ps-2 mb-1">
+                        <span class="fw-semibold">
+                          S/ <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['total_item']; ?></span>
+                        </span>
+                      </div>
                       <div class="modal-cart_shop-div-precio_item ps-2">
-                        <span class="fw-bold">
+                        <span class="fw-semibold">
                           Cant: <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['cantidad_item']; ?></span>
                         </span>
 
-                        <span class="fw-bold float-right">
-                          S/ <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['total_item']; ?></span>
+                        <span class="fw-semibold float-right">
+                          Precio: <span data-total_producto="80" id="total-por-producto_562260"><?php echo $row['precio_item']; ?></span>
                         </span>
                       </div>
                     </div>
@@ -248,7 +253,7 @@
 
               <div class="d-none d-sm-block">
                 <div class="col-12 d-grid mt-3">
-                  <div class="modal-cart_shop-div-precio_item pb-3">
+                  <div class="modal-cart_shop-div-precio_item pb-2">
                     <span class="fw-normal">
                       Total
                     </span>
@@ -262,9 +267,9 @@
                 </div>
 
                 <div class="col-12 d-grid">
-                  <div class="modal-cart_shop-div-precio_item pb-3">
+                  <div class="modal-cart_shop-div-precio_item pb-2">
                     <span class="fw-bold fs-6">
-                      Separa con el (50%)
+                      Separa con (50%)
                     </span>
 
                     <span class="fw-bold float-right fs-5">
@@ -307,7 +312,7 @@
                 <div class="col-12 d-grid">
                   <div class="modal-cart_shop-div-precio_item pb-2">
                     <span class="fw-bold fs-5">
-                      Separa con el (50%)
+                      Separa con (50%)
                     </span>
 
                     <span class="fw-bold float-right fs-5">
