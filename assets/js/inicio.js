@@ -373,9 +373,10 @@ $(document).ready(function () {
       $('#btn-file_voucher').prop('disabled', false);
       $('#btn-file_voucher').html('Enviar voucher');
 
-      console.log(response);
+      //console.log(response);
       if(response.status=='success'){
-        alert(response.message);
+        //alert(response.message);
+        window.open(response.link_whatsapp, "_blank");
       } else {
         alert(response.message);
       }

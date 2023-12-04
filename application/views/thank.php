@@ -81,14 +81,16 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
 
     <h3 class="text-center mb-4 fw-bold">Separa con (50%) S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
 
-    <div class="row">
+    <div class="row mb-2">
       <?php
       if($arrMedioPago['status']=='success') { ?>
-        <div class="col-12">
+        <div class="col-12 col-md-6">
           <h2 class="text-left mb-4 fw-bold">Cuentas Bancarias</h2>
           <div class="row">
-          <?php foreach($arrMedioPago['result'] as $row){ ?>
-            <div class="card mb-3 col-12 col-sm-4 bg-transparent" style="border: none;">
+          <?php foreach($arrMedioPago['result'] as $row){
+            if( $arrCabecera['documento']['id_medio_pago'] == $row->ID_Medio_Pago ) {
+            ?>
+            <div class="card mb-3 col-12 col-sm-12 bg-transparent" style="border: none;">
               <div class="card-body shadow-sm p-3 bg-body rounded pb-0 pt-0">
                 <div class="modal-cart_shop-div_item">
                   <div class="modal-cart_shop-img_item">
@@ -106,25 +108,31 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
                 </div>
               </div>
             </div>
-          <?php } //for each medio de pago ?>
+          <?php
+            }
+          } //for each medio de pago ?>
           </div>
         </div>
       <?php
       }//if each medio de pago
       ?>
+
+      <div class="col-12 col-md-6">
+        <h2 class="text-left mb-4 fw-bold">Voucher</h2>
+        <form class="form row g-3 mb-4 mb-sm-4 mt-0" role="form" id="attachform" enctype="multipart/form-data">
+          <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
+          <div class="col-12 col-sm-12 mt-0" style="cursor: pointer">
+            <div>
+              <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <button type="submit" id="btn-file_voucher" class="btn btn-success btn-lg btn-block shadow" style="width:100%">Enviar voucher</button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <form class="form row g-3 mb-3 mb-sm-4 mt-1" role="form" id="attachform" enctype="multipart/form-data">
-      <input type="hidden" class="form-control" id="id_pedido" name="id_pedido" value="<?php echo $arrCabecera['documento']['id_pedido']; ?>">
-      <div class="col-12 col-sm-8" style="cursor: pointer">
-        <div>
-          <input class="form-control form-control-lg" id="voucher" type="file" name="voucher" placeholder="sin archivo" accept="image/*">
-        </div>
-      </div>
-      <div class="col-12 col-sm-4">
-        <button type="submit" id="btn-file_voucher" class="btn btn-success btn-lg btn-block shadow" style="width:100%">Enviar voucher</button>
-      </div>
-    </form>
     
     <a class="btn btn-outline-success btn-lg btn-block mb-4 shadow-sm" style="width:100%" href="<?php echo $sURLSendMessageWhatsapp; ?>" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
 

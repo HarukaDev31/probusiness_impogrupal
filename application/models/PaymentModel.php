@@ -315,7 +315,9 @@ MONE.No_Signo AS signo_moneda,
 TDRECEP.No_Metodo_Entrega_Tienda_Virtual AS nombre_tipo_envio,
 DEPCLI.No_Departamento AS departamento_cliente,
 PROCLI.No_Provincia AS provincia_cliente,
-DISCLI.No_Distrito AS distrito_cliente
+DISCLI.No_Distrito AS distrito_cliente,
+CAB.Txt_Url_Imagen_Deposito AS voucher_1,
+CAB.Txt_Url_Imagen_Deposito_Segundo_Pago AS voucher_2
 FROM
 importacion_grupal_pedido_cabecera AS CAB
 JOIN importacion_grupal_pedido_detalle AS DET ON(CAB.ID_Pedido_Cabecera = DET.ID_Pedido_Cabecera)
@@ -383,4 +385,53 @@ CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
 			'message' => 'No se encontró registro(s)',
 		);
 	}
+
+    public function generarMensajeWhatsApp($phone, $id, $arrDataWhatsApp){
+        $arrCabecera = $arrDataWhatsApp['arrCabecera'];
+        $arrDetalle = $arrDataWhatsApp['arrDetalle'];
+        $arrMedioPago = $arrDataWhatsApp['arrMedioPago'];
+
+        //Preparar array para envío de data de pedido para la aplicación
+        $message = "*¡Hola ProBusiness*! 😁";
+        $message .= "\n✅ Acabo de realizar el abono envío voucher.\n";
+        $message .= "\n➡️ Link:\n" . $arrCabecera['documento']['voucher'];
+        
+        $message .= "\n\n👤 *CONTACTO*\n";
+        $message .= "=============";
+        $message .= "\n*Cliente:* " . $arrCabecera['cliente']['No_Entidad'];
+        $message .= "\n*" . $arrCabecera['documento']['tipo_documento_identidad'] . "*: " . $arrCabecera['cliente']['Nu_Documento_Identidad'];
+        
+        $message .= "\n*Nro. Pedido:* " . $arrCabecera['documento']['id_pedido'];
+        $message .= "\n*Fecha:* " . ToDateHourBD($arrCabecera['documento']['fecha_registro']);
+        
+        //Detalle de pedido
+        $message .= "\n\n🛍️ *DETALLE DE PEDIDO*\n";
+        $message .= "====================\n";
+        foreach($arrDetalle as $row) {
+          $row = (array)$row;
+          $message .= "✅ " . round($row['cantidad_item'], 2) . " x *" . $row['nombre_item'] . "* - S/ " . number_format($row['total_item'], 2, '.', ',') . "\n";
+        }
+        
+        //Totales
+        $message .= "\n*💁🏻‍♀️ Separa con (50%): " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
+        $message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
+        
+        //🛵 Tipo de envío: Delivery a Agencia
+        //📍Ubigeo: Áncash - Huaraz - Huaraz
+        if( $arrCabecera['documento']['tipo_envio'] == '6' ){
+          $message .= "\n\n🛵 Tipo de envío: " . $arrCabecera['documento']['nombre_tipo_envio'];
+          $message .= "\n📍 Ubigeo: " . $arrCabecera['documento']['departamento_cliente'] . " - " . $arrCabecera['documento']['provincia_cliente'] . " - " . strtoupper($arrCabecera['documento']['distrito_cliente']);
+        } else if( $arrCabecera['documento']['tipo_envio'] == '7' ){
+          $message .= "\n\n🛎️ Tipo de envío: " . $arrCabecera['documento']['nombre_tipo_envio'];
+          $message .= "\n📍 Dirección: CAL. ALBERTO BARTON NRO 527 URB. SANTA CATALINA - LIMA - LIMA - La Victoria ";
+        }
+
+        $message = urlencode($message);
+
+        return array(
+            'status' => 'success',
+            'link_whatsapp' => "https://api.whatsapp.com/send?phone=" . $phone . "&text=" . $message,
+            'message_whatsapp' => $message
+        );
+    }
 }

@@ -290,6 +290,9 @@ class Payment extends CI_Controller {
 			if(!empty($this->input->post('id_pedido')) && isset($_FILES['voucher'])){
 				$tmp = $_FILES['voucher']['tmp_name'];
 				$type = $_FILES['voucher']['type'];
+
+				$id_pedido = $this->input->post('id_pedido');
+
 				// get uploaded file's extension
 				$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
 				// check's valid format
@@ -311,22 +314,67 @@ class Payment extends CI_Controller {
 						));
 					} else {
 						$arrUploadFile = $this->upload->data();
-						//array_debug($arrUploadFile);
 
 						//ruta de archivo cloud
 						$Txt_Url_Imagen_Deposito = base_url($path . $arrUploadFile['file_name']);
+						$data = array('Txt_Url_Imagen_Deposito' => $Txt_Url_Imagen_Deposito);
+						$where = array('ID_Pedido_Cabecera' => $id_pedido);
 
-						//echo $Txt_Url_Imagen_Deposito;
-						$data = array(
-							'Txt_Url_Imagen_Deposito' => $Txt_Url_Imagen_Deposito
-						);
-						$where = array(
-							'ID_Pedido_Cabecera' => $this->input->post('id_pedido')
-						);
-						echo json_encode($this->PaymentModel->addVoucherPedido($data, $where));
-						exit();
+						$arrResult = $this->PaymentModel->addVoucherPedido($data, $where);
+						if($arrResult['status']=='success') {
+							//si subio imagen enviar imagen informando ello
+							$arrParams = array( 'id_pedido' => $id_pedido );
+							$arrResponsePedido = $this->PaymentModel->getPedido($arrParams);
+							if($arrResponsePedido['status']=='success'){
+								$arrPedidoCabecera = $arrResponsePedido['result'][0];
+								$arrCabecera['cliente']['Nu_Celular_Entidad'] = $arrPedidoCabecera->Nu_Celular_Entidad;
+								$arrCabecera['cliente']['No_Entidad'] = $arrPedidoCabecera->No_Entidad;
+								$arrCabecera['documento']['tipo_documento_identidad'] = $arrPedidoCabecera->tipo_documento_identidad;
+								$arrCabecera['cliente']['Nu_Documento_Identidad'] = $arrPedidoCabecera->Nu_Documento_Identidad;
+								$arrCabecera['cliente']['Txt_Direccion'] = $arrPedidoCabecera->Txt_Direccion;
 
-						//aqui puede ser que si subió envíe un whatsapp indicando ello
+								$arrCabecera['documento']['id_pedido'] = $arrPedidoCabecera->id_pedido;
+								$arrCabecera['documento']['fecha_registro'] = $arrPedidoCabecera->fecha_registro;
+								$arrCabecera['documento']['importe_total'] = $arrPedidoCabecera->importe_total;
+								$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
+								$arrCabecera['documento']['signo_moneda'] = $arrPedidoCabecera->signo_moneda;
+								$arrCabecera['documento']['id_medio_pago'] = $arrPedidoCabecera->id_medio_pago;
+								$arrCabecera['documento']['tipo_envio'] = $arrPedidoCabecera->tipo_envio;
+								$arrCabecera['documento']['nombre_tipo_envio'] = $arrPedidoCabecera->nombre_tipo_envio;
+								$arrCabecera['documento']['departamento_cliente'] = $arrPedidoCabecera->departamento_cliente;
+								$arrCabecera['documento']['provincia_cliente'] = $arrPedidoCabecera->provincia_cliente;
+								$arrCabecera['documento']['distrito_cliente'] = $arrPedidoCabecera->distrito_cliente;
+
+								$arrCabecera['documento']['voucher'] = $arrPedidoCabecera->voucher_1;
+
+								$arrDetalle = (array)$arrResponsePedido['result'];
+
+								$ID_Empresa = $arrPedidoCabecera->ID_Empresa;
+
+								//get medio de pago
+								$arrParamsMedioPago = array(
+									'ID_Empresa' => $ID_Empresa
+								);
+								$arrMedioPago = $this->PaymentModel->getMedioPago($arrParamsMedioPago);
+
+								$codigo_pais="51";
+								$numero_celular="932531441";
+								$phone = $codigo_pais . $numero_celular;
+								
+								$arrDataWhatsApp=array(
+									'arrCabecera' => $arrCabecera,
+									'arrDetalle' => $arrDetalle,
+									'arrMedioPago' => $arrMedioPago
+								);
+								echo json_encode($this->PaymentModel->generarMensajeWhatsApp($phone, $id_pedido, $arrDataWhatsApp));
+							} else {
+								echo json_encode($arrResult);
+								exit();
+							}
+						} else {
+							echo json_encode($arrResult);
+							exit();
+						}
 					}
 				} else {
 					echo json_encode(array(
@@ -355,6 +403,9 @@ class Payment extends CI_Controller {
 			if(!empty($this->input->post('id_pedido')) && isset($_FILES['voucher'])){
 				$tmp = $_FILES['voucher']['tmp_name'];
 				$type = $_FILES['voucher']['type'];
+				
+				$id_pedido = $this->input->post('id_pedido');
+
 				// get uploaded file's extension
 				$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
 				// check's valid format
@@ -376,20 +427,67 @@ class Payment extends CI_Controller {
 						));
 					} else {
 						$arrUploadFile = $this->upload->data();
-						//array_debug($arrUploadFile);
 
 						//ruta de archivo cloud
 						$Txt_Url_Imagen_Deposito = base_url($path . $arrUploadFile['file_name']);
+						$data = array('Txt_Url_Imagen_Deposito_Segundo_Pago' => $Txt_Url_Imagen_Deposito);
+						$where = array('ID_Pedido_Cabecera' => $id_pedido);
+						
+						$arrResult = $this->PaymentModel->addVoucherPedido($data, $where);
+						if($arrResult['status']=='success') {
+							//si subio imagen enviar imagen informando ello
+							$arrParams = array( 'id_pedido' => $id_pedido );
+							$arrResponsePedido = $this->PaymentModel->getPedido($arrParams);
+							if($arrResponsePedido['status']=='success'){
+								$arrPedidoCabecera = $arrResponsePedido['result'][0];
+								$arrCabecera['cliente']['Nu_Celular_Entidad'] = $arrPedidoCabecera->Nu_Celular_Entidad;
+								$arrCabecera['cliente']['No_Entidad'] = $arrPedidoCabecera->No_Entidad;
+								$arrCabecera['documento']['tipo_documento_identidad'] = $arrPedidoCabecera->tipo_documento_identidad;
+								$arrCabecera['cliente']['Nu_Documento_Identidad'] = $arrPedidoCabecera->Nu_Documento_Identidad;
+								$arrCabecera['cliente']['Txt_Direccion'] = $arrPedidoCabecera->Txt_Direccion;
 
-						//echo $Txt_Url_Imagen_Deposito;
-						$data = array(
-							'Txt_Url_Imagen_Deposito_Segundo_Pago' => $Txt_Url_Imagen_Deposito
-						);
-						$where = array(
-							'ID_Pedido_Cabecera' => $this->input->post('id_pedido')
-						);
-						echo json_encode($this->PaymentModel->addVoucherPedido($data, $where));
-						exit();
+								$arrCabecera['documento']['id_pedido'] = $arrPedidoCabecera->id_pedido;
+								$arrCabecera['documento']['fecha_registro'] = $arrPedidoCabecera->fecha_registro;
+								$arrCabecera['documento']['importe_total'] = $arrPedidoCabecera->importe_total;
+								$arrCabecera['documento']['cantidad_total'] = $arrPedidoCabecera->cantidad_total;
+								$arrCabecera['documento']['signo_moneda'] = $arrPedidoCabecera->signo_moneda;
+								$arrCabecera['documento']['id_medio_pago'] = $arrPedidoCabecera->id_medio_pago;
+								$arrCabecera['documento']['tipo_envio'] = $arrPedidoCabecera->tipo_envio;
+								$arrCabecera['documento']['nombre_tipo_envio'] = $arrPedidoCabecera->nombre_tipo_envio;
+								$arrCabecera['documento']['departamento_cliente'] = $arrPedidoCabecera->departamento_cliente;
+								$arrCabecera['documento']['provincia_cliente'] = $arrPedidoCabecera->provincia_cliente;
+								$arrCabecera['documento']['distrito_cliente'] = $arrPedidoCabecera->distrito_cliente;
+
+								$arrCabecera['documento']['voucher'] = $arrPedidoCabecera->voucher_2;
+
+								$arrDetalle = (array)$arrResponsePedido['result'];
+
+								$ID_Empresa = $arrPedidoCabecera->ID_Empresa;
+
+								//get medio de pago
+								$arrParamsMedioPago = array(
+									'ID_Empresa' => $ID_Empresa
+								);
+								$arrMedioPago = $this->PaymentModel->getMedioPago($arrParamsMedioPago);
+
+								$codigo_pais="51";
+								$numero_celular="932531441";
+								$phone = $codigo_pais . $numero_celular;
+								
+								$arrDataWhatsApp=array(
+									'arrCabecera' => $arrCabecera,
+									'arrDetalle' => $arrDetalle,
+									'arrMedioPago' => $arrMedioPago
+								);
+								echo json_encode($this->PaymentModel->generarMensajeWhatsApp($phone, $id_pedido, $arrDataWhatsApp));
+							} else {
+								echo json_encode($arrResult);
+								exit();
+							}
+						} else {
+							echo json_encode($arrResult);
+							exit();
+						}
 					}
 				} else {
 					echo json_encode(array(
