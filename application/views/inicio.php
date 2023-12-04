@@ -7,18 +7,20 @@
       <?php
       $iCounter = 0;
       foreach ($arrBanner['result'] as $row) {
+        if( $row->Nu_Tipo_Inicio==1 ) {//1=pc y 3=mobile
       ?>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $iCounter; ?>" class="<?php echo ($iCounter==0 ? 'active' : ''); ?>" aria-label="<?php echo $row->No_Slider; ?>" style="width: 10px;height: 10px;border-radius: 100%;"></button>
       <?php
         ++$iCounter;
+        }
       }
       ?>
     </div>
     
     <div class="carousel-inner">
       <?php
-      $iCounter = 0;
       foreach ($arrBanner['result'] as $row) {
+        if( $row->Nu_Tipo_Inicio==1 ) {//1=pc y 3=mobile
       ?>
       <div class="carousel-item active" data-bs-interval="5000">
         <img src="<?php echo $row->No_Imagen_Url_Inicio_Slider; ?>" class="d-block w-100" alt="<?php echo $row->No_Slider; ?>">
@@ -26,7 +28,7 @@
         </div>
       </div>
       <?php
-        ++$iCounter;
+        }
       }
       ?>
     </div>
