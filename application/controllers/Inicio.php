@@ -19,10 +19,22 @@ class Inicio extends CI_Controller {
 
 		$arrParams = array();
 		$arrImportacionGrupalProducto = $this->InicioModel->getImportacionGrupalProducto($arrParams);
+		
+		$arrBanner = array();
+		if ($arrImportacionGrupalProducto['status'] == 'success') {
+			$_arrImportacionGrupalProducto = $arrImportacionGrupalProducto['result'];
+			$arrParams = array(
+				'ID_Empresa' => $_arrImportacionGrupalProducto[0]->ID_Empresa
+			);
+			$arrBanner = $this->InicioModel->getBanner($arrParams);
+		}
 		$this->load->view('header');
 		$this->load->view('menu', array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto));
 		$this->load->view('inicio',
-			array('arrImportacionGrupalProducto' => $arrImportacionGrupalProducto)
+			array(
+				'arrImportacionGrupalProducto' => $arrImportacionGrupalProducto,
+				'arrBanner' => $arrBanner
+			)
 		);
 		$this->load->view('footer_data');
 		$this->load->view('footer');

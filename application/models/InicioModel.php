@@ -4,7 +4,7 @@ class InicioModel extends CI_Model{
 		parent::__construct();
 		$this->Url     = "https://intranet.probusiness.pe/assets/images/productos/20603287721/";
     }
-  
+
     public function getImportacionGrupalProducto($arrParams){
         //aqui falta que me envíen ID caso contrario no pueden ingresar aquí
         $query = "SELECT
@@ -93,4 +93,48 @@ IGC.Nu_Estado = 1";
 		$arrResponseSQL =	$this->db->query($query);
 		return $arrResponseSQL->result();
 	}
+
+    public function getBanner( $arrParams ){
+		$query = "SELECT
+No_Slider,
+No_Imagen_Url_Inicio_Slider,
+No_Url_Accion,
+Nu_Orden_Slider,
+Nu_Version_Imagen,
+Nu_Tipo_Inicio
+FROM
+ecommerce_inicio
+WHERE
+ID_Empresa = " . $arrParams['ID_Empresa'] . "
+AND Nu_Estado_Slider = 1
+AND Nu_Tipo_Inicio IN(1,3)
+ORDER BY
+Nu_Tipo_Inicio,
+Nu_Orden_Slider;";
+
+        if ( !$this->db->simple_query($query) ){
+            $error = $this->db->error();
+            return array(
+                'status' => 'danger',
+                'message' => 'Problemas al obtener datos',
+                'code_sql' => $error['code'],
+                'message_sql' => $error['message']
+            );
+        }
+
+        $arrResponseSQL = $this->db->query($query);
+        if ( $arrResponseSQL->num_rows() > 0 ){
+            $result = $arrResponseSQL->result();
+            return array(
+                'status' => 'success',
+                'message' => 'Si hay registros',
+                'result' => $result
+            );
+        }
+
+        return array(
+        'status' => 'warning',
+        'message' => 'No hay registros'
+        );
+    }
 }

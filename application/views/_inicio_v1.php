@@ -6,9 +6,10 @@
     <div class="carousel-indicators">
       <?php
       $iCounter = 0;
-      foreach ($arrBanner['result'] as $row) {
+      foreach ($arrImportacionGrupalProducto as $row) {
       ?>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $iCounter; ?>" class="<?php echo ($iCounter==0 ? 'active' : ''); ?>" aria-label="<?php echo $row->No_Slider; ?>" style="width: 10px;height: 10px;border-radius: 100%;"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $iCounter; ?>" class="active" aria-current="true" aria-label="Slide 1" style="width: 10px;height: 10px;border-radius: 100%;"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $iCounter; ?>" aria-label="Slide 2" style="width: 10px;height: 10px;border-radius: 100%;"></button>
       <?php
         ++$iCounter;
       }
@@ -16,19 +17,16 @@
     </div>
     
     <div class="carousel-inner">
-      <?php
-      $iCounter = 0;
-      foreach ($arrBanner['result'] as $row) {
-      ?>
       <div class="carousel-item active" data-bs-interval="5000">
-        <img src="<?php echo $row->No_Imagen_Url_Inicio_Slider; ?>" class="d-block w-100" alt="<?php echo $row->No_Slider; ?>">
+        <img src="<?php echo base_url("assets/images/banner_importacion_grupal.jpg?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
         </div>
       </div>
-      <?php
-        ++$iCounter;
-      }
-      ?>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="<?php echo base_url("assets/images/banner_importacion_grupal_carga.png?ver=1.0.0"); ?>" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+        </div>
+      </div>
     </div>
   </div>
   <?php } ?>
@@ -38,7 +36,7 @@
     if ($arrImportacionGrupalProducto['status'] == 'success') {
       $arrImportacionGrupalProducto = $arrImportacionGrupalProducto['result'];
 
-      //array_debug($arrBanner);
+      array_debug($arrBanner);
       //array_debug($arrImportacionGrupalProducto);
     ?>
       <h1 class="text-center fw-bold mb-4"><?php echo $arrImportacionGrupalProducto[0]->No_Importacion_Grupal; ?></h1>
