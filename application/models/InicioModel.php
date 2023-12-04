@@ -61,7 +61,7 @@ IGC.Nu_Estado = 1";
                 $query = "SELECT SUM(Qt_Producto) AS total_cantidad_item FROM
                 importacion_grupal_pedido_cabecera AS IGPC
                 JOIN importacion_grupal_pedido_detalle AS IGPD ON(IGPD.ID_Pedido_Cabecera = IGPC.ID_Pedido_Cabecera)
-                WHERE IGPC.ID_Importacion_Grupal = " . $row->ID_Importacion_Grupal . " AND IGPD.ID_Producto = " . $row->ID_Producto;
+                WHERE IGPC.Nu_Estado=2 AND IGPC.ID_Importacion_Grupal = " . $row->ID_Importacion_Grupal . " AND IGPD.ID_Producto = " . $row->ID_Producto;
                 
                 $objItem = $this->db->query($query)->row();
                 $iTotalCantidadItem = 0;
