@@ -38,7 +38,7 @@ foreach($arrDetalle as $row) {
 
 //Totales
 $message .= "\n*💁🏻‍♀️ Total a Pagar: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
-$message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
+//$message .= "\n💰 Total: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'], 2, '.', ',');
 
 //enviar cuentas bancarias
 //array_debug($arrMedioPago);
@@ -68,7 +68,7 @@ $sURLSendMessageWhatsapp = "https://api.whatsapp.com/send?phone=" . $phone . "&t
     <h2 class="text-center mb-4 pt-3 text-success"><i class="fa-solid fa-circle-check fa-3x text-green"></i></h2>
     <h2 class="text-center mb-4">Nro. Pedido <?php echo $arrCabecera['documento']['id_pedido']; ?></h2>
 
-    <h3 class="text-center mb-4 fw-bold">Pagar (50%) S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
+    <h3 class="text-center mb-4 fw-bold">Total S/ <?php echo round(($arrCabecera['documento']['importe_total'] / 2), 2); ?></h3>
 
     <div class="row">
       <?php

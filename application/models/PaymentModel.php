@@ -393,7 +393,7 @@ CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
 
         //Preparar array para envío de data de pedido para la aplicación
         $message = "*¡Hola ProBusiness*! 😁";
-        $message .= "\n✅ Envío voucher.\n";
+        $message .= "\n✅ Envío voucher de pago de " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . " .\n";
         $message .= "\n➡️ Link:\n" . $arrCabecera['documento']['voucher'];
         
         $message .= "\n\n👤 *CONTACTO*\n";
@@ -411,9 +411,6 @@ CAB.ID_Pedido_Cabecera=" . $arrParams['id_pedido'];
           $row = (array)$row;
           $message .= "✅ " . round($row['cantidad_item'], 2) . " x *" . $row['nombre_item'] . "* - S/ " . number_format($row['total_item'], 2, '.', ',') . "\n";
         }
-        
-        //Totales
-        $message .= "\n*💁🏻‍♀️ Saldo: " . $arrCabecera['documento']['signo_moneda'] . " " . number_format($arrCabecera['documento']['importe_total'] / 2, 2, '.', ',') . "*";
         
         //🛵 Tipo de envío: Delivery a Agencia
         //📍Ubigeo: Áncash - Huaraz - Huaraz
