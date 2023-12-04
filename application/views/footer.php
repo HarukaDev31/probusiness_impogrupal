@@ -14,7 +14,7 @@
     <?php } ?>
 
     <?php if (isset($js_voucher)) { ?>
-      <script src="<?php echo base_url("assets/js/voucher.js?ver=42.0.0"); ?>"></script>
+      <script src="<?php echo base_url("assets/js/voucher.js?ver=43.0.0"); ?>"></script>
     <?php } ?>
   </body>
 </html>

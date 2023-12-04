@@ -22,7 +22,8 @@ $(document).ready(function () {
 
       console.log(response);
       if(response.status=='success'){
-        alert(response.message);
+        //alert(response.message);
+        window.open(response.link_whatsapp, "_blank");
       } else {
         alert(response.message);
       }
